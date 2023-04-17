@@ -16,3 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 //routes to all the pages begin here.
 Route::view('/', 'index');
+Route::view('/partners', 'partners');
+Route::view('/publications', 'publications');
+Route::view('/login', 'login');
+Route::view('/news', 'news');
+Route::view('/about', 'about_us');
+Route::view('/projects', 'projects');
