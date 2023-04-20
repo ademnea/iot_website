@@ -106,9 +106,13 @@
                       </div>
                       <a href="/forgot_password" class="text-sm font-medium text-gray-600 hover:underline dark:text-gray-500">Forgot password?</a>
                   </div>
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  {{-- <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Login
-                  </button>
+                  </button> --}}
+
+                   <a href = "dashboard" class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                              Login
+                  </a>
                   <p class="text-sm font-light text-gray-500 dark:text-gray-400">
                 <a href="/" class="font-medium text-gray-600 hover:underline dark:text-gray-500">Homepage</a>
                   </p>

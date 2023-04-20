@@ -21,7 +21,7 @@ Route::view('/partners', 'partners');
 Route::view('/publications', 'publications');
 Route::view('/news', 'news');
 Route::view('/about', 'about_us');
-Route::view('/projects', 'projects')->middleware(['auth']);
+Route::view('/projects', 'projects');  //->middleware(['auth']);
 Route::get('/login', function () {
     return view('login');
 })->name('login');
@@ -34,3 +34,8 @@ Route::view('/publicationscontent','publicationscontent');
 Route::view('/newscontent','newscontent');
 Route::view('/aboutuscontent','aboutuscontent');
 Route::view('/dashboard','dashboard');
+Route::view('/register_projects','register_projects');
+Route::view('/register_publications','register_publications');
+Route::view('/register_news','register_news');
+Route::view('/register_home','register_home');
+Route::view('/register_team','register_team');
