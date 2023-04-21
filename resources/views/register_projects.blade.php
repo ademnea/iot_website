@@ -69,7 +69,11 @@
         </h1>
     </center>
     <br>
-    <form action="submit-project.php" method="post" enctype="multipart/form-data">
+    <form action="/submit-project" method="post" enctype="multipart/form-data">
+
+    @csrf
+
+    
       <label for="projectName">Project Name:</label><br/>
       <input type="text" id="projectName" name="projectName" required><br>
     

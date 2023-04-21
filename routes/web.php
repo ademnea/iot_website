@@ -39,3 +39,18 @@ Route::view('/register_publications','register_publications');
 Route::view('/register_news','register_news');
 Route::view('/register_home','register_home');
 Route::view('/register_team','register_team');
+
+//routes for editing content
+Route::view('/edithome','edithome');
+Route::view('/editproject','editproject');
+Route::view('/editteam','editteam');
+Route::view('/editpublications','editpublications');
+Route::view('/editnews','editnews');
+
+//routes to controllers
+Route::post('/insertmission', 'App\Http\Controllers\insert_data@insert_home_form1');
+Route::post('/insertpartner', 'App\Http\Controllers\insert_data@insert_home_form2');
+Route::post('/insert_news', 'App\Http\Controllers\insert_data@insert_news');
+Route::post('/submit-project', 'App\Http\Controllers\insert_data@insert_project');
+Route::post('/insert_publication', 'App\Http\Controllers\insert_data@insert_publication');
+Route::post('/insert_team', 'App\Http\Controllers\insert_data@insert_team');

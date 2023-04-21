@@ -69,7 +69,8 @@
         </h1>
     </center>
     <br>
-    <form action="" method="post" enctype="multipart/form-data">
+    <form action="/insert_news" method="post" enctype="multipart/form-data">
+    @csrf
       <label for="projectName">News:</label><br/>
       <input type="text" id="projectName" name="news" required><br>
     
@@ -85,9 +86,11 @@
 
       <label for="duration"> Date:</label><br/>
       <input type="date" id="duration" name="date" required><br><br>
+
+      <label for="duration">Image:</label><br/>
+      <input type="file" id="duration" name="image" required><br><br>
     
-      <label for="image">Image:</label><br>
-      <input type="file" id="image" name="image" accept="" ><br><br/>
+      <br><br>
     
       <input type="submit" value="Add News">
     </form>
