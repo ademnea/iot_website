@@ -1,4 +1,4 @@
------------------------------------------------------------MUK IoT LAB DB MAPPING-----------------------------------------------
+-----------------------------------------------------------muk_iot DB MAPPING-----------------------------------------------
 
 members                 (id, fname, lname, email-U, position, bio-N, photo-N, status-"Active , Inactive" D -> Active, registered_by-FK N)
 
