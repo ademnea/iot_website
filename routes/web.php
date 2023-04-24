@@ -52,6 +52,8 @@ Route::view('/editteam','editteam');
 Route::view('/editpublications','editpublications');
 Route::view('/editnews','editnews');
 Route::view('/editpartner','editpartner');
+Route::view('/edittopbar','edittopbar');
+Route::view('/editcontacts','editcontacts');
 
 
 
@@ -63,3 +65,4 @@ Route::post('/insert_news', 'App\Http\Controllers\insert_data@insert_news');
 Route::post('/submit-project', 'App\Http\Controllers\insert_data@insert_project');
 Route::post('/insert_publication', 'App\Http\Controllers\insert_data@insert_publication');
 Route::post('/insert_team', 'App\Http\Controllers\insert_data@insert_team');
+Route::post('/insertcontacts', 'App\Http\Controllers\insert_data@insert_contacts');
