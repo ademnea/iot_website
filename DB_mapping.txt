@@ -1,0 +1,74 @@
+-----------------------------------------------------------muk_iot DB MAPPING-----------------------------------------------
+
+members                 (id, fname, lname, email-U, position, bio-N, photo-N, status-"Active , Inactive" D -> Active, registered_by-FK N)
+
+member_phones           (id, contact-U, member_id-FK)
+
+admins                  (member_id-PK FK, username-U, password, registered_by-FK N)
+
+newsletters             (id, title, description , article-Long Text, admin_id-FK)
+
+newsletter_photos       (id, photo, newsletter_id-FK)
+
+partner                 (id, name, description, website_link-N, logo-N, admin_id-FK)
+
+events                  (id, title, description, start_date-N, end_date-N, location-N, admin_id-FK)
+
+event_photos            (id, photo, event_id-FK)
+
+projects                (id, name, venue-N, description, start_date-N, end_date-N, duration-N, status-"Active, Inactive" D -> Active, website, admin_id-FK)
+
+project_photos          (id, photo, project_id-FK)
+
+project_members         (id, project_id-FK, member_id-FK)
+
+scholarships            (id, name, description, requirements, application_deadline-N, project_id-FK-N, admin_id-FK)
+
+careers                 (id, role, description-N, requirements-long text , application_deadline-N, project_id-FK-N, admin_id-FK)
+
+publications            (id, name, type, file_link, admin_id-FK)
+
+member_publications     (id, member_id-FK, publication_id-FK)
+
+applicants              (id, fname, lname, email, phone, photo - N, member_id-FK)
+
+scholarship_applications  (id, applicant_id-FK, scholarship_id-FK, CV)
+
+career_applications       (id, applicant_id-FK, project_id-FK, CV)
+
+website_content           (id, mission-N, team_leader_word-N, objectives-N, motto-N, logo-N)
+
+
+
+-------------------------KEY-----------------------------
+
+by default , an attribute is considered  not null 
+so I will provide default values for some of them
+
+CODES
+
+N  -> Nullable Field 
+U  -> Unique Field
+D  -> Default Field
+PK -> Primary Key 
+FK -> Foreign Key
+
+Assumption 
+
+id is the primary key 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
