@@ -11,6 +11,7 @@ class insert_data extends Controller
    public function insert_home_form1(Request $request){
 
       // return $request->input();
+     // $radio = $request->input('homecontent');
 
                 $mydata = new home;
                 $mydata->type = $request->homecontent;
@@ -20,6 +21,19 @@ class insert_data extends Controller
                 return redirect('/homecontent')->with('success', 'home content added successfully!');
 
    }
+
+   public function insert_contacts(Request $request){
+
+    // return $request->input();
+
+              $mydata = new home;
+              $mydata->type = $request->homecontent;
+              $mydata->content = $request->content;
+              $mydata->save();
+
+              return redirect('/homecontent')->with('success', 'home content added successfully!');
+
+ }
 
 
   // this function inserts partners into the database

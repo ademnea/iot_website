@@ -18,6 +18,14 @@ return new class extends Migration
             $table->text('objectives')->nullable();
             $table->string('motto')->nullable();
             $table->string('logo')->nullable();
+            $table->string('physical_address')->nullable();
+            $table->string('company_telephone')->nullable();
+            $table->string('company_email')->nullable();
+            $table->string('twitter')->nullable();
+            $table->string('facebook')->nullable();
+            $table->string('youtube')->nullable();
+            $table->string('linkedin')->nullable();
+            $table->string('instagram')->nullable();
             $table->timestamps();
         });
     }
