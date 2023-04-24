@@ -54,6 +54,7 @@ Route::view('/editnews','editnews');
 Route::view('/editpartner','editpartner');
 Route::view('/edittopbar','edittopbar');
 Route::view('/editcontacts','editcontacts');
+Route::view('/registerprototype','registerprototype');
 
 
 

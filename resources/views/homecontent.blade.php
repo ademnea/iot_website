@@ -27,9 +27,9 @@
             <b> {{ session('success') }}</b>
             </div> 
 
-        @elseif (session('updated')) 
-             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
-            <b> {{ session('updated') }}</b>
+        @elseif (session('error')) 
+             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+            <b> {{ session('error') }}</b>
               </div>
             @endif
 {{-- start of the page content --}}

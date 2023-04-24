@@ -19,7 +19,7 @@ return new class extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('duration')->nullable();
-            $table->enum('status', ['Active', 'Inactive'])->default('Active');
+            $table->enum('status', ['Ongoing', 'Past'])->default('Ongoing');
             $table->string('website')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('member_id')->on('admins')->onDelete('cascade');

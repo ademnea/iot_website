@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('publications', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->string('title');
             $table->string('type');
+            $table->string('author');
+            $table->string('description');
             $table->string('file_link');
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('member_id')->on('admins')->onDelete('cascade');

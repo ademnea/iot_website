@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('description');
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
-            $table->string('location')->nullable();
+            $table->string('venue')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('member_id')->on('admins');
             $table->timestamps();

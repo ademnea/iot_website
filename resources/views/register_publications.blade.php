@@ -28,26 +28,33 @@ margin-right:10%;
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl light:text-white">
                   Add New Publications Content
               </h1>
+
+              
  
 <br><hr>
               <h3 class="font-medium">
                   Add New Technical Reports and Datasets
+              </h3>
+
+              <h3 class="" style="margin-left:60%;">
+              
+                        <p class="text-gray-500 dark:text-gray-400">Add New Prototypes instead?<a href="registerprototype" class="inline-flex items-center font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                        go
+                        <svg aria-hidden="true" class="w-5 h-5 ml-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+                        </a></p>
+
               </h3>
               <form class="space-y-4 md:space-y-6" action="/insert_publication" method="post" id="form">
 
                @csrf
 
                 <div class="flex items-center mb-4">
-                    <input type="radio" value="mission" name="type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input type="radio" value="report" name="type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Technical Report</label>
                 </div>
                 <div class="flex items-center">
-                    <input type="radio" value="objectives" name="type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                    <input type="radio" value="dataset" name="type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
                     <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Dataset</label>
-                </div>
-                <div class="flex items-center">
-                    <input type="radio" value="objectives" name="type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
-                    <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">Publication</label>
                 </div>
                 
                  <div>

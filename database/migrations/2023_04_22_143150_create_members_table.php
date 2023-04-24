@@ -16,15 +16,17 @@ return new class extends Migration
             $table->string('fname');
             $table->string('lname');
             $table->string('email')->unique();
-            $table->string('position');
+            $table->string('phone')->unique();
+            $table->string('designation');
+            $table->string('role');
             $table->text('bio')->nullable();
             $table->string('photo')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
             $table->unsignedBigInteger('registered_by')->nullable();
+            $table->foreign('registered_by')->references('id')->on('members');
             $table->timestamps();
 
             // Foreign key constraint
-            $table->foreign('registered_by')->references('id')->on('members');
         });
     }
 
