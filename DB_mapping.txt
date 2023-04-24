@@ -38,6 +38,10 @@ career_applications       (id, applicant_id-FK, project_id-FK, CV)
 
 website_content           (id, mission-N, team_leader_word-N, objectives-N, motto-N, logo-N)
 
+prototypes                (id, name , description, project_id-FK-N)
+
+prototype_photos          (id, prototype_id-FK)
+
 
 
 -------------------------KEY-----------------------------
