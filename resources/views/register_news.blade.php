@@ -71,11 +71,9 @@
     <br>
     <form action="/insert_news" method="post" enctype="multipart/form-data">
     @csrf
-      <label for="projectName">News:</label><br/>
-      <input type="text" id="projectName" name="news" required><br>
     
-      <label for="venue">Event Name:</label><br/>
-      <input type="text" id="venue" name="venue" required><br>
+      <label for="venue">Event title:</label><br/>
+      <input type="text" id="venue" name="title" required><br>
 
       <label for="description">News Description:</label><br/>
       <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
@@ -83,9 +81,11 @@
       <label for="participants">Venue:</label><br/>
       <input type="text" id="participants" name="venue" required><br>
     
+      <label for="duration"> Start Date:</label><br/>
+      <input type="date" id="start_date" name="start_date" required><br><br>
 
-      <label for="duration"> Date:</label><br/>
-      <input type="date" id="duration" name="date" required><br><br>
+            <label for="duration"> End Date:</label><br/>
+      <input type="date" id="end_date" name="end_date" required><br><br>
 
       <label for="duration">Image:</label><br/>
       <input type="file" id="duration" name="image" required><br><br>

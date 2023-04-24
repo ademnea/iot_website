@@ -21,13 +21,18 @@ Route::view('/partners', 'partners');
 Route::view('/publications', 'publications');
 Route::view('/news', 'news');
 Route::view('/about', 'about_us');
-Route::view('/projects', 'projects');  //->middleware(['auth']);
+Route::view('/projects', 'projects'); //->middleware(['auth']);
+
 Route::get('/login', function () {
     return view('login');
 })->name('login');
 
 
 //admin side routes
+Route::middleware(['auth'])->group(function () {
+    // Protected routes go here
+});
+
 Route::view('/projectscontent','projectscontent');
 Route::view('/homecontent','homecontent');
 Route::view('/publicationscontent','publicationscontent');
@@ -46,10 +51,14 @@ Route::view('/editproject','editproject');
 Route::view('/editteam','editteam');
 Route::view('/editpublications','editpublications');
 Route::view('/editnews','editnews');
+Route::view('/editpartner','editpartner');
+
+
+
 
 //routes to controllers
 Route::post('/insertmission', 'App\Http\Controllers\insert_data@insert_home_form1');
-Route::post('/insertpartner', 'App\Http\Controllers\insert_data@insert_home_form2');
+Route::post('/insertpartner', 'App\Http\Controllers\insert_data@insert_partner');
 Route::post('/insert_news', 'App\Http\Controllers\insert_data@insert_news');
 Route::post('/submit-project', 'App\Http\Controllers\insert_data@insert_project');
 Route::post('/insert_publication', 'App\Http\Controllers\insert_data@insert_publication');

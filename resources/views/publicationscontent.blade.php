@@ -64,7 +64,7 @@ margin-right:10%;
                     Title
                 </th>
                 <th scope="col" class="px-6 py-3">
-                Type
+                    Type
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Author
