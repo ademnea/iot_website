@@ -78,7 +78,9 @@
             </div>
             <div class="row g-4 justify-content-center bg-gray-500" >
                 <h1 class=" text-left mb-5" id="ongoing"> Ongoing projects</h1>
+                
                 <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+
                     <div class="p-item">
                         <div class="overflow-hidden">
                             <img class="img-fluid" src="img/package-1.jpg" alt="">

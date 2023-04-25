@@ -54,12 +54,13 @@ Route::view('/editnews','editnews');
 Route::view('/editpartner','editpartner');
 Route::view('/edittopbar','edittopbar');
 Route::view('/editcontacts','editcontacts');
+Route::view('/editlogo','editlogo');
 Route::view('/registerprototype','registerprototype');
 
 
 
 
-//routes to controllers
+//routes to insert data into the database
 Route::post('/insertmission', 'App\Http\Controllers\insert_data@insert_home_form1');
 Route::post('/insertpartner', 'App\Http\Controllers\insert_data@insert_partner');
 Route::post('/insert_news', 'App\Http\Controllers\insert_data@insert_news');
@@ -67,3 +68,12 @@ Route::post('/submit-project', 'App\Http\Controllers\insert_data@insert_project'
 Route::post('/insert_publication', 'App\Http\Controllers\insert_data@insert_publication');
 Route::post('/insert_team', 'App\Http\Controllers\insert_data@insert_team');
 Route::post('/insertcontacts', 'App\Http\Controllers\insert_data@insert_contacts');
+Route::post('/insertprototype', 'App\Http\Controllers\insert_data@insert_prototype');
+
+
+//routes to pick data from the database
+Route::get('/aboutuscontent', 'App\Http\Controllers\retrieve_data@fetch_team');
+Route::get('/homecontent', 'App\Http\Controllers\retrieve_data@fetch_home');
+Route::get('/projectscontent', 'App\Http\Controllers\retrieve_data@fetch_projects');
+Route::get('/publicationscontent', 'App\Http\Controllers\retrieve_data@fetch_publications');
+Route::get('/newscontent', 'App\Http\Controllers\retrieve_data@fetch_events');

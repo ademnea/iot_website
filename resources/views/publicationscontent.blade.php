@@ -46,9 +46,55 @@ margin-right:10%;
 </h1>
 <hr>
 <br>
-    <div class ="container">
+<div class ="container">
  <h1 class="font-medium">Prototypes</h1>
+<br>
+  <div class="flex flex-wrap">
+  
+  @foreach ($prototypes as $prototype)
+      
+<div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+    <a href="#">
+        <img class="rounded-t-lg" src="images/prototypes/{{ $prototype->photo }}" alt="" />
+    </a>
+    <div class="p-5">
+        <a href="#">
+            <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
+           {{ $prototype->name }}
+            </h5>
+        </a>
+        <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        {{ $prototype->description }}
+        </p>
+        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+            Read more
+        <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd">
+          </path>
+        </svg>
+        </a>
+    </div>
+</div>
 
+    </div>
+  </div>
+
+    @endforeach
+
+
+
+  <div class="w-full md:w-1/3 p-2">
+    <div class="bg-white rounded-lg shadow-lg">
+      <!-- Card content goes here -->
+    </div>
+  </div>
+
+  <div class="w-full md:w-1/3 p-2">
+    <div class="bg-white rounded-lg shadow-lg">
+      <!-- Card content goes here -->
+    </div>
+  </div>
+</div>
 
 
  
@@ -59,6 +105,7 @@ margin-right:10%;
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
     <table class="w-full text-sm text-left text-gray-500 dark:text-gray-400">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      
             <tr>
                 <th scope="col" class="px-6 py-3">
                     Title
@@ -80,18 +127,21 @@ margin-right:10%;
             </tr>
         </thead>
         <tbody>
+
+        @foreach ($publications as $pub)
+
             <tr class="bg-white border-b dark:bg-gray-900 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Apple MacBook Pro 17"
+                   {{ $pub->title}}
                 </th>
                 <td class="px-6 py-4">
-                    Silver
+                    {{ $pub->type }}
                 </td>
                 <td class="px-6 py-4">
-                    Laptop
+                    {{ $pub->author }}
                 </td>
                 <td class="px-6 py-4">
-                    $2999
+                   documents/{{ $pub->file_link }}
                 </td>
                 <td class="px-6 py-4">
                     <a href="/editpublications" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
@@ -102,6 +152,8 @@ margin-right:10%;
                     </svg>
                 </td>
             </tr>
+              @endforeach
+
         </tbody>
     </table>
 </div>

@@ -44,7 +44,7 @@ margin-right:10%;
                         </a></p>
 
               </h3>
-              <form class="space-y-4 md:space-y-6" action="/insert_publication" method="post" id="form">
+              <form class="space-y-4 md:space-y-6" action="/insert_publication" method="post" id="form" enctype="multipart/form-data">
 
                @csrf
 

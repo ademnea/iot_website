@@ -72,24 +72,32 @@ margin-right:5%;
             </tr>
         </thead>
         <tbody>
+
+        @foreach ($users as $user )
+            
+        @endforeach
             <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    Microsoft Surface Pro
+                    {{ $user->fname }}  {{ $user->lname }}
                 </th>
                 <td class="px-6 py-4">
-                    White
+                    {{ $user->role }}
                 </td>
                 <td class="px-6 py-4">
-                    Laptop PC
+                   {{ $user->designation }}
                 </td>
                 <td class="px-6 py-4">
-                    $1999
+                    {{ $user->email }}
                 </td>
                 <td class="px-6 py-4">
-                    0767876556
+                    {{ $user->phone }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="/editteam" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit</a>
+                    <a href="/editteam? firstname={{ $user->fname }}&lastname={{ $user->lname}}&email={{ $user->email}}&phone={{ $user->phone}}&role={{ $user->role }}&designation={{ $user->designation }}&bio={{ $user->bio }}">
+                    <div class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    Edit
+                    </div>
+                    </a>
                 </td>
                 <td class="px-6 py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -97,6 +105,7 @@ margin-right:5%;
                 </svg>
                 </td>
             </tr>
+
         
         </tbody>
     </table>

@@ -81,10 +81,10 @@
       <input type="text" id="venue" name="venue" required><br>
     
       <label for="duration">Start Date:</label><br/>
-      <input type="text" id="start_date" name="start_date" required><br>
+      <input type="date" id="start_date" name="start_date" required><br>
 
-      <label for="duration">Duration:</label><br/>
-      <input type="text" id="end_date" name="duration" required><br>
+      <label for="duration">End Date:</label><br/>
+      <input type="date" id="end_date" name="end_date" required><br>
     
       <label for="participants">Number of Participants:</label><br/>
       <input type="number" id="participants" name="participants" required><br>
@@ -93,10 +93,10 @@
       <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
 
       <label for="description">Project Website Link:</label><br/>
-       <input type="number" id="participants" name="project_link" required><br>
+       <input type="text" id="participants" name="project_link" required><br>
     
       <label for="image">Image:</label>
-      <input type="file" id="image" name="image" accept="" ><br><br/>
+      <input type="file" id="image" name="image" ><br><br/>
     
       <input type="submit" value="Add Project">
     </form>

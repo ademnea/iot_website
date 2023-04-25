@@ -26,7 +26,7 @@ margin-right:10%;
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl light:text-white">
                   Register New Team Member
               </h1>
-              <form class="space-y-4 md:space-y-6" action="/insert_team" method="post" id="form">
+              <form class="space-y-4 md:space-y-6" action="/insert_team" method="post" id="form" enctype="multipart/form-data">
 
                @csrf
                 

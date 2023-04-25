@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('event_photos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('photo');
+            $table->enum('status', ['Ongoing', 'Past'])->default('Ongoing');
             $table->unsignedBigInteger('event_id');
             $table->foreign('event_id')->references('id')->on('events')->onDelete('cascade');
             $table->timestamps();

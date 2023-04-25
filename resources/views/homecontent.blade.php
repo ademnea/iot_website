@@ -51,12 +51,15 @@ margin-right:10%;
 <br>
 <br>
 
+@foreach ($contents as $content)
+    
+@endforeach
 {{-- Beginning of the company Logo. --}}
 
 
  <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-      <img src="../img/about.jpg" alt="Dr John Wick" class="h-48 w-48 rounded-full">
+      <img src="../images/logo/{{ $content->logo }}" alt="logo" class="h-48 w-48 rounded-full">
        <div style="margin-left:15%;"> <h4 class="text-lg font-medium mt-4">Logo</h4> </div><br>
             </div>
 
@@ -89,24 +92,24 @@ margin-right:10%;
             <div class="col-span-1 flex justify-center items-center">
 <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Twitter:</span> Twitter link
+        <span class="font-semibold text-gray-900 dark:text-white">Twitter:</span> {{ $content->twitter }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Facebook:</span> Facebook link
+        <span class="font-semibold text-gray-900 dark:text-white">Facebook:</span> {{ $content->facebook }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">LinkedIn:</span> LinkedIn link
+        <span class="font-semibold text-gray-900 dark:text-white">LinkedIn:</span> {{ $content->linkedin }}
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Instagram:</span> Instagram link 
+        <span class="font-semibold text-gray-900 dark:text-white">Instagram:</span> {{ $content->instagram }} 
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Youtube:</span> Youtube link
+        <span class="font-semibold text-gray-900 dark:text-white">Youtube:</span> {{ $content->youtube }}
     </li>
    </ol>
             </div>
   {{-- editing action for the social links --}}
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edittopbar">
+            <a href="/edittopbar? facebook={{ $content->facebook }}&twitter={{ $content->twitter }}&linkedin={{ $content->linkedin }}&instagram={{ $content->instagram }}&youtube={{ $content->youtube }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -122,19 +125,19 @@ margin-right:10%;
     <div class="col-span-1 flex justify-center items-center">
 <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Email</span>Twitter link
+        <span class="font-semibold text-gray-900 dark:text-white">Email</span> {{ $content->company_email }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Telephone</span> Facebook link
+        <span class="font-semibold text-gray-900 dark:text-white">Telephone</span> {{ $content->company_telephone }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Physical Address</span> LinkedIn link
+        <span class="font-semibold text-gray-900 dark:text-white">Physical Address</span> {{ $content->physical_address }}
     </li>
 </ol>
     </div>
   {{-- editing action for the social links --}}
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/editcontacts">
+            <a href="/editcontacts? email={{ $content->company_email }}&phone={{ $content->company_telephone }}&address={{ $content->physical_address }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -149,10 +152,7 @@ margin-right:10%;
       <div class="wow fadeInUp" data-wow-delay="0.1s">
        <p> <br>
        <h1 class="font-medium">Mission</h1>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting  
+        {{ $content->mission }}  
        </p><br>
     <hr>
 
@@ -164,7 +164,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome">
+            <a href="/edithome? objectives={{ $content->objectives }}&mission={{ $content->mission }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -176,10 +176,7 @@ margin-right:10%;
      <br><br>
      <p>
     <h1 class="font-medium">Objectives</h1>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting  
+        {{ $content->objectives }}  
        </p> <br>
        <hr>
 
@@ -191,7 +188,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome">
+            <a href="/edithome? objectives={{ $content->objectives }}&mission={{ $content->mission }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -207,18 +204,29 @@ margin-right:10%;
 
     <div class="flex flex-row items-center justify-center">
     <div class="w-1/3"> <br><br>
-        <img src="../img/about.jpg" alt="Dr John Wick" class="h-48 w-48 rounded-full">
-       <div style="margin-left:15%;"> <h4 class="text-lg font-medium mt-4">Dr John Wick</h4> </div>
+
+ @foreach ($leader as $leader)
+     
+ @endforeach
+        @if ($leader->isNotEmpty())
+        <img src="../images/team/{{ $leader->photo}}"  class="h-48 w-48 rounded-full">
+       <div style="margin-left:15%;"> <h4 class="text-lg font-medium mt-4">Dr {{ $leader->fname}} {{ $leader->lname }}</h4> </div>
     </div>
     <div class="w-2/3">
         <p class="mt-4">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting
+       {{ $content->team_leader_word }}
         </p><br>
         <hr>
-
+    @else
+        <img src="../img/team-4.jpg"  class="h-48 w-48 rounded-full">
+       <div style="margin-left:15%;"> <h4 class="text-lg font-medium mt-4">Dr John Doe</h4></div>
+    </div>
+    <div class="w-2/3">
+        <p class="mt-4">
+       here are the words from the team leader. these are default before you enter your own.
+        </p><br>
+        <hr>
+     @endif
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -263,10 +271,15 @@ margin-right:10%;
             </div>
 
             </div>
+
+
+    @foreach ($partners as $partner)
+        
+ 
             <div class="owl-carousel testimonial-carousel position-relative">
             <br>
                 <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
+                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="images/partners/{{ $partner->logo }}" style="width: 80px; height: 80px;">
                  
           {{-- Actions to edit the partner --}}
             <div class="grid grid-cols-2 gap-4">
@@ -280,47 +293,23 @@ margin-right:10%;
             <div class="col-span-1 flex justify-center items-center">
 
             {{-- action to edit, rewriting this url --}}
-            <a href="/editpartner">
+            <a href="/editpartner? name={{ $partner->name }}">
                <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
             </a>
-
             </div>
             </div>
-
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <br>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    <h5 class="mb-0">{{ $partner->name }}</h5>
+                    {{-- <p>New York, USA</p> --}}
+                    <p class="mb-0">
+                    {{ $partner->description }}
+                    </p>
                 </div>
                 <br>
 
+   @endforeach
            {{-- end of partner --}}
-
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <br>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
         
 </div>
 

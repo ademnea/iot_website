@@ -50,20 +50,27 @@ margin-right:10%;
 <div class="container-xxl py-5">
     <div class="container">
 
-
+   @foreach ($onprojects as $onproject)
+       
             <h1 class="font-medium"> Ongoing projects</h1>
     <br>
                 <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="img/package-1.jpg" alt="">
+                        <img class="" src="images/projects/{{ $onproject->photo }}" >
                     </div>
                     <div class="flex border-b border-gray-200">
-                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-success me-2"></i>Makerere University IOT lab</small>
-                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="far fa-calendar-alt text-success me-2"></i>3 weeks</small>
-                        <small class="flex-1 text-center py-2"><i class="fas fa-user text-success me-2"></i>6 people</small>
+                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-success me-2"></i>
+                        {{ $onproject->venue }}
+                        </small>
+                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="far fa-calendar-alt text-success me-2"></i>
+                        {{ $onproject->duration }} weeks
+                        </small>
+                        <small class="flex-1 text-center py-2"><i class="fas fa-user text-success me-2"></i>
+                        {{-- {{ $onproject->participants }} people --}}
+                        </small>
                     </div>
                     <div class="p-4">
-                        <p>Anything about the projects</p>
+                        <p>{{ $onproject->description }}</p>
                         <br><hr>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-1 flex justify-center items-center">
@@ -73,7 +80,7 @@ margin-right:10%;
                             </div>
 
                             <div class="col-span-1 flex justify-center items-center">
-                            <a href="/editproject">
+                            <a href="/editproject? name={{ $onproject->name }}&venue={{ $onproject->venue }}&duration={{ $onproject->duration }}&description={{ $onproject->description }}&participants={{ $onproject->participants }} ">
                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                 </svg>
@@ -82,23 +89,31 @@ margin-right:10%;
                             </div>
                     </div>
                 </div>
+   @endforeach
+
+   @foreach ($pastprojects as $pastproject)
 
    <br><br>
             <h1 class="font-medium"> Past projects</h1>
             <br>
-                <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
+                            <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="img/package-1.jpg" alt="">
+                        <img class="" src="images/projects/{{ $pastproject->photo }}" >
                     </div>
                     <div class="flex border-b border-gray-200">
-                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-success me-2"></i>Makerere University IOT lab</small>
-                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="far fa-calendar-alt text-success me-2"></i>3 weeks</small>
-                        <small class="flex-1 text-center py-2"><i class="fas fa-user text-success me-2"></i>6 people</small>
+                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-success me-2"></i>
+                        {{ $pastproject->venue }}
+                        </small>
+                        <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="far fa-calendar-alt text-success me-2"></i>
+                        {{ $pastproject->duration }} weeks
+                        </small>
+                        <small class="flex-1 text-center py-2"><i class="fas fa-user text-success me-2"></i>
+                        {{-- {{ $pastproject->participants }} people --}}
+                        </small>
                     </div>
                     <div class="p-4">
-                        <p>Anything about the projects</p>
-
-                         <br><hr>
+                        <p>{{ $pastproject->description }}</p>
+                        <br><hr>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-1 flex justify-center items-center">
                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -107,7 +122,7 @@ margin-right:10%;
                             </div>
 
                             <div class="col-span-1 flex justify-center items-center">
-                            <a href="/editproject">
+                            <a href="/editproject? name={{ $pastproject->name }}&venue={{ $pastproject->venue }}&duration={{ $pastproject->duration }}&description={{ $pastproject->description }}&participants={{ $pastproject->participants }} ">
                                <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                                 </svg>
@@ -116,7 +131,7 @@ margin-right:10%;
                             </div>
                     </div>
                 </div>
-        
+         @endforeach 
 
    </div>
 </div>

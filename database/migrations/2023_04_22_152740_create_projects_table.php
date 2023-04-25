@@ -15,13 +15,14 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('venue')->nullable();
+            $table->string('participants')->nullable();
             $table->text('description');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->integer('duration')->nullable();
             $table->enum('status', ['Ongoing', 'Past'])->default('Ongoing');
             $table->string('website')->nullable();
-            $table->unsignedBigInteger('admin_id');
+            $table->unsignedBigInteger('admin_id')->nullable();;
             $table->foreign('admin_id')->references('member_id')->on('admins')->onDelete('cascade');
             $table->timestamps();
         });
