@@ -24,8 +24,16 @@ class insert_data extends Controller
       // return $request->input();
          $radio = $request->input('homecontent');
          $content = $request->input('content');
+         $motto = $request->input('motto');
 
-       //  dd($radio);
+         if($motto){
+
+            DB::table('website_content')->insert([
+                'motto' => $motto,  
+            ]);
+
+         }
+       
  
         if ($existingData) {
 
@@ -223,6 +231,7 @@ public Function insert_project(Request $request){
 
                 'name' => $request->projectName,
                 'venue' => $request->venue,
+                'participants' => $request->participants,
                 'description' => $request->description,
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
@@ -336,7 +345,7 @@ public Function insert_prototype(Request $request){
         'prototype_id' => $latestRecordId,     
     ]);
 
-            return redirect('/projectscontent')->with('success', 'project added successfully!');
+            return redirect('/publicationscontent')->with('success', 'prototype added successfully!');
 
    // return $request->input();
 }

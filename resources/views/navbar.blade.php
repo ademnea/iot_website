@@ -1,7 +1,9 @@
+    @foreach ($contents as $content)
+        
        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="/" class="navbar-brand p-0">
                 {{-- <h1 class="text-success m-0">Makerere IoT Lab</h1> --}}
-                <img src="../img/logo.jpeg" alt="Logo">
+                <img src="../images/logo/{{ $content->logo }}" alt="Logo">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -10,7 +12,7 @@
                 <div class="navbar-nav ms-auto py-0">
                 {{-- homepage dropdown --}}
                         <div class="nav-item dropdown">
-                        <a href="#" class="nav-link dropdown-toggle">Home</a>
+                        <a href="/" class="nav-link dropdown-toggle">Home</a>
                         <div class="dropdown-menu m-0">
                             <a href="/#mission" class="dropdown-item">Mission</a>
                             <a href="/#objectives" class="dropdown-item">Objectives</a>
@@ -31,7 +33,7 @@
                    <div class="nav-item dropdown">
                         <a href="/publications" class="nav-link dropdown-toggle">publications</a>
                         <div class="dropdown-menu m-0">
-                            <a href="/publications#products" class="dropdown-item">products</a>
+                            <a href="/publications#products" class="dropdown-item">prototypes</a>
                             <a href="/publications#reports" class="dropdown-item">technical reports</a>
                             <a href="/publications#datasets" class="dropdown-item">Data sets</a>
                         </div>
@@ -51,3 +53,5 @@
                 </a>
             </div>
         </nav>
+
+     @endforeach

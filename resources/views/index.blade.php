@@ -47,17 +47,17 @@
     @include('topbar')
     <!-- Topbar End -->
 
-
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
          @include('navbar')
      {{-- start of the navigation bar --}}
-
+   
+   @foreach ($contents as $content)
         <div class="container-fluid bg-success py-5 mb-5 hero-header">
             <div class="container py-5">
                 <div class="row justify-content-center py-5">
                     <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                        <h1 class="display-3 text-white mb-3 animated slideInDown">"Connecting the world, one device at a time"</h1>
+                        <h1 class="display-3 text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
                         <p class="fs-4 text-white mb-4 animated slideInDown">The Makerere University Internet of Things Lab.</p>
                     </div>
                 </div>
@@ -66,53 +66,48 @@
     </div>
     <!-- Navbar & Hero End -->
 
+       
     {{-- mission statement start --}}
     <div class ="container" id="mission">
       <h6 class="section-title bg-white text-success px-3" style="margin-left:10%;">Mission and Objectives</h6>
       <div class="wow fadeInUp" data-wow-delay="0.1s">
        <p>
        <h1 id="objectives">Mission</h1>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting  
+          {{ $content->mission }}  
        </p>
 
      <br><br>
      <p>
     <h1>Objectives</h1>
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-        It has survived not only five centuries, but also the leap into electronic typesetting  
+          {{ $content->objectives }}  
        </p>
         </div>
 
 {{--  start of the word from the team leader --}}
 
 <br>
+@foreach ($leader as $leader)
+
      <h1 id="word">Word from the team leader</h1>
    <div class="wow fadeInUp" data-wow-delay="0.1s">
                 <div class="row">
                 <div class="col-md-4">
                 <br>
-                    <img src = "../img/about.jpg" height="200" width="200" style="border-radius:50%;">
+                    <img src = "../images/team/{{ $leader->photo}}" height="200" width="200" style="border-radius:50%;">
                     <br>
-                    <h4>Dr John Wick</h4>
+                    <h4>Dr {{ $leader->fname}} {{ $leader->lname }}</h4>
                 </div>
                 <div class="col-md-8">
                    <p> <br><br><br>
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
-                        Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                        when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                        It has survived not only five centuries, but also the leap into electronic typesetting  
+                       {{ $content->team_leader_word }} 
                     </p>
                     </div>
                 </div>
                  </div>
 
+      @endforeach
 <br>
-
+  @endforeach 
     <!-- Partners Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
@@ -120,36 +115,27 @@
                 <h6 class="section-title bg-white text-center text-success px-3">Partners</h6>
                 <h1 class="mb-5">Our partners</h1>
             </div>
+
             <div class="owl-carousel testimonial-carousel position-relative">
+
+       @foreach ($partners as $partner)
+
                 <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-1.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
+                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="images/partners/{{ $partner->logo }}" style="width: 80px; height: 80px;">
+                    <h5 class="mb-0">{{ $partner->name }}</h5>
+                    {{-- <p>New York, USA</p> --}}
+                    <p class="mb-0">
+                    {{ $partner->description }}
+                    </p>
                 </div>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-2.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-3.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="img/testimonial-4.jpg" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">John Doe</h5>
-                    <p>New York, USA</p>
-                    <p class="mt-2 mb-0">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit diam amet diam et eos. Clita erat ipsum et lorem et sit.</p>
-                </div>
+                   
+       @endforeach
+               
             </div>
         </div>
     </div>
     <!-- Testimonial End -->
-        
+         
 </div>
     <!-- Footer Start -->
      @include('footer')

@@ -42,14 +42,14 @@ class retrieve_data extends Controller
 
         $onprojects = DB::table('projects')
             ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
-            ->select('projects.*', 'project_photos.*')
+            ->select('projects.*', 'project_photos.photo')
             ->where('projects.status', '=', 'Ongoing')
             ->get();
 
 
         $pastprojects = DB::table('projects')
             ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
-            ->select('projects.*', 'project_photos.*')
+            ->select('projects.*', 'project_photos.photo')
             ->where('projects.status', '=', 'Past')
             ->get();
 
@@ -81,14 +81,14 @@ class retrieve_data extends Controller
         $onevents = DB::table('events')
             ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
             ->select('events.*', 'event_photos.*')
-            ->where('projects.status', '=', 'Ongoing')
+            ->where('events.status', '=', 'Ongoing')
             ->get();
 
 
         $pastevents = DB::table('events')
             ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
             ->select('events.*', 'event_photos.*')
-            ->where('projects.status', '=', 'Past')
+            ->where('events.status', '=', 'Past')
             ->get();
 
         return view('/newscontent',compact('onevents','pastevents'));

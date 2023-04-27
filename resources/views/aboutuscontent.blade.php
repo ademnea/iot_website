@@ -72,10 +72,10 @@ margin-right:5%;
             </tr>
         </thead>
         <tbody>
+@if (isset($users))
 
         @foreach ($users as $user )
-            
-        @endforeach
+
             <tr class="border-b bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     {{ $user->fname }}  {{ $user->lname }}
@@ -93,7 +93,7 @@ margin-right:5%;
                     {{ $user->phone }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="/editteam? firstname={{ $user->fname }}&lastname={{ $user->lname}}&email={{ $user->email}}&phone={{ $user->phone}}&role={{ $user->role }}&designation={{ $user->designation }}&bio={{ $user->bio }}">
+                    <a href="/editteam? id={{  $user->id }}&firstname={{ $user->fname }}&lastname={{ $user->lname}}&email={{ $user->email}}&phone={{ $user->phone}}&role={{ $user->role }}&designation={{ $user->designation }}&bio={{ $user->bio }}">
                     <div class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
                     Edit
                     </div>
@@ -105,7 +105,9 @@ margin-right:5%;
                 </svg>
                 </td>
             </tr>
-
+                     
+        @endforeach
+@endif
         
         </tbody>
     </table>

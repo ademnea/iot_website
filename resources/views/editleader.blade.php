@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>edit logo</title>
+        <title>edit leader</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         <script src="https://cdn.tailwindcss.com"></script>
 
@@ -13,16 +13,23 @@
            <div class="w-full bg-white rounded-lg shadow light:border md:mt-0 sm:max-w-md xl:p-0 light:bg-gray-800 light:border-gray-700">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl light:text-white">
-                  Edit Logo
+                  Edit Team Leader
               </h1>
-           <form class="space-y-4 md:space-y-6" action="/editlogo_route" method="post" id="form" enctype="multipart/form-data">
+           <form class="space-y-4 md:space-y-6" action="/editleader_route" method="post" id="form" enctype="multipart/form-data">
 
                @csrf
 
-              <input type="hidden" value="{{ $_GET['id']}}" name="id" >
+            <input type="hidden" value="{{ $_GET['id']}}" name="id" >
+                 <div>
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Word From Team Leader</label>
+                    <textarea name="word" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500">
+                    {{ $_GET['word']}}
+                    </textarea>
+                  </div>
+
                   <div>
-                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Choose Image</label>
-                   <input type="file" value="" name="image" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br><br>
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Team Leader Image</label>
+                     <input type="file" value="{{ $_GET['photo']}}" name="image"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
                   </div>
 
                   <div class="grid grid-cols-2 gap-4">

@@ -76,7 +76,8 @@
       <input type="text" id="venue" name="title" required><br>
 
       <label for="description">News Description:</label><br/>
-      <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
+      <textarea id="description" name="description" rows="4" cols="50" required>
+      </textarea><br>
     
       <label for="participants">Venue:</label><br/>
       <input type="text" id="participants" name="venue" required><br>

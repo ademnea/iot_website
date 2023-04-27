@@ -28,10 +28,14 @@ margin-right:10%;
          <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl light:text-white">
                   Add New Home Content
               </h1>
-              <form class="space-y-4 md:space-y-6" action="/insertmission" method="post" id="form">
+              <form class="space-y-4 md:space-y-6" action="/insertmission" method="post" id="form" enctype="multipart/form-data">
 
                @csrf
-
+ 
+                 <div>
+                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Motto</label>
+                      <input type="text" name="motto" placeholder="motto" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                  </div>
 
                 <div class="flex items-center mb-4">
                     <input type="radio" value="mission" name="homecontent" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">

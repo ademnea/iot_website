@@ -15,18 +15,20 @@
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl light:text-white">
                   Edit Lab Contacts
               </h1>
-           <form class="space-y-4 md:space-y-6" action="/editmission" method="post" id="form">
+           <form class="space-y-4 md:space-y-6" action="/editlabinfo_route" method="post" id="form" enctype="multipart/form-data">
 
                @csrf
 
+              <input type="hidden" name="id" value="{{ $_GET['id']}}">
+
                 <label for="projectName">Physical Address:</label><br/>
-                <input type="text" value="{{ $_GET['address']}}" name="news"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
+                <input type="text" value="{{ $_GET['address']}}" name="address"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
 
                 <label for="projectName">Email Address:</label><br/>
-                <input type="text" value="{{ $_GET['email']}}" name="news"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
+                <input type="text" value="{{ $_GET['email']}}" name="email"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
                 
                 <label for="projectName">Telephone:</label><br/>
-                <input type="text" value="{{ $_GET['phone']}}" name="news"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
+                <input type="text" value="{{ $_GET['phone']}}" name="phone"  class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
 
                   <div class="grid grid-cols-2 gap-4">
                   

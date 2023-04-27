@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title');
+            $table->enum('status', ['Ongoing', 'Past'])->default('Ongoing');
             $table->text('description');
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
