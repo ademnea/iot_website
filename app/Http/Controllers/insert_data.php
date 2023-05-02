@@ -8,12 +8,47 @@ use App\Models\prototypes;
 use App\Models\website_content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
+use App\Models\User;
 
 
 class insert_data extends Controller
 {
-    
+    //lets insert an admin
+
+    public function insert_admin(Request $request){
+     $password = $request->input('password');
+     $email = $request->input('email');
+     $password_confirm = $request->input('password_confirmation');
+     $rememberToken = Str::random(60);
+
+     $user = User::where('email', $email)->first();
+     if ($user) {
+        return redirect('/register')->with('message','this email already exists');
+     }
+
+
+     if($password != $password_confirm){
+
+        return redirect('/register')->with('message','these passwords do not match');
+     }
+
+
+      DB::table('users')->insert([
+        'name' => $request->name,
+        'email' => $email,
+        'password' => $password,
+        'remember_token' =>  $rememberToken,
+    ]);
+
+    return redirect('/aboutuscontent')->with('success','admin registered successfully');
+
+
+    }
+
+
+
+
     //this function inserts data for mission, objectives, and word from the team leader.
    public function insert_home_form1(Request $request){
 
@@ -100,7 +135,7 @@ class insert_data extends Controller
         }
 
 
-                return redirect('/homecontent')->with('success', 'home content added successfully!');
+      return redirect('/homecontent')->with('success', 'home content added successfully!');
 
    }
 
@@ -157,7 +192,7 @@ class insert_data extends Controller
   // this function inserts partners into the database
    public function insert_partner(Request $request){
 
-    $admin = null;
+    $admin = $request->input('admin');
 
     $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
     $picname = $request->file('image')->getClientOriginalName();
@@ -183,7 +218,7 @@ class insert_data extends Controller
 
     public Function insert_news(Request $request){
 
-        $admin = 1;
+        $admin = $request->input('admin');
 
     $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
     $picname = $request->file('image')->getClientOriginalName();
@@ -220,7 +255,7 @@ class insert_data extends Controller
 public Function insert_project(Request $request){
 
 
-     $admin = 1;
+          $admin = $request->input('admin');
 
                 //this code uploads the picture from the form.
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
@@ -259,7 +294,8 @@ public Function insert_project(Request $request){
 
 public Function insert_publication(Request $request){
               
-              $admin = 1;
+             $admin = $request->input('admin');
+
               $type = $request->input('type');
     
                    //this code uploads the publication file from the form.
@@ -289,7 +325,9 @@ public Function insert_publication(Request $request){
 
 
 public Function insert_team(Request $request){
-     $admin = 1;
+   
+         $admin = $request->input('admin');
+
                 //this code uploads the picture from the form.
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
             $picname = $request->file('image')->getClientOriginalName();
@@ -318,8 +356,8 @@ public Function insert_team(Request $request){
 public Function insert_prototype(Request $request){
 
 
-    $admin = 1;
-    $projectid = null;
+    $admin = $request->input('admin');
+    $projectid = $request->input('project_id');;
 
                 //this code uploads the picture from the form.
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);

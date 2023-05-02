@@ -72,6 +72,8 @@
     <form action="/insert_news" method="post" enctype="multipart/form-data">
     @csrf
     
+      <input type="hidden" name="admin" value="{{ Session::get('id') }}">
+      
       <label for="venue">Event title:</label><br/>
       <input type="text" id="venue" name="title" required><br>
 

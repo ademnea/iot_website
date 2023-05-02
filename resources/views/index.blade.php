@@ -108,33 +108,6 @@
       @endforeach
 <br>
   @endforeach 
-    <!-- Partners Start -->
-    <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
-        <div class="container">
-            <div class="text-center" id="partners">
-                <h6 class="section-title bg-white text-center text-success px-3">Partners</h6>
-                <h1 class="mb-5">Our partners</h1>
-            </div>
-
-            <div class="owl-carousel testimonial-carousel position-relative">
-
-       @foreach ($partners as $partner)
-
-                <div class="testimonial-item bg-white text-center border p-4">
-                    <img class="bg-white rounded-circle shadow p-1 mx-auto mb-3" src="images/partners/{{ $partner->logo }}" style="width: 80px; height: 80px;">
-                    <h5 class="mb-0">{{ $partner->name }}</h5>
-                    {{-- <p>New York, USA</p> --}}
-                    <p class="mb-0">
-                    {{ $partner->description }}
-                    </p>
-                </div>
-                   
-       @endforeach
-               
-            </div>
-        </div>
-    </div>
-    <!-- Testimonial End -->
          
 </div>
     <!-- Footer Start -->

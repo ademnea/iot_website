@@ -73,6 +73,8 @@
 
     @csrf
 
+
+     <input type="hidden" name="admin" value="{{ Session::get('id') }}">
     
       <label for="projectName">Project Name:</label><br/>
       <input type="text" id="projectName" name="projectName" required><br>

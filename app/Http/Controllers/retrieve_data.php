@@ -96,5 +96,12 @@ class retrieve_data extends Controller
        }
 
 
+       public function fetch_project_prototype(Request $request){
+
+        $projects = projects::all();
+        return view('/registerprototype',compact('projects'));
+
+       }
+
 
 }

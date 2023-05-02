@@ -3,7 +3,7 @@
        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="/" class="navbar-brand p-0">
                 {{-- <h1 class="text-success m-0">Makerere IoT Lab</h1> --}}
-                <img src="../images/logo/{{ $content->logo }}" alt="Logo">
+                <img src="../images/logo/{{ $content->logo }}" alt="Logo" style="border-radius:15px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
@@ -17,7 +17,6 @@
                             <a href="/#mission" class="dropdown-item">Mission</a>
                             <a href="/#objectives" class="dropdown-item">Objectives</a>
                             <a href="/#word" class="dropdown-item">Word from Team Leader</a>
-                            <a href="/#partners" class="dropdown-item">Partners</a>
                         </div>
                     </div>
 
@@ -31,7 +30,7 @@
                     </div>
 
                    <div class="nav-item dropdown">
-                        <a href="/publications" class="nav-link dropdown-toggle">publications</a>
+                        <a href="/publications" class="nav-link dropdown-toggle">Products</a>
                         <div class="dropdown-menu m-0">
                             <a href="/publications#products" class="dropdown-item">prototypes</a>
                             <a href="/publications#reports" class="dropdown-item">technical reports</a>
@@ -44,8 +43,9 @@
                       <div class="nav-item dropdown">
                         <a href="/about" class="nav-link dropdown-toggle">About Us</a>
                         <div class="dropdown-menu m-0">
-                            <a href="/about#researchers" class="dropdown-item">Researchers</a>
-                            <a href="/about#interns" class="dropdown-item">Interns</a>
+                            <a href="/about#researchers" class="dropdown-item">Team</a>
+                            <a href="/about#contactus" class="dropdown-item">Contact Us</a>
+                            <a href="/about#partners" class="dropdown-item">Partners</a>
                           </div>
                        </div>
                 </div>

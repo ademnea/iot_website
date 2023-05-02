@@ -18,7 +18,10 @@ class show_data extends Controller
           $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
           $interns = DB::table('members')->where('role', '=', 'intern')->get();
             
-            return view('/about_us',compact('researchers','interns'));
+
+            $partners = partners::all();
+
+            return view('/about_us',compact('researchers','interns','partners'));
        
            }
 

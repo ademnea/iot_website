@@ -23,18 +23,18 @@
 
       {{-- displaying an alert after registering a category --}}
          @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400" role="alert">
+            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
             <b> {{ session('success') }}</b>
             </div> 
 
         @elseif (session('error')) 
-             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400" role="alert">
+             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
             <b> {{ session('error') }}</b>
               </div>
             @endif
 {{-- start of the page content --}}
 
-<button type="button" id="top" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+<button type="button" id="top" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
 <a href="/register_home">Add New Home Content</a>
 </button>
 
@@ -91,20 +91,20 @@ margin-right:10%;
 
          <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-<ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
+<ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside">
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Twitter:</span> {{ $content->twitter }}
+        <span class="font-semibold text-gray-900">Twitter:</span> {{ $content->twitter }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Facebook:</span> {{ $content->facebook }}
+        <span class="font-semibold text-gray-900">Facebook:</span> {{ $content->facebook }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">LinkedIn:</span> {{ $content->linkedin }}
+        <span class="font-semibold text-gray-900">LinkedIn:</span> {{ $content->linkedin }}
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Instagram:</span> {{ $content->instagram }} 
+        <span class="font-semibold text-gray-900">Instagram:</span> {{ $content->instagram }} 
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Youtube:</span> {{ $content->youtube }}
+        <span class="font-semibold text-gray-900">Youtube:</span> {{ $content->youtube }}
     </li>
    </ol>
             </div>
@@ -119,20 +119,20 @@ margin-right:10%;
             </div>
 
 <br>
-<h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Lab contacts and Information:</h2>
+<h2 class="mb-2 text-lg font-semibold text-gray-900">Lab contacts and Information:</h2>
 
    <div class="grid grid-cols-2 gap-4">
 
     <div class="col-span-1 flex justify-center items-center">
-<ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside dark:text-gray-400">
+<ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside">
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Email</span> {{ $content->company_email }}
+        <span class="font-semibold text-gray-900">Email</span> {{ $content->company_email }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Telephone</span> {{ $content->company_telephone }}
+        <span class="font-semibold text-gray-900">Telephone</span> {{ $content->company_telephone }}
     </li>
     <li>
-        <span class="font-semibold text-gray-900 dark:text-white">Physical Address</span> {{ $content->physical_address }}
+        <span class="font-semibold text-gray-900">Physical Address</span> {{ $content->physical_address }}
     </li>
 </ol>
     </div>
