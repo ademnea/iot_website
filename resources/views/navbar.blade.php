@@ -3,7 +3,7 @@
        <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
             <a href="/" class="navbar-brand p-0">
                 {{-- <h1 class="text-success m-0">Makerere IoT Lab</h1> --}}
-                <img src="../images/logo/{{ $content->logo }}" alt="Logo" style="border-radius:15px;">
+                <img src="../images/logo/{{ $content->logo }}" alt="Logo" style="height: 150px; width: 120px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
                 <span class="fa fa-bars"></span>
