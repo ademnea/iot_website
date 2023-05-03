@@ -51,18 +51,19 @@
     <div class="container-fluid position-relative p-0">
          @include('navbar')
      {{-- start of the navigation bar --}}
-   
    @foreach ($contents as $content)
-        <div class="container-fluid bg-success py-5 mb-5 hero-header">
-            <div class="container py-5">
-                <div class="row justify-content-center py-5">
-                    <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                        <h1 class="display-3 text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
-                        <p class="fs-4 text-white mb-4 animated slideInDown">The Makerere University Internet of Things Lab.</p>
+           
+            <div class="container-fluid bg-success py-2 mb-5 hero-header">
+                <div class="container py-2">
+                    <div class="row justify-content-center py-2">
+                        <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
+                            <h1 class="display-3 text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
+                            <p class="fs-4 text-white mb-4 animated slideInDown">The Makerere University Internet of Things Lab.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
     </div>
     <!-- Navbar & Hero End -->
 
