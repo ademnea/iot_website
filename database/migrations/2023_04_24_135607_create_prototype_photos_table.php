@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('photo');
             $table->unsignedBigInteger('prototype_id');
             $table->timestamps();
-
             // Foreign key constraints
             $table->foreign('prototype_id')->references('id')->on('prototypes')->onDelete('cascade');
         });

@@ -23,7 +23,7 @@ return new class extends Migration
             $table->enum('status', ['Ongoing', 'Past'])->default('Ongoing');
             $table->string('website')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();;
-            $table->foreign('admin_id')->references('member_id')->on('admins')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

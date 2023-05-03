@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('website_link')->nullable();
             $table->string('logo')->nullable();
             $table->unsignedBigInteger('admin_id')->nullable();
-            $table->foreign('admin_id')->references('member_id')->on('admins')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

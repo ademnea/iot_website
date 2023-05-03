@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('file_link');
             $table->unsignedBigInteger('admin_id');
-            $table->foreign('admin_id')->references('member_id')->on('admins')->onDelete('cascade');
+            $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

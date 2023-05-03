@@ -20,7 +20,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign key constraint
-            $table->foreign('admin_id')->references('member_id')->on('admins');
+            $table->foreign('admin_id')->references('id')->on('users');
         });
     }
 

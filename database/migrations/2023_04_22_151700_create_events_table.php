@@ -20,7 +20,7 @@ return new class extends Migration
             $table->dateTime('end_date')->nullable();
             $table->string('venue')->nullable();
             $table->unsignedBigInteger('admin_id');
-            $table->foreign('admin_id')->references('member_id')->on('admins');
+            $table->foreign('admin_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
