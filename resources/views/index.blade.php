@@ -42,16 +42,15 @@
     </div>
     <!-- Spinner End -->
 
-
     <!-- Topbar Start -->
     @include('topbar')
     <!-- Topbar End -->
 
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
-         @include('navbar')
+    @include('navbar')
      {{-- start of the navigation bar --}}
-   @foreach ($contents as $content)
+    @foreach ($contents as $content)
            
             <div class="container-fluid bg-success py-2 mb-5 hero-header">
                 <div class="container py-2">
@@ -108,8 +107,7 @@
 
       @endforeach
 <br>
-  @endforeach 
-         
+  @endforeach       
 </div>
     <!-- Footer Start -->
      @include('footer')

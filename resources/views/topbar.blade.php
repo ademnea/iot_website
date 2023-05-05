@@ -1,5 +1,5 @@
    
-   
+   @if($contents)
 @foreach ($contents as $content)
     
     <div class="container-fluid bg-dark px-5 d-none d-lg-block">
@@ -23,3 +23,7 @@
         </div>
     </div>
 @endforeach
+
+@elseif(!$contents)
+   <h1>default topbar content</h1>
+@endif
