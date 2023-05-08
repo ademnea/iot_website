@@ -51,11 +51,10 @@ margin-right:10%;
 <br>
 <br>
 
- @if (isset($contents))
+
  
 @foreach ($contents as $content)
     
-@endforeach
 {{-- Beginning of the company Logo. --}}
 
  <div class="grid grid-cols-2 gap-4">
@@ -230,8 +229,7 @@ margin-right:10%;
     <div class="w-1/3"> <br><br>
 
  @foreach ($leader as $leader)
-     
- @endforeach
+
         <img src="../images/team/{{ $leader->photo}}"  class="h-48 w-48 rounded-full">
        <div style="margin-left:15%;"> <h4 class="text-lg font-medium mt-4">Dr {{ $leader->fname}} {{ $leader->lname }}</h4> </div>
     </div>
@@ -240,6 +238,8 @@ margin-right:10%;
        {{ $content->team_leader_word }}
         </p><br>
         <hr>
+   @endforeach
+
     @else
         <img src="../img/team-4.jpg"  class="h-48 w-48 rounded-full">
        <div style="margin-left:15%;"> <h4 class="text-lg font-medium mt-4">Dr John Doe</h4></div>
@@ -271,6 +271,10 @@ margin-right:10%;
 <hr>
 <br>
 
+@endforeach
+
+@foreach ($partners as $partner)
+
     <!-- Partners Start -->
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
@@ -283,7 +287,6 @@ margin-right:10%;
                  <h1 class="mb-5">Our partners</h1>
             </div>
 
-      @foreach ($partners as $partner)
 
             <div class="col-span-1 flex justify-center items-center">
             <a href="register_home#partners">
@@ -328,9 +331,8 @@ margin-right:10%;
                 </div>
                 <br>
 
-   @endforeach
+         @endforeach
            {{-- end of partner --}}
-        @endif 
 </div>
 
    </div>

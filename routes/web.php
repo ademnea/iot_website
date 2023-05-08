@@ -16,6 +16,7 @@ use Illuminate\Auth\Middleware\Authenticate;
 
 
 //routes to all the pages begin here.
+
 Route::view('/', 'index');
 Route::view('/partners', 'partners');
 Route::view('/publications', 'publications');

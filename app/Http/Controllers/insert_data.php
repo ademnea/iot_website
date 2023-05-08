@@ -61,16 +61,14 @@ class insert_data extends Controller
          $content = $request->input('content');
          $motto = $request->input('motto');
 
-         if($motto){
-
-            DB::table('website_content')->insert([
-                'motto' => $motto,  
-            ]);
-
-         }
        
  
         if ($existingData) {
+
+            DB::table('website_content')->where('id', $existingData->id)->update([
+
+                'motto' => $motto,
+            ]);
 
             if ($radio == "mission") {
               
@@ -111,6 +109,7 @@ class insert_data extends Controller
                 // The table has data, update the existing row with the new data
                 DB::table('website_content')->insert([
                     'mission' => $content,
+                    'motto' => $motto,
                     // add more fields to insert as needed
                 ]);
            
@@ -120,6 +119,7 @@ class insert_data extends Controller
 
             DB::table('website_content')->insert([
                 'objectives' => $content,
+                'motto' => $motto,
                 // add more fields to insert as needed
             ]);
            }
@@ -127,6 +127,7 @@ class insert_data extends Controller
 
             DB::table('website_content')->insert([
                 'team_leader_word' => $content,
+                'motto' => $motto,
                 // add more fields to insert as needed
             ]);
    

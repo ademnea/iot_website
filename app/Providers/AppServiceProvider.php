@@ -26,5 +26,10 @@ class AppServiceProvider extends ServiceProvider
             $contents = website_content::all();
             View::share('contents', $contents);
 
+    if(Schema::hasTable('website_content')){
+        $contents = website_content::all();
+        View::share('contents', $contents);
+
+         }
     }
 }
