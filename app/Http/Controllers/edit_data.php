@@ -31,6 +31,26 @@ class edit_data extends Controller
 
     }
 
+        //edit banner
+        public function edit_banner(Request $request){
+    
+            // this code uploads the picture from the form.
+             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+             $picname = $request->file('image')->getClientOriginalName();
+             $request->image->move(public_path('images/banner'), $picname);
+     
+             $id = $request->input('id');
+         
+             DB::table('website_content')
+             ->where('id', $id)
+             ->update([
+                 'banner' => $picname,
+                 // add more fields as needed
+             ]);
+         return redirect('/homecontent')->with('success', 'logo changed successfully!');
+     
+         }
+
 
     //editing the leader's content.
 

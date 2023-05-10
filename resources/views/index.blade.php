@@ -1,3 +1,5 @@
+@foreach ($contents as $content)
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,6 +33,18 @@
     <!-- Template Stylesheet -->
     <link rel="stylesheet" href="../css/style.css">
 
+
+    <style>
+
+        /*** Hero Header ***/
+.hero-header {
+    background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../images/banner/{{$content->banner}});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    </style>
 </head>
 
 <body>
@@ -50,7 +64,7 @@
     <div class="container-fluid position-relative p-0">
     @include('navbar')
      {{-- start of the navigation bar --}}
-    @foreach ($contents as $content)
+  
            
             <div class="container-fluid bg-success py-2 mb-5 hero-header">
                 <div class="container py-2">

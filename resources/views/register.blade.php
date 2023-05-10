@@ -1,9 +1,7 @@
 <x-guest-layout>
     <x-authentication-card>
-        <x-slot name="logo">
 
-            <x-authentication-card-logo />
-            
+        <x-slot name="logo">
         </x-slot>
 
         <b> {{ __('Register Adminstrator') }}</b> <br><br>

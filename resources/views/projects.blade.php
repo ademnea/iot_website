@@ -30,6 +30,19 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+
+        /*** Hero Header ***/
+.hero-header {
+    background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../images/banner/{{$content->banner}});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    </style>
+    
 </head>
 
 <body>
@@ -41,7 +54,7 @@
     </div>
     <!-- Spinner End -->
 
-
+    @foreach ($contents as $content)
     <!-- Topbar Start -->
        @include('topbar')
     <!-- Topbar End -->
@@ -49,7 +62,6 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
          @include('navbar')
-
     <div class="container-fluid bg-primary py-5 mb-5 hero-header">
     
         </div> 
@@ -157,7 +169,7 @@
     <!-- Footer Start -->
     @include('footer')
     <!-- Footer End -->
-
+ @endforeach
 
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>

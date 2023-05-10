@@ -30,6 +30,19 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+
+    <style>
+
+        /*** Hero Header ***/
+.hero-header {
+    background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../images/banner/{{$content->banner}});
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+    </style>
+    
 </head>
 
 <body>

@@ -29,9 +29,10 @@ class retrieve_data extends Controller
     //function fetches members
     public function fetch_team(){
         
+        $contents = website_content::all();
         $users = members::all();
         
-        return view('/aboutuscontent',compact('users'));
+        return view('/aboutuscontent',compact('users','contents'));
    
        }
 
@@ -39,6 +40,8 @@ class retrieve_data extends Controller
        public function fetch_projects(){
         
         // we need a join for the pictures to be displayed too.
+
+        $contents = website_content::all();
 
         $onprojects = DB::table('projects')
             ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
@@ -53,13 +56,14 @@ class retrieve_data extends Controller
             ->where('projects.status', '=', 'Past')
             ->get();
 
-        return view('/projectscontent',compact('onprojects','pastprojects'));
+        return view('/projectscontent',compact('onprojects','pastprojects','contents'));
    
        }
 
        public function fetch_publications(){
         
                // we need a join for the pictures to be displayed too.
+        $contents = website_content::all();
 
         $prototypes = DB::table('prototypes')
                ->join('prototype_photos', 'prototypes.id', '=', 'prototype_photos.prototype_id')
@@ -69,7 +73,7 @@ class retrieve_data extends Controller
 
         $publications  = publications::all();
         
-        return view('/publicationscontent',compact('publications','prototypes'));
+        return view('/publicationscontent',compact('publications','prototypes','contents'));
    
        }
 
@@ -77,6 +81,8 @@ class retrieve_data extends Controller
        public function fetch_events(){
         
         // we need a join for the pictures to be displayed too.
+
+        $contents = website_content::all();
 
         $onevents = DB::table('events')
             ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
@@ -91,15 +97,17 @@ class retrieve_data extends Controller
             ->where('events.status', '=', 'Past')
             ->get();
 
-        return view('/newscontent',compact('onevents','pastevents'));
+        return view('/newscontent',compact('onevents','pastevents','contents'));
    
        }
 
 
        public function fetch_project_prototype(Request $request){
 
+        $contents = website_content::all();
+
         $projects = projects::all();
-        return view('/registerprototype',compact('projects'));
+        return view('/registerprototype',compact('projects','contents'));
 
        }
 

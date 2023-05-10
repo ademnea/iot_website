@@ -14,6 +14,8 @@ class show_data extends Controller
         //function fetches members
         public function fetch_team(){
         
+            $contents = website_content::all();
+
           //  $users = members::all();
           $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
           $interns = DB::table('members')->where('role', '=', 'intern')->get();
@@ -21,7 +23,7 @@ class show_data extends Controller
 
             $partners = partners::all();
 
-            return view('/about_us',compact('researchers','interns','partners'));
+            return view('/about_us',compact('researchers','interns','partners','contents'));
        
            }
 
@@ -29,6 +31,8 @@ class show_data extends Controller
            public function fetch_events(){
         
             // we need a join for the pictures to be displayed too.
+
+            $contents = website_content::all();
     
             $onevents = DB::table('events')
                 ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
@@ -43,7 +47,7 @@ class show_data extends Controller
                 ->where('events.status', '=', 'Past')
                 ->get();
     
-            return view('/news',compact('onevents','pastevents'));
+            return view('/news',compact('onevents','pastevents','contents'));
        
            }
 
@@ -57,10 +61,11 @@ class show_data extends Controller
             ->select('prototypes.*', 'prototype_photos.*')
             ->get();
        
+    $contents = website_content::all();
 
      $publications  = publications::all();
      
-     return view('/publications',compact('publications','prototypes'));
+     return view('/publications',compact('publications','prototypes','contents'));
 
     }
 
@@ -68,6 +73,8 @@ class show_data extends Controller
     public function fetch_projects(){
         
         // we need a join for the pictures to be displayed too.
+
+        $contents = website_content::all();
 
         $onprojects = DB::table('projects')
             ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
@@ -82,7 +89,7 @@ class show_data extends Controller
             ->where('projects.status', '=', 'Past')
             ->get();
 
-        return view('/projects',compact('onprojects','pastprojects'));
+        return view('/projects',compact('onprojects','pastprojects','contents'));
    
        }
 
@@ -92,6 +99,15 @@ class show_data extends Controller
         $partners = partners::all();
         $contents = website_content::all();
 
+ 
+        // if we startup the system without data, redirect the admin to the login to enter some new data.
+       if($contents->count() === 0){
+
+          return redirect('/login')->with('status','Login to insert new website content');
+
+       }
+
+
         return view('/index',compact('contents','leader','partners'));
    
        }
@@ -99,8 +115,9 @@ class show_data extends Controller
 
        public function fetch_partners(){
 
+        $contents = website_content::all();
         $partners = partners::all();
-        return view('/partners',compact('partners'));
+        return view('/partners',compact('partners','contents'));
 
        }
 

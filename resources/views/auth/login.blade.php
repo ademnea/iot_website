@@ -1,11 +1,10 @@
 <x-guest-layout>
     <x-authentication-card>
+
         <x-slot name="logo">
-
-            <x-authentication-card-logo />
-
         </x-slot>
-<b> {{ __('Admin Login') }}</b> <br><br>
+
+<b> {{ __('Admin Login') }}</b><br><br>
         <x-validation-errors class="mb-4" />
 
         @if (session('status'))

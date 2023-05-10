@@ -54,6 +54,7 @@ Route::view('/editpartner','editpartner');
 Route::view('/edittopbar','edittopbar');
 Route::view('/editcontacts','editcontacts');
 Route::view('/editlogo','editlogo');
+Route::view('/editbanner','editbanner');
 
 
 //routes to insert data into the database
@@ -81,6 +82,7 @@ Route::get('/registerprototype','App\Http\Controllers\retrieve_data@fetch_projec
 //controller routes for updating database content
 Route::post('/editmission_route', 'App\Http\Controllers\edit_data@edit_mission');
 Route::post('/editlogo_route', 'App\Http\Controllers\edit_data@edit_logo');
+Route::post('/editbanner_route', 'App\Http\Controllers\edit_data@edit_banner');
 Route::post('/editleader_route', 'App\Http\Controllers\edit_data@edit_leader');
 Route::post('/editpartner_route', 'App\Http\Controllers\edit_data@edit_partner');
 Route::post('/edittopbar_route', 'App\Http\Controllers\edit_data@edit_topbar');

@@ -23,13 +23,12 @@ class AppServiceProvider extends ServiceProvider
            //we need an if statement to first check if the table exists, before attempting to pick data.
    
             // Execute query to fetch data from my_table
-            $contents = website_content::all();
-            View::share('contents', $contents);
 
-    if(Schema::hasTable('website_content')){
-        $contents = website_content::all();
-        View::share('contents', $contents);
+    // if(Schema::hasTable('website_content')){
+    //     $contents = website_content::all();
+    //     View::share('contents', $contents);
 
-         }
+    //      }
+
     }
 }
