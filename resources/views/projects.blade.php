@@ -31,6 +31,8 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    @foreach ($contents as $content)
+
     <style>
 
         /*** Hero Header ***/
@@ -54,7 +56,6 @@
     </div>
     <!-- Spinner End -->
 
-    @foreach ($contents as $content)
     <!-- Topbar Start -->
        @include('topbar')
     <!-- Topbar End -->

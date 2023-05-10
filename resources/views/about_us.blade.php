@@ -31,6 +31,8 @@
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
+    @foreach ($contents as $content)
+        
     <style>
 
         /*** Hero Header ***/
@@ -197,7 +199,7 @@
     @include('footer')
     <!-- Footer End -->
 
-
+    @endforeach
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 

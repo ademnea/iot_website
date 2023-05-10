@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <x-authentication-card>
+    <x-authentication-card :contents="$contents">
 
         <x-slot name="logo">
         </x-slot>
@@ -7,11 +7,10 @@
         <b> {{ __('Register Adminstrator') }}</b> <br><br>
 
 
-        @if (session('message')) 
-             <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-            <b> {{ session('message') }}</b>
-              </div>
-              <br>
+        @if ($status)
+        <div class="mb-4 font-medium text-sm text-red-600">
+            {{ $status }}
+        </div>
         @endif
             
         <x-validation-errors class="mb-4" />

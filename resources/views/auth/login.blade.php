@@ -1,15 +1,13 @@
 <x-guest-layout>
-    <x-authentication-card>
 
-        <x-slot name="logo">
-        </x-slot>
-
-<b> {{ __('Admin Login') }}</b><br><br>
+    <x-authentication-card  :contents="$contents">
+ 
+    <b>{{ __('Admin Login') }}</b><br><br>
         <x-validation-errors class="mb-4" />
 
-        @if (session('status'))
+        @if ($status)
             <div class="mb-4 font-medium text-sm text-red-600">
-                {{ session('status') }}
+                {{ $status }}
             </div>
         @endif
 
@@ -46,4 +44,5 @@
             </div>
         </form>
     </x-authentication-card>
+
 </x-guest-layout>

@@ -103,7 +103,7 @@ class show_data extends Controller
         // if we startup the system without data, redirect the admin to the login to enter some new data.
        if($contents->count() === 0){
 
-          return redirect('/login')->with('status','Login to insert new website content');
+          return view('auth/login',['contents' => $contents, 'status' => 'Login to insert new website content']);
 
        }
 

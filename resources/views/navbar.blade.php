@@ -52,7 +52,7 @@
                           </div>
                        </div>
                 </div>
-                <a href="/login" class="btn btn-success rounded-pill py-2 px-4">Admin 
+                <a href="/logmein" class="btn btn-success rounded-pill py-2 px-4">Admin 
                 </a>
             </div>
         </nav>
