@@ -83,16 +83,16 @@
        
     {{-- mission statement start --}}
     <div class ="container" id="mission">
-      <h6 class="section-title bg-white text-success px-3" style="margin-left:10%;">Mission and Objectives</h6>
+      <h2 class="section-title bg-white text-success px-3" style="margin-left:10%;">Mission and Objectives</h2>
       <div class="wow fadeInUp" data-wow-delay="0.1s">
        <p>
-       <h1 id="objectives">Mission</h1>
+       <h2 id="objectives">Mission</h2>
           {{ $content->mission }}  
        </p>
 
      <br><br>
      <p>
-    <h1>Objectives</h1>
+    <h2>Objectives</h2>
           {{ $content->objectives }}  
        </p>
         </div>
@@ -102,7 +102,7 @@
 <br>
 @foreach ($leader as $leader)
 
-     <h1 id="word">Word from the team leader</h1>
+     <h2 id="word">Word from the team leader</h2>
    <div class="wow fadeInUp" data-wow-delay="0.1s">
                 <div class="row">
                 <div class="col-md-4">

@@ -13,7 +13,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto py-0">
-                {{-- homepage dropdown --}}
+              
+                    {{-- homepage dropdown --}}
                         <div class="nav-item dropdown">
                         <a href="/" class="nav-link dropdown-toggle">Home</a>
                         <div class="dropdown-menu m-0">
@@ -32,6 +33,7 @@
                         </div>
                     </div>
 
+                    {{-- products dropdown --}}
                    <div class="nav-item dropdown">
                         <a href="/publications" class="nav-link dropdown-toggle">Products</a>
                         <div class="dropdown-menu m-0">
@@ -43,6 +45,7 @@
 
                     <a href="/news" class="nav-item nav-link">News</a>
 
+                    {{-- about us dropdown --}}
                       <div class="nav-item dropdown">
                         <a href="/about" class="nav-link dropdown-toggle">About Us</a>
                         <div class="dropdown-menu m-0">

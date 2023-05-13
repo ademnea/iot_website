@@ -77,12 +77,11 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Events</h6>
-                <h1 class="mb-5">Lab News Events</h1>
+                <h2 class="section-title bg-white text-center text-success px-3">Events</h2>
             </div>
             <div class="row g-4">
 
-<h6 class="section-title bg-white text-center text-primary px-3">Upcoming</h6>
+     <h2>Upcoming</h2>
 
           @foreach ($onevents as $onevent)
               
@@ -112,7 +111,7 @@
   <br><br>
 
        
-   <h6 class="section-title bg-white text-center text-primary px-3">Past Events</h6>
+   <h2>Past Events</h2>
 
             @foreach ($pastevents as $pastevent)
               

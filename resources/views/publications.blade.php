@@ -75,9 +75,9 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-primary px-3">Products</h6>
+                <h2 class="section-title bg-white text-center text-success px-3">Products</h2>
                
-              <h1 class="font-medium">Prototypes</h1>
+              <h2 class="font-medium">Prototypes</h2>
 <br>
   <div class="flex flex-wrap">
   
@@ -120,7 +120,7 @@
     @endforeach
     <!-- Service End -->
 <br><br>
- <h1 class="font-medium">Technical Reports and Datasets</h1>
+ <h2 class="font-medium">Technical Reports and Datasets</h2>
 
  </div>
  </div>

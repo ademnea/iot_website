@@ -20,6 +20,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
 
+    {{-- links for the contact section --}}
+    
     <!-- Libraries Stylesheet -->
     <link href="lib/animate/animate.min.css" rel="stylesheet">
     <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
@@ -50,7 +52,7 @@
 <body>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
@@ -66,7 +68,7 @@
     <div class="container-fluid position-relative p-0">
          @include('navbar')
 
-    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
+    <div class="container-fluid bg-success py-5 mb-5 hero-header">
     
         </div> 
     </div>
@@ -81,9 +83,10 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-success px-3">Team</h6>
-                <h1 class="mb-5" id="researchers">Researchers</h1>
+                <h2 class="section-title bg-white text-center text-success px-3">Team</h2> <br>
+                <h2 class="mb-5" id="researchers">Researchers</h2>
             </div>
+
             <div class="row g-4">
     
       @foreach ($researchers as $researcher)
@@ -108,27 +111,19 @@
                 </div>
           
       @endforeach
-
-
             </div>
         </div>
     </div>
     <!-- researcher Team End -->  
    
-   
-   
-   
-   
-   
+
     <!-- intern Team Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h6 class="section-title bg-white text-center text-success px-3" id="interns">Interns</h6>
-                <h1 class="mb-5">Meet Our Intern Team</h1>
+                <h2>Interns</h2>
             </div>
             <div class="row g-4">
-
     {{-- interns begin here  --}}
 
       @foreach ($interns as $intern)
@@ -150,15 +145,60 @@
                             <small>{{ $intern->designation }}</small>
                         </div>
                     </div>
-                </div>
-          
-      @endforeach
+                </div> 
+                @endforeach
+            </div>
+            
+      <br>
     <!-- Team End -->
 
     <!-- contacts start -->
-
-
-
+    <br>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+              <h4>Get in touch</h4>
+                <div class="mb-3">
+                    <label for="formGroupExampleInput" class="form-label">Name</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name">
+                  </div>
+                  <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Email</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter your email">
+                  </div>
+                  <div class="mb-3">
+                    <label for="formGroupExampleInput2" class="form-label">Contact Number</label>
+                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter your number">
+                  </div>
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Message</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                  </div>
+                  <button class="btn btn-success">Submit</button>
+            </div>
+            <div class="col-md-5 ">
+              <h4>Contact us</h4><hr>
+              <div class="mt-4">
+                  <div class="d-flex">
+                    <i class="bi bi-geo-alt-fill"></i>
+                    <p >Address: {{ $content->physical_address }}</p>
+                  </div><hr>
+                  <div class="d-flex">
+                    <i class="bi bi-telephone-fill"></i>
+                    <p>Contact: {{ $content->company_phone }}</p>
+                  </div><hr>
+                  <div class="d-flex">
+                    <i class="bi bi-envelope-fill"></i>
+                    <p>Email: {{ $content->company_email }}</p>
+                  </div><hr>
+                  <div class="d-flex">
+                    <i class="bi bi-browser-chrome"></i>
+                    <p>Website: www.contact.com</p>
+                  </div><hr>
+              </div>
+            </div>
+        </div>
+    </div>
 
      <!-- contacts end -->
 
@@ -167,8 +207,7 @@
     <div class="container-xxl py-5 wow fadeInUp" data-wow-delay="0.1s">
         <div class="container">
             <div class="text-center" id="partners">
-                <h6 class="section-title bg-white text-center text-success px-3">Partners</h6>
-                <h1 class="mb-5">Our partners</h1>
+                <h2 class="section-title bg-white text-center text-success px-3">Partners</h2>
             </div>
 
             <div class="owl-carousel testimonial-carousel position-relative">
@@ -201,7 +240,7 @@
 
     @endforeach
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-success btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 
     <!-- JavaScript Libraries -->
