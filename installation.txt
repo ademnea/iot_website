@@ -2,7 +2,7 @@
 2.update the composer.
 3.run npm install.
 4.set up DB run migrations.
-5.Register an admin.
+5.Register an admin in the users table.
 6.start server.
 7.run 'npm run dev' in new terminal.
 8.browse, then login and start adding content.

@@ -100,6 +100,9 @@ Route::post('/editmember_route', 'App\Http\Controllers\edit_data@edit_team');
 
 });
 
+//inserting feedback message into the database
+Route::post('/insert_message', 'App\Http\Controllers\insert_data@insert_message');
+
 
 // routes for displaying/ showing data to the outside pages.
 // to pick data from the database

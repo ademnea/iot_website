@@ -358,7 +358,7 @@ public Function insert_prototype(Request $request){
 
 
     $admin = $request->input('admin');
-    $projectid = $request->input('project_id');;
+    $projectid = $request->input('project_id');
 
                 //this code uploads the picture from the form.
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
@@ -387,6 +387,23 @@ public Function insert_prototype(Request $request){
             return redirect('/publicationscontent')->with('success', 'prototype added successfully!');
 
    // return $request->input();
+}
+
+
+public Function insert_message(Request $request){
+
+           //this code uploads the picture from the form.
+
+            DB::table('messages')->insert([
+
+                'name' => $request->name,
+                'email' => $request->email,
+                'phone' => $request->phone,
+                'message' => $request->message,   
+            ]);
+
+            return redirect('/about#contactus')->with('message','Thanks for the feedback,'.' '.$request->name.'.');
+
 }
 
 }

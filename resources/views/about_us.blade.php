@@ -144,38 +144,55 @@
                             <h5 class="mb-0">{{ $intern->fname }}  {{ $intern->lname }}</h5>
                             <small>{{ $intern->designation }}</small>
                         </div>
+                        
                     </div>
                 </div> 
                 @endforeach
             </div>
             
-      <br>
+      <br  id="contactus">
     <!-- Team End -->
 
     <!-- contacts start -->
     <br>
-    <div class="container">
+    <div class="container" >
+
+        <center>
+            {{-- displaying an alert after registering a category --}}
+               @if (session('message'))
+
+               <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>{{ session('message') }}</strong> we will get back to you. 
+              </div>
+
+              @endif
+      </center>
         <div class="row">
             <div class="col-md-7">
               <h4>Get in touch</h4>
+            <form method="post" action="/insert_message">
+                @csrf
+
                 <div class="mb-3">
                     <label for="formGroupExampleInput" class="form-label">Name</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput" placeholder="Enter your name">
+                    <input type="text" name="name" class="form-control" id="formGroupExampleInput" placeholder="Enter your name" required>
                   </div>
                   <div class="mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Email</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter your email">
+                    <input type="text" name="email" class="form-control" id="formGroupExampleInput2" placeholder="Enter your email" required>
                   </div>
                   <div class="mb-3">
                     <label for="formGroupExampleInput2" class="form-label">Contact Number</label>
-                    <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Enter your number">
+                    <input type="text" name="phone" class="form-control" id="formGroupExampleInput2" placeholder="Enter your number">
                   </div>
                   <div class="mb-3">
                     <label for="exampleFormControlTextarea1" class="form-label">Message</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                    <textarea class="form-control" name="message" id="exampleFormControlTextarea1" rows="3"></textarea>
                   </div>
                   <button class="btn btn-success">Submit</button>
             </div>
+        </form>
+
             <div class="col-md-5 ">
               <h4>Contact us</h4><hr>
               <div class="mt-4">
@@ -193,7 +210,7 @@
                   </div><hr>
                   <div class="d-flex">
                     <i class="bi bi-browser-chrome"></i>
-                    <p>Website: www.contact.com</p>
+                    {{-- <p>Website: www.contact.com</p> --}}
                   </div><hr>
               </div>
             </div>
@@ -241,7 +258,6 @@
     @endforeach
     <!-- Back to Top -->
     <a href="#" class="btn btn-lg btn-success btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
-
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
