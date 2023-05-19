@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->text('mission')->nullable();
             $table->text('team_leader_word')->nullable();
+            $table->text('vision')->nullable();
             $table->text('objectives')->nullable();
             $table->string('motto')->nullable();
             $table->string('logo')->nullable();

@@ -88,6 +88,16 @@ class insert_data extends Controller
 
                 ]);
             }
+
+            else if($radio == "vision"){
+
+
+                DB::table('website_content')->where('id', $existingData->id)->update([
+                   
+                    'vision' => $content,
+
+                ]);
+            }
            else{
 
             DB::table('website_content')->where('id', $existingData->id)->update([
@@ -123,6 +133,17 @@ class insert_data extends Controller
                 // add more fields to insert as needed
             ]);
            }
+
+           else if($radio == "vision"){
+
+
+            DB::table('website_content')->insert([
+                'vision' => $content,
+                'motto' => $motto,
+                // add more fields to insert as needed
+            ]);
+           }
+
           else{
 
             DB::table('website_content')->insert([

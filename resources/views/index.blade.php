@@ -80,11 +80,18 @@
     </div>
     <!-- Navbar & Hero End -->
 
+        {{-- vision start --}}
+        <div class ="container" id="mission">
+            <h2 class="section-title bg-white text-success px-3" style="margin-left:10%;">Vision, Mission and Objectives</h2>
+            <div class="wow fadeInUp" data-wow-delay="0.1s">
+             <p>
+             <h2 id="vision">Vision</h2>
+                {{ $content->vision }}  
+             </p>
+      
+           <br><br>
        
     {{-- mission statement start --}}
-    <div class ="container" id="mission">
-      <h2 class="section-title bg-white text-success px-3" style="margin-left:10%;">Mission and Objectives</h2>
-      <div class="wow fadeInUp" data-wow-delay="0.1s">
        <p>
        <h2 id="objectives">Mission</h2>
           {{ $content->mission }}  

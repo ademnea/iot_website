@@ -95,6 +95,7 @@ class edit_data extends Controller
         ->where('id', $id)
         ->update([
             'motto'=> $request->input('motto'),
+            'vision' => $request->input('vision'),
             'mission' => $request->input('mission'),
             'objectives' => $request->input('objectives'),
             // add more fields as needed

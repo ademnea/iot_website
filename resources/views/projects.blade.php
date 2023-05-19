@@ -95,14 +95,15 @@
 
                                     <div class="m-2 card">
 
-                                     <a href="https://{{$onproject->website}}">
+                                     <a href="http://{{$onproject->website}}">
                                         <img src="images/projects/{{ $onproject->photo }}" class="card-img-top" alt="project photo" style="height:180px">
-                                     </a>
+                                     
                                         <div class="card-body">
                                             <h5 class="card-title">{{ $onproject->name }}</h5>
                                             <p class="card-text">
                                                 {{ $onproject->description }}
                                             </p>
+                                        </a>
                                          </div>
                                     </div>
                                 </div>

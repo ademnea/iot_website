@@ -18,6 +18,7 @@
                         <div class="nav-item dropdown">
                         <a href="/" class="nav-link dropdown-toggle">Home</a>
                         <div class="dropdown-menu m-0">
+                            <a href="/#vision" class="dropdown-item">Vision</a>
                             <a href="/#mission" class="dropdown-item">Mission</a>
                             <a href="/#objectives" class="dropdown-item">Objectives</a>
                             <a href="/#word" class="dropdown-item">Word from Team Leader</a>
