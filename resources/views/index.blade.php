@@ -70,8 +70,8 @@
                 <div class="container py-2">
                     <div class="row justify-content-center py-2">
                         <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                            <h1 class= "text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
                             <p class="fs-4 text-white mb-4 animated slideInDown">{{$content->Labname}}</p>
+                            <h1 class= "text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
                         </div>
                     </div>
                 </div>

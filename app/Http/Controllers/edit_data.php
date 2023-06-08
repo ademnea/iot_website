@@ -94,6 +94,7 @@ class edit_data extends Controller
         DB::table('website_content')
         ->where('id', $id)
         ->update([
+            'Labname'=> $request->input('labname'),
             'motto'=> $request->input('motto'),
             'vision' => $request->input('vision'),
             'mission' => $request->input('mission'),
