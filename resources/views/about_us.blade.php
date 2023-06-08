@@ -67,14 +67,10 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
          @include('navbar')
-
-    <div class="container-fluid bg-success py-5 mb-5 hero-header">
-    
-        </div> 
     </div>
     <!-- Navbar & Hero End -->
 
-
+<br><br><br>
 
 
 {{-- team start--}}
@@ -83,19 +79,16 @@
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h2 class="section-title bg-white text-center text-success px-3">Team</h2> <br>
-                <h2 class="mb-5" id="researchers">Researchers</h2>
+                <h2 class="mb-5" id="researchers">Our Team</h2>
             </div>
 
             <div class="row g-4">
     
-      @foreach ($researchers as $researcher)
+      @foreach ($teams as $team)
 
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
                     <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="images/team/{{ $researcher->photo }}" alt="">
-                        </div>
+                            <img class="card-img-top" alt="project photo" style="height:250px" src="images/team/{{ $team->photo }}" alt="">
 
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
                             <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
@@ -104,8 +97,8 @@
                         </div>
 
                         <div class="text-center p-4">
-                            <h5 class="mb-0">{{ $researcher->fname }}  {{ $researcher->lname }}</h5>
-                            <small>{{ $researcher->designation }}</small>
+                            <h5 class="mb-0">{{ $team->fname }}  {{ $team->lname }}</h5>
+                            <small>{{ $team->designation }}</small>
                         </div>
                     </div>
                 </div>
@@ -114,7 +107,7 @@
             </div>
         </div>
     </div>
-    <!-- researcher Team End -->  
+    <!-- team Team End -->  
    
 
     <!-- intern Team Start -->
@@ -202,7 +195,7 @@
                   </div><hr>
                   <div class="d-flex">
                     <i class="bi bi-telephone-fill"></i>
-                    <p>Contact: {{ $content->company_phone }}</p>
+                    <p>Contact: {{ $content->company_telephone }}</p>
                   </div><hr>
                   <div class="d-flex">
                     <i class="bi bi-envelope-fill"></i>

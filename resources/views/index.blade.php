@@ -70,8 +70,8 @@
                 <div class="container py-2">
                     <div class="row justify-content-center py-2">
                         <div class="col-lg-10 pt-lg-5 mt-lg-5 text-center">
-                            <h1 class="display-3 text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
-                            <p class="fs-4 text-white mb-4 animated slideInDown">The Makerere University Internet of Things Lab.</p>
+                            <h1 class= "text-white mb-3 animated slideInDown">"{{ $content->motto }}"</h1>
+                            <p class="fs-4 text-white mb-4 animated slideInDown">{{$content->Labname}}</p>
                         </div>
                     </div>
                 </div>
@@ -82,26 +82,19 @@
 
         {{-- vision start --}}
         <div class ="container" id="mission">
-            <h2 class="section-title bg-white text-success px-3" style="margin-left:10%;">Vision, Mission and Objectives</h2>
             <div class="wow fadeInUp" data-wow-delay="0.1s">
-             <p>
+             
              <h2 id="vision">Vision</h2>
                 {{ $content->vision }}  
-             </p>
-      
            <br><br>
        
     {{-- mission statement start --}}
-       <p>
        <h2 id="objectives">Mission</h2>
           {{ $content->mission }}  
-       </p>
-
      <br><br>
-     <p>
+   
     <h2>Objectives</h2>
           {{ $content->objectives }}  
-       </p>
         </div>
 
 {{--  start of the word from the team leader --}}
@@ -116,7 +109,7 @@
                 <br>
                     <img src = "../images/team/{{ $leader->photo}}" height="200" width="200" style="border-radius:50%;">
                     <br>
-                    <h4>Dr {{ $leader->fname}} {{ $leader->lname }}</h4>
+                    <h4>{{ $leader->fname}} {{ $leader->lname }}</h4>
                 </div>
                 <div class="col-md-8">
                    <p> <br><br><br>

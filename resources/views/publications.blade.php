@@ -65,17 +65,13 @@
     <div class="container-fluid position-relative p-0">
          @include('navbar')
 
-    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
-    
-        </div> 
     </div>
     <!-- Navbar & Hero End -->
-
+    <br><br><br>
     <!-- Service Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h2 class="section-title bg-white text-center text-success px-3">Products</h2>
                
               <h2 class="font-medium">Prototypes</h2>
 <br>

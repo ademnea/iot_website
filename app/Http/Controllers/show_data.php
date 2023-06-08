@@ -16,14 +16,14 @@ class show_data extends Controller
         
             $contents = website_content::all();
 
-          //  $users = members::all();
+           $teams = members::all();
           $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
           $interns = DB::table('members')->where('role', '=', 'intern')->get();
             
 
             $partners = partners::all();
 
-            return view('/about_us',compact('researchers','interns','partners','contents'));
+            return view('/about_us',compact('researchers','interns','partners','teams','contents'));
        
            }
 

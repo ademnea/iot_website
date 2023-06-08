@@ -31,6 +31,12 @@
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
+    
+    <style>
+        .card-body a{
+            text-decoration: none;
+        }
+    </style>
 
     @foreach ($contents as $content)
 
@@ -64,21 +70,14 @@
     <!-- Navbar & Hero Start -->
     <div class="container-fluid position-relative p-0">
          @include('navbar')
-    <div class="container-fluid bg-success py-5 mb-5 hero-header">
-    </div> 
     </div>
     <!-- Navbar & Hero End -->
-
+    <br><br><br>
 
 <!-- Project Start -->
  
         <div class="container-fluid">
-
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h2 class="section-title bg-white text-center text-success px-3">Projects</h2>
-            </div>
-
-                <div class="container-xxl py-5">
+                <div class="container-xxl ">
                     <div class="container">
                         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                             <h2 class=" text-left mb-5" id="ongoing"> Ongoing projects</h2>
@@ -86,10 +85,6 @@
 
                         <div class="row g-4">
                         @foreach ($onprojects as $onproject)
-
-                       
-                        
-                        
                             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="rounded pt-3">
 
@@ -99,8 +94,14 @@
                                         <img src="images/projects/{{ $onproject->photo }}" class="card-img-top" alt="project photo" style="height:180px">
                                      
                                         <div class="card-body">
-                                            <h5 class="card-title">{{ $onproject->name }}</h5>
-                                            <p class="card-text">
+                                            <h5 class="card-title" 
+                                            style=" 
+                                            text-decoration: none !important;
+                                            color: black;">{{ $onproject->name }}</h5>
+                                            <p class="card-text" 
+                                            style=" 
+                                            text-decoration: none !important;
+                                            color: black;">
                                                 {{ $onproject->description }}
                                             </p>
                                         </a>
@@ -108,17 +109,12 @@
                                     </div>
                                 </div>
                             </div>
-
                             @endforeach
                         </div>
 
-                    </div>
-                </div>
-        </div>
     <br><br>
      <h2 class="font-medium" id="past"> Past projects</h2>
 
- 
      <div class="row g-4">
         @foreach ($pastprojects as $pastproject)
 
@@ -145,7 +141,7 @@
         </div>  
     </div>
 
-
+</div>
     <!-- Footer Start -->
     @include('footer')
     <!-- Footer End -->

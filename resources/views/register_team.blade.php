@@ -55,18 +55,17 @@ margin-right:10%;
                   </div>
 
                  <div>
-                      <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Designation</label>
+                      <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Role</label>
                       <input type="text" name="designation" id="cost" placeholder="Designation" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
                   </div>
 
                   <div>
-                      <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Role</label>
 
                 <div class="flex items-center">
                     <input type="radio" value="leader" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900">Team Leader</label>
                 </div>
-
+            {{-- 
                 <div class="flex items-center">
                     <input type="radio" value="researcher" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900">Researcher</label>
@@ -75,7 +74,7 @@ margin-right:10%;
                 <div class="flex items-center">
                     <input type="radio" value="intern" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900">Intern</label>
-                </div>
+                </div> --}}
 
                   </div>
 

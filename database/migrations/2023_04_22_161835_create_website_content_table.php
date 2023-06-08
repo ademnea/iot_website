@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('vision')->nullable();
             $table->text('objectives')->nullable();
             $table->string('motto')->nullable();
+            $table->string('Labname')->nullable();
             $table->string('logo')->nullable();
             $table->string('banner')->nullable();
             $table->string('physical_address')->nullable();

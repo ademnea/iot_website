@@ -15,7 +15,7 @@ class edit_data extends Controller
     public function edit_logo(Request $request){
     
        // this code uploads the picture from the form.
-        $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+        $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
         $picname = $request->file('image')->getClientOriginalName();
         $request->image->move(public_path('images/logo'), $picname);
 
@@ -35,7 +35,7 @@ class edit_data extends Controller
         public function edit_banner(Request $request){
     
             // this code uploads the picture from the form.
-             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
              $picname = $request->file('image')->getClientOriginalName();
              $request->image->move(public_path('images/banner'), $picname);
      
@@ -68,7 +68,7 @@ class edit_data extends Controller
      
         if ($request->hasFile('image')) {
            // this code uploads the picture from the form.
-           $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+           $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
            $picname = $request->file('image')->getClientOriginalName();
            $request->image->move(public_path('images/team'), $picname);
 
@@ -156,7 +156,7 @@ class edit_data extends Controller
 
          if ($request->hasFile('image')) {
             // this code uploads the picture from the form.
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/events'), $picname);
   
@@ -194,7 +194,7 @@ class edit_data extends Controller
       
          if ($request->hasFile('image')) {
             // this code uploads the picture from the form.
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/projects'), $picname);
 
@@ -232,7 +232,7 @@ class edit_data extends Controller
     
        if ($request->hasFile('image')) {
           // this code uploads the picture from the form.
-          $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+          $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
           $picname = $request->file('image')->getClientOriginalName();
           $request->image->move(public_path('images/events'), $picname);
 
@@ -271,7 +271,7 @@ class edit_data extends Controller
    if ($request->hasFile('file')) {
       // this code uploads the picture from the form.
       $request->validate([
-        'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:2048',
+        'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:20000',
           ]);
     $filename = $request->file('file')->getClientOriginalName();
     $request->file('file')->move(public_path('documents/publications'), $filename);
@@ -309,7 +309,7 @@ return redirect('/publicationscontent')->with('success', 'publication updated su
  
     if ($request->hasFile('image')) {
        // this code uploads the picture from the form.
-       $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+       $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
        $picname = $request->file('image')->getClientOriginalName();
        $request->image->move(public_path('images/team'), $picname);
 

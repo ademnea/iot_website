@@ -60,6 +60,7 @@ class insert_data extends Controller
          $radio = $request->input('homecontent');
          $content = $request->input('content');
          $motto = $request->input('motto');
+         $Labname = $request->input('labname');
 
        
  
@@ -68,91 +69,21 @@ class insert_data extends Controller
             DB::table('website_content')->where('id', $existingData->id)->update([
 
                 'motto' => $motto,
-            ]);
-
-            if ($radio == "mission") {
-              
-                 // The table has data, update the existing row with the new data
-            DB::table('website_content')->where('id', $existingData->id)->update([
-
-                'mission' => $content,
-            ]);
-            
-            }
-            else if($radio == "objectives"){
-
-
-                DB::table('website_content')->where('id', $existingData->id)->update([
-                   
-                    'objectives' => $content,
-
-                ]);
-            }
-
-            else if($radio == "vision"){
-
-
-                DB::table('website_content')->where('id', $existingData->id)->update([
-                   
-                    'vision' => $content,
-
-                ]);
-            }
-           else{
-
-            DB::table('website_content')->where('id', $existingData->id)->update([
-                   
-                'team_leader_word' => $content,
+                'Labname' => $Labname,
+                'vision' => $content,
 
             ]);
-    
-           }
            
         }
-        
-        
+          
         else {
-            // The table has no data, create a new row
-
-            if ($radio == "mission") {
-              
-                // The table has data, update the existing row with the new data
-                DB::table('website_content')->insert([
-                    'mission' => $content,
-                    'motto' => $motto,
-                    // add more fields to insert as needed
-                ]);
-           
-           }
-           else if($radio == "objectives"){
-
 
             DB::table('website_content')->insert([
-                'objectives' => $content,
                 'motto' => $motto,
-                // add more fields to insert as needed
-            ]);
-           }
-
-           else if($radio == "vision"){
-
-
-            DB::table('website_content')->insert([
+                'Labname' => $Labname,
                 'vision' => $content,
-                'motto' => $motto,
                 // add more fields to insert as needed
             ]);
-           }
-
-          else{
-
-            DB::table('website_content')->insert([
-                'team_leader_word' => $content,
-                'motto' => $motto,
-                // add more fields to insert as needed
-            ]);
-   
-          }
 
         }
 
@@ -163,7 +94,7 @@ class insert_data extends Controller
 
    public function insert_contacts(Request $request){
 
-    $request->validate(['logo' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+    $request->validate(['logo' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
     $picname = $request->file('logo')->getClientOriginalName();
     $request->logo->move(public_path('images/logo'), $picname);
 
@@ -216,7 +147,7 @@ class insert_data extends Controller
 
     $admin = $request->input('admin');
 
-    $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+    $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
     $picname = $request->file('image')->getClientOriginalName();
     $request->image->move(public_path('images/partners'), $picname);
 
@@ -242,7 +173,7 @@ class insert_data extends Controller
 
         $admin = $request->input('admin');
 
-    $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+    $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
     $picname = $request->file('image')->getClientOriginalName();
     $request->image->move(public_path('images/events'), $picname);
 
@@ -280,11 +211,12 @@ public Function insert_project(Request $request){
           $admin = $request->input('admin');
 
                 //this code uploads the picture from the form.
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/projects'), $picname);
 
-            DB::table('projects')->insert([
+            //this method below inserts and gets id at the same time
+           $latestRecordId = DB::table('projects')->insertGetId([
 
                 'name' => $request->projectName,
                 'venue' => $request->venue,
@@ -297,10 +229,9 @@ public Function insert_project(Request $request){
                   
             ]);
 
+         // return $latestRecordId;
 
-    //lets get the latest project and add this image to it.
-    $latestRecord = projects::latest()->first();
-    $latestRecordId = $latestRecord->id;
+
 
     //now lets insert the image in the event images table.
     DB::table('project_photos')->insert([
@@ -323,7 +254,7 @@ public Function insert_publication(Request $request){
                    //this code uploads the publication file from the form.
                    // Validate and capture document file
             $request->validate([
-                'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:2048',
+                'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:20000',
             ]);
             $filename = $request->file('file')->getClientOriginalName();
             $request->file('file')->move(public_path('documents/publications'), $filename);
@@ -351,7 +282,7 @@ public Function insert_team(Request $request){
          $admin = $request->input('admin');
 
                 //this code uploads the picture from the form.
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/team'), $picname);
 
@@ -382,7 +313,7 @@ public Function insert_prototype(Request $request){
     $projectid = $request->input('project_id');
 
                 //this code uploads the picture from the form.
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:2048']);
+            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:20000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/prototypes'), $picname);
 

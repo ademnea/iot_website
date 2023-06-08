@@ -66,22 +66,19 @@
     <div class="container-fluid position-relative p-0">
          @include('navbar')
 
-    <div class="container-fluid bg-primary py-5 mb-5 hero-header">
-    
-        </div> 
     </div>
     <!-- Navbar & Hero End -->
 
+    <br><br><br>
 
     <!-- Team Start -->
     <div class="container-xxl py-5">
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h2 class="section-title bg-white text-center text-success px-3">Events</h2>
             </div>
             <div class="row g-4">
 
-     <h2>Upcoming</h2>
+     <h2>Upcoming Events</h2>
 
           @foreach ($onevents as $onevent)
               

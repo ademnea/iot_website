@@ -1,5 +1,6 @@
 
-       <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+
+       <nav class="navbar navbar-expand-lg bg-white navbar-light shadow-sm px-5 py-3 py-lg-0">
             <a href="/" class="navbar-brand p-0">
 
                 @foreach ($contents as $content)

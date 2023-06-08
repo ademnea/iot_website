@@ -1,7 +1,7 @@
 1.clone the project.
 2.update the composer. (run composer update)
 3.run npm install.
-4.set up DB and run migrations.
+4.set up DB (create .env) and run migrations.
 5.Register an admin in the users table.
 6.start server.
 7.run 'npm run dev' in new terminal.

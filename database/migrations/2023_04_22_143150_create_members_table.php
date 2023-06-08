@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('phone')->unique();
             $table->string('designation');
-            $table->string('role');
+            $table->string('role')->nullable();
             $table->text('bio')->nullable();
             $table->string('photo')->nullable();
             $table->enum('status', ['Active', 'Inactive'])->default('Active');
