@@ -94,7 +94,8 @@
      <br><br>
    
     <h2>Objectives</h2>
-          {{ $content->objectives }}  
+    
+          {!! preg_replace('/\r\n|\r|\n/', '<br>', $content->objectives) !!}  
         </div>
 
 {{--  start of the word from the team leader --}}
@@ -113,7 +114,9 @@
                 </div>
                 <div class="col-md-8">
                    <p> <br><br><br>
-                       {{ $content->team_leader_word }} 
+                    
+                    {{-- break the paragraph into secttions or paragraphs. --}}
+                    {!! preg_replace('/\r\n|\r|\n/', '<br>', $content->team_leader_word) !!}
                     </p>
                     </div>
                 </div>

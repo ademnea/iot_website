@@ -270,7 +270,7 @@ margin-right:10%;
      <br><br>
      <p>
     <h1 class="font-medium">Objectives</h1>
-        {{ $content->objectives }}  
+        {!! preg_replace('/\r\n|\r|\n/', '<br>', $content->objectives) !!}  
        </p> <br>
        <hr>
 
@@ -307,7 +307,7 @@ margin-right:10%;
     </div>
     <div class="w-2/3">
         <p class="mt-4">
-       {{ $content->team_leader_word }}
+            {!! preg_replace('/\r\n|\r|\n/', '<br>', $content->team_leader_word) !!}
         </p><br>
         <hr>
    @endforeach

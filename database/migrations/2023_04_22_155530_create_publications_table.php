@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('type');
             $table->string('author');
-            $table->string('description');
+            $table->text('description');
             $table->string('file_link');
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('users')->onDelete('cascade');
