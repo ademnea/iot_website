@@ -24,9 +24,10 @@ Route::view('/news', 'news');
 Route::view('/about', 'about_us');
 Route::view('/projects', 'projects')->middleware(['auth']);
 
+//Route::view('/oldlogin', 'oldlogin')->name('login');
+Route::get('/logmein', 'App\Http\Controllers\iot_admin_login@login');
 Route::post('/mylogin', 'App\Http\Controllers\iot_admin_login@login');
-Route::get('/logmein', 'App\Http\Controllers\iot_admin_login@logmein');
-Route::get('/login', 'App\Http\Controllers\iot_admin_login@logmein')->name('login');
+Route::get('/oldlogin', 'App\Http\Controllers\iot_admin_login@logmein')->name('login');
 
 //admin side protected routes
 Route::middleware(['auth'])->group(function () {

@@ -36,7 +36,7 @@ class iot_admin_login extends Controller
 
      else {
         $contents = website_content::all();
-        return view('auth/login', ['contents' => $contents, 'status' => 'Wrong Credentials']);
+        return view('/oldlogin', ['contents' => $contents, 'status' => 'Wrong Credentials, please try again!']);
 
          }
        
@@ -45,7 +45,7 @@ class iot_admin_login extends Controller
     public function logmein(){
 
         $contents = website_content::all();
-        return view('auth/login', ['contents' => $contents, 'status' => '']);
+        return view('oldlogin', ['contents' => $contents, 'status' => '']);
     }
 
     public function registerme(){

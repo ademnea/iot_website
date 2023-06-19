@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 
+@foreach ($contents as $content)
+    
 <head>
     <meta charset="utf-8">
     <title>Admin - IoT</title>
@@ -29,26 +31,20 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
 
     <style>
 
-        /*** Hero Header ***/
-.hero-header {
-    background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../images/banner/{{$content->banner}});
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
     </style>
     
 </head>
 
 <body>
+    <br><br><br>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
         <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -57,35 +53,32 @@
     </div>
     <!-- Spinner End -->
 
-
      {{-- admin login form --}}
   <div class="flex flex-col items-center justify-center px-6 py-0 ">
-     {{-- alerts --}}
-            <center>
-            <div style ="width:400px;
-            border-radius:8px;
-            font-size:20px
-            " >
-            @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
-            <b> {{ session('success') }}</b>
-            </div>  
-            @endif
-
-            @if (session('Error'))
-            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
-            <b> {{ session('Error') }}</b>
-            </div>  
-            @endif
-            </div>
-            </center>
 
       <div class="w-full bg-gray rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+
+            <img src="../images/logo/{{$content->logo}}" alt="" width="" height="">
+
+            {{-- ALERT --}}
+            <center>
+                <div style ="width:400px;
+                border-radius:8px;
+                font-size:20px
+                " >
+               @if ($status)
+               <div class="mb-4 font-medium text-sm text-red-600">
+                   {{ $status }}
+               </div>
+               @endif
+                </div>
+            </center>
+
               <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
-                  ADMIN
+                  Admin Login
               </h1>
-              <form class="space-y-4 md:space-y-6" action="/logmein" method="post">
+              <form class="space-y-4 md:space-y-6" action="/mylogin" method="post">
 
                @csrf
                   <div>
@@ -122,11 +115,11 @@
       </div>
   </div>
 
-
+  @endforeach
 
 
     <!-- Footer Start -->
-     @include('footer')
+
     <!-- Footer End -->
 
 

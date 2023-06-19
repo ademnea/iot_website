@@ -26,7 +26,8 @@
     <link href="lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css" rel="stylesheet" />
 
     <!-- Customized Bootstrap Stylesheet -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+
 
     <!-- Template Stylesheet -->
     <link href="css/style.css" rel="stylesheet">
@@ -114,9 +115,32 @@
   </div>
 
     @endforeach
+    <br><br>
+    <h2 class="font-medium">Technical Reports and Datasets</h2>
     <!-- Service End -->
-<br><br>
- <h2 class="font-medium">Technical Reports and Datasets</h2>
+    <p>
+    <div class="row g-4">
+        @foreach ($publications as $pub)
+              <div class="col-lg-3 col-md- wow fadeInUp" data-wow-delay="0.7s">
+                  <div class="team-item">
+                      <div class="text-center p-4">
+                          <small class="mb-0">{{ $pub->title }} <br>
+                            <br>{{ $pub->description }}</small><br><hr>
+                          
+                            @if ($pub->created_at)
+                                <small>published: {{ $pub->created_at->format('m-Y') }}</small><br>
+                            @endif
+
+                            by <h5>{{ $pub->author }}</h5><br>
+                            <a href=" ../documents/publications/{{ $pub->file_link}}" download>
+                               <button class="btn btn-success"> Download Document </button> 
+                            </a>
+                            
+                      </div>
+                  </div>
+              </div>  
+       @endforeach
+  </div>
 
  </div>
  </div>

@@ -39,6 +39,8 @@ class insert_data extends Controller
         'email' => $email,
         'password' => $password,
         'remember_token' =>  $rememberToken,
+        'created_at' => now(),
+        'updated_at' => now(),
     ]);
 
     return redirect('/aboutuscontent')->with('success','admin registered successfully');
@@ -71,6 +73,7 @@ class insert_data extends Controller
                 'motto' => $motto,
                 'Labname' => $Labname,
                 'vision' => $content,
+                'updated_at' => now(),
 
             ]);
            
@@ -82,6 +85,8 @@ class insert_data extends Controller
                 'motto' => $motto,
                 'Labname' => $Labname,
                 'vision' => $content,
+                'created_at' => now(),
+                'updated_at' => now(),
                 // add more fields to insert as needed
             ]);
 
@@ -119,6 +124,7 @@ class insert_data extends Controller
                    'linkedin' => $request->linkedin,
                    'youtube' => $request->youtube,
                    'instagram' => $request->instagram,
+                   'updated_at' => now(),
                ]);
 
  }    else{
@@ -132,7 +138,9 @@ class insert_data extends Controller
         'facebook' => $request->facebook,
         'linkedin' => $request->linkedin,
         'youtube' => $request->youtube,
-        'instagram' => $request->instagram,  
+        'instagram' => $request->instagram,
+        'created_at' => now(),
+        'updated_at' => now(), 
     ]);
 
 }
@@ -159,6 +167,8 @@ class insert_data extends Controller
                 'description' => $request->description,
                 'website_link' => $request->website,
                 'admin_id' => $admin,
+                'created_at' => now(),
+                'updated_at' => now(),
                   
             ]);
 
@@ -186,6 +196,8 @@ class insert_data extends Controller
                 'description' => $request->description,
                 'venue' => $request->venue,
                 'admin_id' => $admin,
+                'created_at' => now(),
+                'updated_at' => now(),
                   
             ]);
 
@@ -196,7 +208,9 @@ class insert_data extends Controller
             //now lets insert the image in the event images table.
             DB::table('event_photos')->insert([
                 'photo' => $picname,
-                'event_id' => $latestRecordId,     
+                'event_id' => $latestRecordId,
+                'created_at' => now(),
+                'updated_at' => now(),     
             ]);
 
     
@@ -226,6 +240,8 @@ public Function insert_project(Request $request){
                 'end_date' => $request->end_date,
                 'website' => $request->project_link,
                 'admin_id' => $admin,
+                'created_at' => now(),
+                'updated_at' => now(),
                   
             ]);
 
@@ -236,7 +252,9 @@ public Function insert_project(Request $request){
     //now lets insert the image in the event images table.
     DB::table('project_photos')->insert([
         'photo' => $picname,
-        'project_id' => $latestRecordId,     
+        'project_id' => $latestRecordId,
+        'created_at' => now(),
+        'updated_at' => now(),     
     ]);
 
             return redirect('/projectscontent')->with('success', 'project added successfully!');
@@ -268,6 +286,8 @@ public Function insert_publication(Request $request){
                 'description' => $request->description,
                 'file_link' => $filename,
                 'admin_id' => $admin,
+                'created_at' => now(),
+                'updated_at' => now(),
                   
             ]);
 
@@ -296,7 +316,9 @@ public Function insert_team(Request $request){
                 'role' => $request->role,
                 'bio' => $request->bio,
                 'photo' => $picname,
-                'registered_by' => $admin,        
+                'registered_by' => $admin,
+                'created_at' => now(),
+                'updated_at' => now(),        
                   
             ]);
     
@@ -322,6 +344,8 @@ public Function insert_prototype(Request $request){
                 'name' => $request->title,
                 'description' => $request->description,
                 'project_id' => $projectid,
+                'created_at' => now(),
+                'updated_at' => now(),
                   
             ]);
 
@@ -333,7 +357,9 @@ public Function insert_prototype(Request $request){
     //now lets insert the image in the event images table.
     DB::table('prototype_photos')->insert([
         'photo' => $picname,
-        'prototype_id' => $latestRecordId,     
+        'prototype_id' => $latestRecordId,
+        'created_at' => now(),
+        'updated_at' => now(),     
     ]);
 
             return redirect('/publicationscontent')->with('success', 'prototype added successfully!');
@@ -351,7 +377,9 @@ public Function insert_message(Request $request){
                 'name' => $request->name,
                 'email' => $request->email,
                 'phone' => $request->phone,
-                'message' => $request->message,   
+                'message' => $request->message,
+                'created_at' => now(),
+                'updated_at' => now(),   
             ]);
 
             return redirect('/about#contactus')->with('message','Thanks for the feedback,'.' '.$request->name.'.');
