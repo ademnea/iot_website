@@ -16,7 +16,7 @@
                 <div class="navbar-nav ms-auto py-0">
               
                     {{-- homepage dropdown --}}
-                        <div class="nav-item dropdown">
+                    <div class="nav-item dropdown">
                         <a href="/" class="nav-link dropdown-toggle">Home</a>
                         <div class="dropdown-menu m-0">
                             <a href="/#vision" class="dropdown-item">Vision</a>

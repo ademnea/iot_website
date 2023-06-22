@@ -8,5 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class publications extends Model
 {
     protected $table = 'publications';
+    protected $casts = [
+        'date_published' => 'datetime',
+    ];
     use HasFactory;
 }

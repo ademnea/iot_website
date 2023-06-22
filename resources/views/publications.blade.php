@@ -74,7 +74,7 @@
         <div class="container">
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
                
-              <h2 class="font-medium">Prototypes</h2>
+            @if($prototypes->isNotEmpty())  <h2 class="font-medium">Prototypes</h2> @endif
 <br>
   <div class="flex flex-wrap">
   
@@ -123,16 +123,22 @@
         @foreach ($publications as $pub)
               <div class="col-lg-3 col-md- wow fadeInUp" data-wow-delay="0.7s">
                   <div class="team-item">
+                    <img class="card-img-top" style="height:200px" src="images/publications/{{ $pub->photo }}" alt="image">
                       <div class="text-center p-4">
-                          <small class="mb-0">{{ $pub->title }} <br>
-                            <br>{{ $pub->description }}</small><br><hr>
+ 
+                        <small class="mb-0">{{ $pub->title }}
+                           
+                            {{-- description can fit here --}}
+                        
+                         </small><br>
+                            <hr>
                           
-                            @if ($pub->created_at)
-                                <small>published: {{ $pub->created_at->format('m-Y') }}</small><br>
+                            @if ($pub->date_published)
+                                <small>published: {{ $pub->date_published->format('d-m-Y') }}</small><br>
                             @endif
 
                             by <h5>{{ $pub->author }}</h5><br>
-                            <a href=" ../documents/publications/{{ $pub->file_link}}" download>
+                            <a href=" ../documents/publications/{{ $pub->file_link }}" download>
                                <button class="btn btn-success"> Download Document </button> 
                             </a>
                             

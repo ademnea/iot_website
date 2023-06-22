@@ -263,6 +263,7 @@ class edit_data extends Controller
        'title' => $request->title,
        'type' => $request->type,
        'author' => $request->author,
+       'date_published' => $request->date_published,
        'description' => $request->description,
        // add more fields as needed
    ]);
@@ -285,6 +286,22 @@ class edit_data extends Controller
       ]);
 
   }
+
+  if($request->hasFile('photo')){
+
+    $request->validate(['photo' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
+    $picname = $request->file('photo')->getClientOriginalName();
+    $request->photo->move(public_path('images/publications'), $picname);
+
+    DB::table('publications')
+    ->where('id', $id)
+    ->update([
+        'photo' => $picname,
+        // add more fields as needed
+    ]);
+
+  }
+
 
 return redirect('/publicationscontent')->with('success', 'publication updated successfully!');
 

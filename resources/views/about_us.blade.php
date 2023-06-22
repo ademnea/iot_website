@@ -103,8 +103,14 @@
 
                      {{-- begin popup --}}
                          <!-- Button trigger modal -->
-                <a class="" data-bs-toggle="modal" data-bs-target="#{{ $team->id }}">
-                    read more
+
+                 <span class="collapsed-text">
+                    <!-- Display only one line of text -->
+                   {{ \Illuminate\Support\Str::words($team->bio, $words = 10, $end = '....') }}
+                 </span>
+
+                <a class="" data-bs-toggle="modal" data-bs-target="#{{ $team->id }}" style="cursor:pointer;">
+                    Read more  <i class="fas fa-chevron-down"></i>
                 </a>
                 
                 <!-- Modal -->
@@ -116,7 +122,76 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                        {{ $team->bio }}
+                            {{-- {{ $team->bio }} --}}
+                        {!! preg_replace('/\r\n|\r|\n/', '<br>', $team->bio) !!}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+          {{-- end bio popup --}}
+
+                         </div>
+                    </div>
+                </div>  
+         @endforeach
+
+            </div>
+        </div>
+    </div>
+    <!-- team Team End -->  
+   
+
+     <!-- Intern Start -->
+     <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h2 class="mb-5" id="researchers">Interns</h2>
+            </div>
+
+            <div class="row g-4">
+    
+    @foreach ($interns as $intern)
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="team-item">
+                            <img class="card-img-top" alt="project photo" style="height:250px" src="images/team/{{ $intern->photo }}" alt="">
+
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">{{ $intern->fname }}  {{ $intern->lname }}</h5>
+                            <small>{{ $intern->designation }}</small>
+                        <br>
+
+                     {{-- begin popup --}}
+                         <!-- Button trigger modal -->
+
+                 <span class="collapsed-text">
+                    <!-- Display only one line of text -->
+                   {{ \Illuminate\Support\Str::words($intern->bio, $words = 10, $end = '....') }}
+                 </span>
+
+                <a class="" data-bs-toggle="modal" data-bs-target="#{{ $intern->id }}" style="cursor:pointer;">
+                    Read more <i class="fas fa-chevron-down"></i>
+                </a>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="{{ $intern->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $intern->fname }}  {{ $intern->lname }} 's biography</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{-- {{ $team->bio }} --}}
+                        {!! preg_replace('/\r\n|\r|\n/', '<br>', $intern->bio) !!}
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
@@ -135,69 +210,7 @@
             </div>
         </div>
     </div>
-    <!-- team Team End -->  
-   
-
-
-    <!-- intern Team Start -->
-    <div class="container-xxl py-5">
-        <div class="container">
-            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                <h2>Interns</h2>
-            </div>
-            <div class="row g-4">
-    {{-- interns begin here  --}}
-
-      @foreach ($interns as $intern)
-
-                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                    <div class="team-item">
-                        <div class="overflow-hidden">
-                            <img class="img-fluid" src="images/team/{{ $intern->photo }}" alt="">
-                        </div>
-
-                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                        </div>
-
-                        <div class="text-center p-4">
-                            <h5 class="mb-0">{{ $intern->fname }}  {{ $intern->lname }}</h5>
-                            <small>{{ $intern->designation }}</small>
-                        </div>
-
-                         {{-- begin popup --}}
-                         <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                    Launch static backdrop modal
-                </button>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                        ...
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary">Understood</button>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-          {{-- end bio popup --}}
-
-                        
-                    </div>
-                </div> 
-                @endforeach
-            </div>
+    <!-- team Team End -->
             
       <br  id="contactus">
     <!-- Team End -->

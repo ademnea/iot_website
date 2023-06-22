@@ -16,6 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('type');
             $table->string('author');
+            $table->string('photo')->nullable();
+            $table->timestamp('date_published')->nullable();
             $table->text('description');
             $table->string('file_link');
             $table->unsignedBigInteger('admin_id');

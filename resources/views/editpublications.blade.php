@@ -35,6 +35,16 @@
                       <input type="text" name="author" value="{{ $_GET['author']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
                   </div>
 
+                  <div>
+                    <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Overview photo</label>
+                     <input type="file" name="photo" value="{{ $_GET['photo']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                 </div>
+
+                 <div>
+                  <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Date published</label>
+                   <input type="date" name="date_published" value="{{ $_GET['date_published']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+               </div>
+
                    <div>
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Description</label>
                     <textarea name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500">

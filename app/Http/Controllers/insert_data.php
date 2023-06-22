@@ -271,6 +271,11 @@ public Function insert_publication(Request $request){
     
                    //this code uploads the publication file from the form.
                    // Validate and capture document file
+
+            $request->validate(['photo' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
+            $picname = $request->file('photo')->getClientOriginalName();
+            $request->photo->move(public_path('images/publications'), $picname);
+
             $request->validate([
                 'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:11000',
             ]);
@@ -282,6 +287,8 @@ public Function insert_publication(Request $request){
 
                 'title' => $request->title,
                 'author' => $request->author,
+                'photo' => $picname,
+                'date_published' => $request->date_published,
                 'type' => $type,
                 'description' => $request->description,
                 'file_link' => $filename,

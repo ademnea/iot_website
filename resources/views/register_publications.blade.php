@@ -70,6 +70,16 @@ margin-right:10%;
                       <input type="text" name="author" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
                   </div>
 
+                  <div>
+                    <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Overview Picture(optional) </label>
+                     <input type="file" name="photo" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                 </div>
+
+                 <div>
+                    <label for="date_published" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Date Published (optional) </label>
+                     <input type="date" name="date_published" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                 </div>
+
                    <div>
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                     <textarea name="description"  placeholder="Write your Description here..." rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>

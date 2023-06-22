@@ -128,6 +128,9 @@ margin-right:10%;
                     Author
                 </th>
                 <th scope="col" class="px-6 py-3">
+                    Date published
+                </th>
+                <th scope="col" class="px-6 py-3">
                     File Path
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -152,10 +155,15 @@ margin-right:10%;
                     {{ $pub->author }}
                 </td>
                 <td class="px-6 py-4">
+                    @if ($pub->date_published)
+                    {{ $pub->date_published->format('d-m-Y') }}
+                    @endif
+                </td>
+                <td class="px-6 py-4">
                    documents/{{ $pub->file_link }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="/editpublications? id={{  $pub->id }}&title={{ $pub->title }}&type={{ $pub->type }}&author={{ $pub->author }}&description={{ $pub->description }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                    <a href="/editpublications? id={{  $pub->id }}&title={{ $pub->title }}&type={{ $pub->type }}&author={{ $pub->author }}&date_published={{ $pub->date_published}}&photo={{ $pub->photo }}&description={{ $pub->description }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                 </td>
                 <td class="px-6 py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

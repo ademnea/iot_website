@@ -14,11 +14,10 @@ class show_data extends Controller
         //function fetches members
         public function fetch_team(){
         
-            $contents = website_content::all();
-
+           $contents = website_content::all();
            $teams = members::all();
-          $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
-          $interns = DB::table('members')->where('role', '=', 'intern')->get();
+           $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
+           $interns = DB::table('members')->where('role', '=', 'intern')->get();
             
 
             $partners = partners::all();
@@ -61,7 +60,7 @@ class show_data extends Controller
             ->select('prototypes.*', 'prototype_photos.*')
             ->get();
        
-    $contents = website_content::all();
+     $contents = website_content::all();
 
      $publications  = publications::all();
      
