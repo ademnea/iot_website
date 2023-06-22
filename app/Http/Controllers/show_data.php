@@ -15,7 +15,10 @@ class show_data extends Controller
         public function fetch_team(){
         
            $contents = website_content::all();
-           $teams = members::all();
+           //$teams = members::all();
+           //Non interns are displayed first as below
+           
+           $teams = DB::table('members')->whereNotIn('role', ['intern'])->get();
            $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
            $interns = DB::table('members')->where('role', '=', 'intern')->get();
             
