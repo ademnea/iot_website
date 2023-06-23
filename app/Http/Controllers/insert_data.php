@@ -323,7 +323,7 @@ public Function insert_team(Request $request){
                 'role' => $request->role,
                 'bio' => $request->bio,
                 'photo' => $picname,
-                'registered_by' => $admin,
+                'registered_by' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),        
                   
