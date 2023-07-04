@@ -224,10 +224,16 @@ public Function insert_project(Request $request){
 
           $admin = $request->input('admin');
 
+          $picname = null;
+
                 //this code uploads the picture from the form.
+
+            if($request->image){
+
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/projects'), $picname);
+                }
 
             //this method below inserts and gets id at the same time
            $latestRecordId = DB::table('projects')->insertGetId([
@@ -259,7 +265,6 @@ public Function insert_project(Request $request){
 
             return redirect('/projectscontent')->with('success', 'project added successfully!');
 
-   // return $request->input();
 }
 
 
