@@ -183,10 +183,11 @@ class insert_data extends Controller
 
         $admin = $request->input('admin');
 
+        if($request->image){
     $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
     $picname = $request->file('image')->getClientOriginalName();
     $request->image->move(public_path('images/events'), $picname);
-
+        }
     
             DB::table('events')->insert([
 
@@ -347,10 +348,15 @@ public Function insert_prototype(Request $request){
     $projectid = $request->input('project_id');
 
                 //this code uploads the picture from the form.
+
+                if($request->image){
+
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
             $picname = $request->file('image')->getClientOriginalName();
             $request->image->move(public_path('images/prototypes'), $picname);
 
+                }
+                
             DB::table('prototypes')->insert([
 
                 'name' => $request->title,

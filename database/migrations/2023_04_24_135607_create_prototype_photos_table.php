@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('prototype_photos', function (Blueprint $table) {
             $table->id();
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->unsignedBigInteger('prototype_id');
             $table->timestamps();
             // Foreign key constraints
