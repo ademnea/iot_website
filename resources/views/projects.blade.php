@@ -38,19 +38,7 @@
     </style>
 
     @foreach ($contents as $content)
-
-    <style>
-
-        /*** Hero Header ***/
-.hero-header {
-    background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../images/banner/{{$content->banner}});
-    background-position: center center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-    </style>
-    
+  
 </head>
 
 <body>
@@ -71,48 +59,84 @@
          @include('navbar')
     </div>
     <!-- Navbar & Hero End -->
-    <br><br><br>
 
 <!-- Project Start -->
- 
+<br><br><br><br><br><br>
         <div class="container-fluid">
                 <div class="container-xxl ">
                     <div class="container">
                         <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
-                            <h2 class=" text-left mb-5" id="ongoing"> Ongoing projects</h2>
+                            <h2 class=" text-left mb-5" id="ongoing"> Projects</h2>
                         </div>
 
                         <div class="row g-4">
+
                         @foreach ($onprojects as $onproject)
                             <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
                                 <div class="rounded pt-3">
 
-                                    <div class="m-2 card">
+                                    <div class="team-item m-2 card">
 
-                                     <a href="http://{{$onproject->website}}">
+                                     <a href="http://{{$onproject->website}}" style=" 
+                                        text-decoration: none !important;
+                                        color: black;">
                                         <img src="images/projects/{{ $onproject->photo }}" class="card-img-top" alt="project photo" style="height:180px">
                                      
                                         <div class="card-body">
                                             <h5 class="card-title" 
-                                            style=" 
+                                            style="
                                             text-decoration: none !important;
                                             color: black;">{{ $onproject->name }}</h5>
                                             <p class="card-text" 
                                             style=" 
                                             text-decoration: none !important;
                                             color: black;">
-                                                {{ $onproject->description }}
+
+                               {{-- the popup modal should begin here to display fewer words. --}}
+ 
+                             <span class="collapsed-text">
+                                <!-- Display only one line of text -->
+                               {{ \Illuminate\Support\Str::words($onproject->description, $words = 10, $end = '....') }}
+                             </span>
+            
+                            <a class="" data-bs-toggle="modal" data-bs-target="#{{ $onproject->id }}" style="cursor:pointer;">
+                                Read more  <i class="fas fa-chevron-down"></i>
+                            </a>
+                            
+                            <!-- Modal -->
+                            <div class="modal fade" id="{{ $onproject->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $onproject->name }} project Description</h1>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        {{-- {{ $onproject->bio }} --}}
+                                    {!! preg_replace('/\r\n|\r|\n/', '<br>', $onproject->description) !!}
+                                    </div>
+                                    <div class="modal-footer">
+                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                                </div>
+                            </div>
+                      {{-- end descripption popup --}}
+
                                             </p>
                                         </a>
                                          </div>
                                     </div>
                                 </div>
                             </div>
+
                             @endforeach
                         </div>
 
     <br><br>
-     <h2 class="font-medium" id="past"> Past projects</h2>
+     <h2 class="font-medium" id="past"> 
+        {{-- Past projects --}}
+    </h2>
 
      <div class="row g-4">
         @foreach ($pastprojects as $pastproject)
@@ -151,8 +175,13 @@
 
 
     <!-- JavaScript Libraries -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    
+    {{-- <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script> --}}
+    
     <script src="lib/wow/wow.min.js"></script>
     <script src="lib/easing/easing.min.js"></script>
     <script src="lib/waypoints/waypoints.min.js"></script>
