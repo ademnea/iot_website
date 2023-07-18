@@ -223,6 +223,7 @@ class edit_data extends Controller
        ->update([
            'title' => $request->news,
            'venue' => $request->venue,
+           'article_link' => $request->link,
            'start_date' => $request->startdate,
            'description' => $request->description,
            'end_date' => $request->enddate,

@@ -75,14 +75,17 @@
       <input type="hidden" name="admin" value="{{ Session::get('id') }}">
       
       <label for="venue">Event title:</label><br/>
-      <input type="text" id="venue" name="title" required><br>
+      <input type="text" id="venue" name="title" placeholder="title" required><br>
 
       <label for="description">News Description:</label><br/>
       <textarea id="description" name="description" rows="4" cols="50" required>
       </textarea><br>
     
       <label for="participants">Venue:</label><br/>
-      <input type="text" id="participants" name="venue" required><br>
+      <input type="text" id="participants" placeholder="venue" name="venue" required><br>
+
+      <label for="participants">Article Link</label><br/>
+      <input type="text" id="" name="link" placeholder="article link"><br>
     
       <label for="duration"> Start Date:</label><br/>
       <input type="date" id="start_date" name="start_date" required><br><br>

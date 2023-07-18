@@ -19,6 +19,7 @@ return new class extends Migration
             $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date')->nullable();
             $table->string('venue')->nullable();
+            $table->string('article_link')->nullable();
             $table->unsignedBigInteger('admin_id');
             $table->foreign('admin_id')->references('id')->on('users');
             $table->timestamps();

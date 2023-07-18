@@ -196,6 +196,7 @@ class insert_data extends Controller
                 'end_date' => $request->end_date,
                 'description' => $request->description,
                 'venue' => $request->venue,
+                'article_link' => $request->link,
                 'admin_id' => $admin,
                 'created_at' => now(),
                 'updated_at' => now(),
