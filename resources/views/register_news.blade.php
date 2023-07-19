@@ -93,8 +93,10 @@
             <label for="duration"> End Date:</label><br/>
       <input type="date" id="end_date" name="end_date" required><br><br>
 
-      <label for="duration">Image:</label><br/>
-      <input type="file" id="duration" name="image" required><br><br>
+      <label for="duration">Images:</label><br/>
+      <input type="file" name="images[]" id="image" multiple required><br><br>
+{{-- 
+      <input type="file" id="duration" name="image" required><br><br> --}}
     
       <br><br>
     

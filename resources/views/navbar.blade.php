@@ -27,13 +27,13 @@
                     </div>
 
                     {{-- projects dropdown --}}
-               <div class="nav-item dropdown">
-                        <a href="projects" class="nav-link dropdown-toggle">Projects</a>
+               {{-- <div class="nav-item dropdown"> --}}
+                        <a href="projects" class="nav-item nav-link">Projects</a>
                         <div class="dropdown-menu m-0">
-                            <a href="/projects#ongoing" class="dropdown-item">Ongoing Projects</a>
-                            <a href="/projects#past" class="dropdown-item">Past Projects</a>
+                            {{-- <a href="/projects#ongoing" class="dropdown-item">Ongoing Projects</a>
+                            <a href="/projects#past" class="dropdown-item">Past Projects</a> --}}
                         </div>
-                    </div>
+                    {{-- </div> --}}
 
                     {{-- products dropdown --}}
                    <div class="nav-item dropdown">

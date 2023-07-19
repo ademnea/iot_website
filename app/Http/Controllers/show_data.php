@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\Models\event_photos;
 use App\Models\members;
+use App\Models\news;
 use App\Models\partners;
 use App\Models\projects;
 use App\Models\publications;
@@ -42,6 +45,10 @@ class show_data extends Controller
                 ->where('events.status', '=', 'Ongoing')
                 ->get();
     
+           // $onevents = news::all();
+            $eventphotos = event_photos::all();
+
+           // dd($eventphotos);
     
             $pastevents = DB::table('events')
                 ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
@@ -49,7 +56,7 @@ class show_data extends Controller
                 ->where('events.status', '=', 'Past')
                 ->get();
     
-            return view('/news',compact('onevents','pastevents','contents'));
+            return view('/news',compact('onevents','pastevents','contents','eventphotos'));
        
            }
 

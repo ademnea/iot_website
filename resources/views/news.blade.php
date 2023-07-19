@@ -93,7 +93,14 @@
                             <a href="http://{{$onevent->article_link}}" style=" 
                                 text-decoration: none !important;
                                 color: black;">
+
+                        {{-- @foreach ($eventphotos as $eventphotos)
+                            @if ($eventphotos->event_id === $onevent->id)
+                            <img class="img-fluid" src="images/events/ {{ $eventphotos->photo }}" alt="Event Photo">
+                            @endif
+                        @endforeach   --}}
                             <img class="img-fluid" src="images/events/{{ $onevent->photo }}" alt="">
+
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
                         </div>

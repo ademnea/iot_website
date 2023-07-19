@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\event_photos;
 use App\Models\news;
 use App\Models\projects;
 use App\Models\prototypes;
@@ -181,14 +182,10 @@ class insert_data extends Controller
 
     public Function insert_news(Request $request){
 
+      //  return $request->input();
+
         $admin = $request->input('admin');
 
-        if($request->image){
-    $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-    $picname = $request->file('image')->getClientOriginalName();
-    $request->image->move(public_path('images/events'), $picname);
-        }
-    
             DB::table('events')->insert([
 
                 'title' => $request->title,
@@ -207,15 +204,23 @@ class insert_data extends Controller
             $latestRecord = news::latest()->first();
             $latestRecordId = $latestRecord->id;
 
-            //now lets insert the image in the event images table.
-            DB::table('event_photos')->insert([
-                'photo' => $picname,
-                'event_id' => $latestRecordId,
-                'created_at' => now(),
-                'updated_at' => now(),     
-            ]);
+            //now lets insert the images in the event images table.
+          
+            if ($request->hasFile('images')) {
+            foreach ($request->images as $file) {
 
-    
+               $picname = $file->getClientOriginalName();
+               $file->move(public_path('images/events'), $picname);
+
+                $fileModel = new event_photos;
+                $fileModel->photo = $picname;
+                $fileModel->event_id = $latestRecordId;
+                $fileModel->save();          
+                     
+        }
+    }
+        
+
             return redirect('/newscontent')->with('success', 'event added successfully!');
 }
 
