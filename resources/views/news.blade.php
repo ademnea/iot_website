@@ -90,16 +90,23 @@
                 <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
                     <div class="team-item">
                         <div class="overflow-hidden">
-                            <a href="http://{{$onevent->article_link}}" style=" 
+                            <a href="http://{{$onevent[0]->article_link}}" style=" 
                                 text-decoration: none !important;
                                 color: black;">
 
-                        {{-- @foreach ($eventphotos as $eventphotos)
-                            @if ($eventphotos->event_id === $onevent->id)
-                            <img class="img-fluid" src="images/events/ {{ $eventphotos->photo }}" alt="Event Photo">
+                            @if (count($onevent) > 0)
+
+                            <div class="owl-carousel testimonial-carousel position-relative">
+                                @foreach ($onevent as $photo)
+                                    <img src="{{ asset('images/events/' . $photo->photo) }}" alt="Project Photo">
+                                @endforeach
+                            </div>
+
+                            @else
+                            <p>No photos available for this project.</p>
                             @endif
-                        @endforeach   --}}
-                            <img class="img-fluid" src="images/events/{{ $onevent->photo }}" alt="">
+
+                            {{-- <img class="img-fluid" src="images/events/{{ $onevent->photo }}" alt=""> --}}
 
                         </div>
                         <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
@@ -112,35 +119,35 @@
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                                   </svg>
                               
-                            {{ $onevent->venue }}</h5>
+                            {{ $onevent[0]->venue }}</h5>
                             <hr>
-                        <h5 class="mb-0">{{ $onevent->title }}</h5>
+                        <h5 class="mb-0">{{ $onevent[0]->title }}</h5>
 
                             {{-- <small>{{ $onevent->description }}</small> --}}
 
                             <span class="collapsed-text">
                                 <!-- Display only one line of text -->
-                               {{ \Illuminate\Support\Str::words($onevent->description, $words = 10, $end = '....') }}
+                               {{ \Illuminate\Support\Str::words($onevent[0]->description, $words = 10, $end = '....') }}
                              </span>
             
-                            <a class="" data-bs-toggle="modal" data-bs-target="#{{ $onevent->id }}" style="cursor:pointer;">
+                            <a class="" data-bs-toggle="modal" data-bs-target="#{{ $onevent[0]->id }}" style="cursor:pointer;">
                                 More <i class="fas fa-chevron-down"></i>
                             </a>
 
                         <!-- Modal -->
-                <div class="modal fade" id="{{ $onevent->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade" id="{{ $onevent[0]->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $onevent->title }}</h1>
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $onevent[0]->title }}</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             {{-- {{ $team->bio }} --}}
-                       <small> {!! preg_replace('/\r\n|\r|\n/', '<br>', $onevent->description) !!}</small>
+                       <small> {!! preg_replace('/\r\n|\r|\n/', '<br>', $onevent[0]->description) !!}</small>
                         </div>
                         <div class="modal-footer">
-                        <a href="http://{{$onevent->article_link}}" style="cursor:pointer;" class="text-primary" >Click Here </a> to read the article
+                        <a href="http://{{$onevent[0]->article_link}}" style="cursor:pointer;" class="text-primary" >Click Here </a> to read the article
                         </div>
                     </div>
                     </div>
@@ -151,7 +158,7 @@
                         </div>
                     </div>
                 </div>
-                         @endforeach
+        @endforeach
   <br><br>
 
        

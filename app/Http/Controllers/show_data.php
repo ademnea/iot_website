@@ -38,12 +38,23 @@ class show_data extends Controller
             // we need a join for the pictures to be displayed too.
 
             $contents = website_content::all();
-    
-            $onevents = DB::table('events')
-                ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
-                ->select('events.*', 'event_photos.*')
-                ->where('events.status', '=', 'Ongoing')
-                ->get();
+
+         //we need a query here to send a project and the pictures on that project.
+
+
+         $onevents = DB::table('events')
+         ->leftJoin('event_photos', 'events.id', '=', 'event_photos.event_id')
+         ->select('events.*', 'event_photos.photo')
+         ->where('events.status', '=', 'Ongoing')
+         ->get()
+         ->groupBy('id');
+     
+
+            // $onevents = DB::table('events')
+            //     ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
+            //     ->select('events.*', 'event_photos.*')
+            //     ->where('events.status', '=', 'Ongoing')
+            //     ->get();
     
            // $onevents = news::all();
             $eventphotos = event_photos::all();
