@@ -55,7 +55,7 @@
 <body>
     <!-- Spinner Start -->
     <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
-        <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+        <div class="spinner-border text-success" style="width: 3rem; height: 3rem;" role="status">
             <span class="sr-only">Loading...</span>
         </div>
     </div>
@@ -101,13 +101,11 @@
                             <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                        
-                                       @foreach ($onevent as $photo)
-                                        
-                                          <div class="carousel-item active">
-                                            <img src="{{ asset('images/events/' . $photo->photo) }}" class="card-img-top" alt="...">
-                                          </div>
-
-                                          @endforeach
+                                    @foreach ($onevent as $key => $photo)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                      <img src="{{ asset('images/events/' . $photo->photo) }}" class="card-img-top" alt="...">
+                                    </div>
+                                   @endforeach
 
                                         </div>
                                         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
@@ -223,7 +221,7 @@
     @endforeach
     
     <!-- Back to Top -->
-    <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    <a href="#" class="btn btn-lg btn-success btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 
 <!-- JavaScript Libraries -->
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="crossorigin="anonymous"></script>

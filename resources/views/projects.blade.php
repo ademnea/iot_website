@@ -133,34 +133,6 @@
                             @endforeach
                         </div>
 
-    <br><br>
-     <h2 class="font-medium" id="past"> 
-        {{-- Past projects --}}
-    </h2>
-
-     <div class="row g-4">
-        @foreach ($pastprojects as $pastproject)
-
-            <div class="col-lg-3 col-sm-6 wow fadeInUp" data-wow-delay="0.1s">
-                <div class="rounded pt-3">
-
-                    <div class="m-2 card">
-                        <a href="https://{{$pastproject->website}}">
-                            <img src="images/projects/{{ $pastproject->photo }}" class="card-img-top" alt="project photo" style="height:180px">
-                         </a>
-                        <div class="card-body">
-                            <h5 class="card-title">{{ $pastproject->name }}</h5>
-                            <p class="card-text">
-                                {{ $pastproject->description }}
-                            </p>
-                         </div>
-                    </div>
-                </div>
-            </div>
-
-            @endforeach
-        </div>
-
         </div>  
     </div>
 

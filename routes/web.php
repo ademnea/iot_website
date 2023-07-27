@@ -17,14 +17,18 @@ use Illuminate\Auth\Middleware\Authenticate;
 
 //routes to all the pages begin here.
 
-Route::view('/', 'index');
-Route::view('/partners', 'partners');
-Route::view('/publications', 'publications');
-Route::view('/news', 'news');
-Route::view('/about', 'about_us');
-Route::view('/projects', 'projects')->middleware(['auth']);
 
-//Route::view('/oldlogin', 'oldlogin')->name('login');
+// routes for displaying/ showing data to the outside pages.
+// to pick data from the database
+Route::get('/about', 'App\Http\Controllers\show_data@fetch_team');
+Route::get('/', 'App\Http\Controllers\show_data@fetch_home');
+Route::get('/projects', 'App\Http\Controllers\show_data@fetch_projects');
+Route::get('/publications', 'App\Http\Controllers\show_data@fetch_publications');
+Route::get('/news', 'App\Http\Controllers\show_data@fetch_events');
+Route::get('/partners', 'App\Http\Controllers\show_data@fetch_partners');
+Route::get('/gallery', 'App\Http\Controllers\show_data@fetch_gallery');
+
+//these routes handle the login functionality.
 Route::get('/logmein', 'App\Http\Controllers\iot_admin_login@login');
 Route::post('/mylogin', 'App\Http\Controllers\iot_admin_login@login');
 Route::get('/oldlogin', 'App\Http\Controllers\iot_admin_login@logmein')->name('login');
@@ -103,13 +107,3 @@ Route::post('/editmember_route', 'App\Http\Controllers\edit_data@edit_team');
 
 //inserting feedback message into the database
 Route::post('/insert_message', 'App\Http\Controllers\insert_data@insert_message');
-
-
-// routes for displaying/ showing data to the outside pages.
-// to pick data from the database
-Route::get('/about', 'App\Http\Controllers\show_data@fetch_team');
-Route::get('/', 'App\Http\Controllers\show_data@fetch_home');
-Route::get('/projects', 'App\Http\Controllers\show_data@fetch_projects');
-Route::get('/publications', 'App\Http\Controllers\show_data@fetch_publications');
-Route::get('/news', 'App\Http\Controllers\show_data@fetch_events');
-Route::get('/partners', 'App\Http\Controllers\show_data@fetch_partners');

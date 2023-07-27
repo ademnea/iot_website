@@ -25,10 +25,10 @@ class show_data extends Controller
            $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
            $interns = DB::table('members')->where('role', '=', 'intern')->get();
             
-
+           $randomPhotos = members::inRandomOrder()->limit(6)->get();
             $partners = partners::all();
 
-            return view('/about_us',compact('researchers','interns','partners','teams','contents'));
+            return view('/about_us',compact('researchers','interns','partners','teams','contents','randomPhotos'));
        
            }
 
@@ -49,14 +49,6 @@ class show_data extends Controller
          ->get()
          ->groupBy('id');
      
-
-            // $onevents = DB::table('events')
-            //     ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
-            //     ->select('events.*', 'event_photos.*')
-            //     ->where('events.status', '=', 'Ongoing')
-            //     ->get();
-    
-           // $onevents = news::all();
             $eventphotos = event_photos::all();
 
            // dd($eventphotos);
@@ -66,8 +58,10 @@ class show_data extends Controller
                 ->select('events.*', 'event_photos.*')
                 ->where('events.status', '=', 'Past')
                 ->get();
+
+            $randomPhotos = members::inRandomOrder()->limit(6)->get();
     
-            return view('/news',compact('onevents','pastevents','contents','eventphotos'));
+            return view('/news',compact('onevents','pastevents','contents','eventphotos','randomPhotos'));
        
            }
 
@@ -82,10 +76,10 @@ class show_data extends Controller
             ->get();
        
      $contents = website_content::all();
-
+     $randomPhotos = members::inRandomOrder()->limit(6)->get();
      $publications  = publications::all();
      
-     return view('/publications',compact('publications','prototypes','contents'));
+     return view('/publications',compact('publications','prototypes','contents','randomPhotos'));
 
     }
 
@@ -99,22 +93,18 @@ class show_data extends Controller
         $onprojects = DB::table('projects')
             ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
             ->select('projects.*', 'project_photos.photo')
-            ->where('projects.status', '=', 'Ongoing')
             ->get();
 
 
-        $pastprojects = DB::table('projects')
-            ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
-            ->select('projects.*', 'project_photos.photo')
-            ->where('projects.status', '=', 'Past')
-            ->get();
+            $randomPhotos = members::inRandomOrder()->limit(6)->get();
 
-        return view('/projects',compact('onprojects','pastprojects','contents'));
+        return view('/projects',compact('onprojects','contents','randomPhotos'));
    
        }
 
        public function fetch_home(){
         
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
         $leader = DB::table('members')->where('role', '=', 'leader')->get();
         $partners = partners::all();
         $contents = website_content::all();
@@ -128,16 +118,26 @@ class show_data extends Controller
        }
 
 
-        return view('/index',compact('contents','leader','partners'));
+        return view('/index',compact('contents','leader','partners','randomPhotos'));
    
        }
 
+       public function fetch_gallery(){
+
+        $contents = website_content::all();
+
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
+        //dd($randomPhotos);
+        return view('/gallery',compact('contents','randomPhotos'));
+
+       }
 
        public function fetch_partners(){
 
         $contents = website_content::all();
         $partners = partners::all();
-        return view('/partners',compact('partners','contents'));
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
+        return view('/partners',compact('partners','contents','randomPhotos'));
 
        }
 

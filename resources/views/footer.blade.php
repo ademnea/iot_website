@@ -30,24 +30,16 @@
                 <div class="col-lg-3 col-md-6">
                     <h4 class="text-white mb-3">Gallery</h4>
                     <div class="row g-2 pt-2">
+
+                        {{-- loop to run only 6 times --}}
+                        @foreach ($randomPhotos as $photo)
                         <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="" alt="">
+                            <a href="/gallery">
+                                <img class="img-fluid bg-light p-1" src="{{ asset('images/team/' . $photo->photo) }}" alt="">
+                            </a>
                         </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="" alt="">
-                        </div>
-                        <div class="col-4">
-                            <img class="img-fluid bg-light p-1" src="" alt="">
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6">
