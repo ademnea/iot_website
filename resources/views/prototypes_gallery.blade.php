@@ -76,58 +76,69 @@
     <!-- content start -->
     <div class="container-xxl py-5">
         <div class="container">
+            <h3>Gallery</h3>
+              <svg style="width: 1.5rem; height: 1.5rem; color:green;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6" style="font-size: 3px;">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 5.25l-7.5 7.5-7.5-7.5m15 6l-7.5 7.5-7.5-7.5" />
+              </svg>                
+            <h4>Prototypes</h4><br>
             <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
 
+@foreach ($prototypes as $prototype)
+    
                 <div class="row">
                     <div class="col-md-6">
-                        <!-- Content for the first column goes here -->
-                        <h3>Welcome to the gallery, <br> pick a category to view the pictures</h3>
-                        <br><br><br>
-                        <div class="list-group list-group-flush">
-                            <a href="/events_gallery" class="list-group-item list-group-item-action">News and Events</a>
-                            <a href="/project_gallery" class="list-group-item list-group-item-action">Project photos</a>
-                            <a href="/prototypes_gallery" class="list-group-item list-group-item-action">Prototypes</a>
-                            <a href="/team_gallery" class="list-group-item list-group-item-action">Team photos</a>
-                            <a class="list-group-item list-group-item-action disabled" aria-disabled="true">Others</a>
-                          </div>
+                      <!-- Content for the first column goes here -->
+
+                      <div id="carouselExampleIndicators" class="carousel slide">
+                        <div class="carousel-indicators">
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                        </div>
+    
+                        <div class="carousel-inner">
+    
+                              @foreach ($prototype as $key => $photo)
+                                <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                <a href="{{ asset('images/prototypes/' . $photo->photo) }}" target="_blank">
+                                  <img src="{{ asset('images/prototypes/' . $photo->photo) }}" class="d-block" style="height:500px; width:600px;" alt="...">
+                                </a>
+                                </div>
+                               @endforeach
+    
+                        </div>
+    
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>  
                     </div>
+                    {{-- end of first column --}}
                     <div class="col-md-6">
                       <!-- Content for the second column goes here -->
-                      <div class="card" style="width: 22rem;">
-  
-                        <div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
-                          <div class="carousel-inner">
+                      <h4>
+                          <svg style="width: 1.5rem; height: 1.5rem; color:blue;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M11.25 11.25l.041-.02a.75.75 0 011.063.852l-.708 2.836a.75.75 0 001.063.853l.041-.021M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-9-3.75h.008v.008H12V8.25z" />
+                          </svg>
+                        More information about {{$prototype[0]->name}}</h4>
+                        <br>
 
-                            @foreach ($randomPhotos as $key => $photo)
-                            <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
-                              <img src="{{ asset('images/team/' . $photo->photo) }}" class="card-img-top" alt="...">
-                            </div>
-                           @endforeach
-
-                          </div>
-                          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                          </button>
-                          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                          </button>
-                        </div>
-                        
-                          <div class="card-body">
-                            <h5 class="card-title">Meet the Team</h5>
-                            <p class="card-text">view our full team.</p>
-                            <a href="/team_gallery" class="btn btn-success">Show</a>
-                          </div>
-                        </div>
-
+                          <p>
+                            <h4>Description</h4>
+                            <svg style="width: 1.5rem; height: 1.5rem; color:red;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z" />
+                              </svg>
+                              
+                          {{$prototype[0]->description}}</p>
                     </div>
                   </div>
-
-            </div>
-            <div class="row g-4">
-
+                  <br><br>
+    @endforeach             
 
             </div>
         </div>

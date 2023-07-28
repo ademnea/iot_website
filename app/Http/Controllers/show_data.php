@@ -49,9 +49,6 @@ class show_data extends Controller
          ->get()
          ->groupBy('id');
      
-            $eventphotos = event_photos::all();
-
-           // dd($eventphotos);
     
             $pastevents = DB::table('events')
                 ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
@@ -131,6 +128,70 @@ class show_data extends Controller
         return view('/gallery',compact('contents','randomPhotos'));
 
        }
+
+       public function fetch_project_gallery(){
+
+        $contents = website_content::all();
+
+        $projects = DB::table('projects')
+        ->leftJoin('project_photos', 'projects.id', '=', 'project_photos.project_id')
+        ->select('projects.*', 'project_photos.photo')
+        ->get()
+        ->groupBy('id');
+
+      //  dd($projects);
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
+        //dd($randomPhotos);
+        return view('/project_gallery',compact('contents','randomPhotos','projects'));
+
+       }
+
+       public function fetch_team_gallery(){
+
+        $contents = website_content::all();
+
+        $teams = members::all();
+
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
+        //dd($randomPhotos);
+        return view('/team_gallery',compact('contents','randomPhotos','teams'));
+
+       }
+
+       public function fetch_prototype_gallery(){
+
+        $contents = website_content::all();
+
+        $prototypes = DB::table('prototypes')
+        ->leftJoin('prototype_photos', 'prototypes.id', '=', 'prototype_photos.prototype_id')
+        ->select('prototypes.*', 'prototype_photos.photo')
+        ->get()
+        ->groupBy('id');
+
+      //  dd($projects);
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
+        //dd($randomPhotos);
+        return view('/prototypes_gallery',compact('contents','randomPhotos','prototypes'));
+
+       }
+
+       public function fetch_events_gallery(){
+
+        $contents = website_content::all();
+
+        $events = DB::table('events')
+        ->leftJoin('event_photos', 'events.id', '=', 'event_photos.event_id')
+        ->select('events.*', 'event_photos.photo')
+        ->get()
+        ->groupBy('id');
+
+      //  dd($projects);
+        $randomPhotos = members::inRandomOrder()->limit(6)->get();
+        //dd($randomPhotos);
+        return view('/events_gallery',compact('contents','randomPhotos','events'));
+
+       }
+
 
        public function fetch_partners(){
 

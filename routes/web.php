@@ -28,6 +28,12 @@ Route::get('/news', 'App\Http\Controllers\show_data@fetch_events');
 Route::get('/partners', 'App\Http\Controllers\show_data@fetch_partners');
 Route::get('/gallery', 'App\Http\Controllers\show_data@fetch_gallery');
 
+//dummy route
+Route::get('/project_gallery','App\Http\Controllers\show_data@fetch_project_gallery');
+Route::get('/team_gallery','App\Http\Controllers\show_data@fetch_team_gallery');
+Route::get('/prototypes_gallery','App\Http\Controllers\show_data@fetch_prototype_gallery');
+Route::get('/events_gallery','App\Http\Controllers\show_data@fetch_events_gallery');
+
 //these routes handle the login functionality.
 Route::get('/logmein', 'App\Http\Controllers\iot_admin_login@login');
 Route::post('/mylogin', 'App\Http\Controllers\iot_admin_login@login');

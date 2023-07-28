@@ -120,7 +120,7 @@
 
                          
                             @else
-                            <p>No photos available for this project.</p>
+                            <p>No photos available for this event.</p>
                             @endif
 
                             {{-- <img class="img-fluid" src="images/events/{{ $onevent->photo }}" alt=""> --}}
