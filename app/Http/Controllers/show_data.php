@@ -58,7 +58,7 @@ class show_data extends Controller
 
             $randomPhotos = members::inRandomOrder()->limit(6)->get();
     
-            return view('/news',compact('onevents','pastevents','contents','eventphotos','randomPhotos'));
+            return view('/news',compact('onevents','pastevents','contents','randomPhotos'));
        
            }
 
