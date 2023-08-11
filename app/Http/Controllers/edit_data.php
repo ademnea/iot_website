@@ -187,6 +187,7 @@ class edit_data extends Controller
              'name' => $request->projectName,
              'venue' => $request->venue,
              'participants' => $request->participants,
+             'website' => $request->link,
              'description' => $request->description,
              // add more fields as needed
          ]);

@@ -29,6 +29,9 @@
                     <label for="participants">Number of Participants:</label><br/>
                     <input type="text" value="{{ $_GET['participants']}}" name="participants" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
                     
+                    <label for="link">Project Link:</label><br/>
+                    <input type="text" value="{{ $_GET['link']}}" name="link" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500"><br>
+                    
                     <label for="description">Description:</label><br/>
                     <textarea name="description" rows="4" cols="50" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
                     {{ $_GET['description']}}
