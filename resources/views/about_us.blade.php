@@ -71,6 +71,8 @@
                 <h2 class="mb-5" id="researchers">Meet Our Team</h2>
             </div>
 
+            <h3 class="mb-5" id="researchers">Senior Researchers</h3>
+
             <div class="row g-4">
     
     @foreach ($teams as $team)
@@ -129,8 +131,215 @@
             </div>
         </div>
     </div>
-    <!-- team Team End -->  
+    <!-- senior researchers End -->
+
+
+      <!-- Intern Start -->
+      <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h2 class="mb-5" id="researchers">PhD Students</h2>
+            </div>
+
+            <div class="row g-4">
+    
+    @foreach ($PhDs as $PhD)
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="team-item">
+                            <img class="card-img-top" alt="project photo" style="height:250px" src="images/team/{{ $PhD->photo }}" alt="">
+
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">{{ $PhD->fname }}  {{ $PhD->lname }}</h5>
+                            <small>{{ $PhD->designation }}</small>
+                        <br>
+
+                     {{-- begin popup --}}
+                         <!-- Button trigger modal -->
+
+                 <span class="collapsed-text">
+                    <!-- Display only one line of text -->
+                   {{ \Illuminate\Support\Str::words($PhD->bio, $words = 10, $end = '....') }}
+                 </span>
+
+                <a class="" data-bs-toggle="modal" data-bs-target="#{{ $PhD->id }}" style="cursor:pointer;">
+                    Read more <i class="fas fa-chevron-down"></i>
+                </a>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="{{ $PhD->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $PhD->fname }}  {{ $PhD->lname }} 's biography</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{-- {{ $team->bio }} --}}
+                        {!! preg_replace('/\r\n|\r|\n/', '<br>', $PhD->bio) !!}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+          {{-- end bio popup --}}
+
+        </div>
+
+                    </div>
+                </div>  
+         @endforeach
+
+            </div>
+        </div>
+    </div>
+    <!-- phd End -->
    
+
+      <!-- masters Start -->
+      <div class="container-xxl py-5">
+        <div class="container">
+            <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+                <h2 class="mb-5" id="researchers">Masters Students</h2>
+            </div>
+
+            <div class="row g-4">
+    
+    @foreach ($masters as $master)
+                <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                    <div class="team-item">
+                            <img class="card-img-top" alt="project photo" style="height:250px" src="images/team/{{ $master->photo }}" alt="">
+
+                        <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                            <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                        </div>
+
+                        <div class="text-center p-4">
+                            <h5 class="mb-0">{{ $master->fname }}  {{ $master->lname }}</h5>
+                            <small>{{ $master->designation }}</small>
+                        <br>
+
+                     {{-- begin popup --}}
+                         <!-- Button trigger modal -->
+
+                 <span class="collapsed-text">
+                    <!-- Display only one line of text -->
+                   {{ \Illuminate\Support\Str::words($master->bio, $words = 10, $end = '....') }}
+                 </span>
+
+                <a class="" data-bs-toggle="modal" data-bs-target="#{{ $master->id }}" style="cursor:pointer;">
+                    Read more <i class="fas fa-chevron-down"></i>
+                </a>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="{{ $master->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $master->fname }}  {{ $master->lname }} 's biography</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            {{-- {{ $team->bio }} --}}
+                        {!! preg_replace('/\r\n|\r|\n/', '<br>', $master->bio) !!}
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+          {{-- end bio popup --}}
+
+        </div>
+
+                    </div>
+                </div>  
+         @endforeach
+
+            </div>
+        </div>
+    </div>
+    <!-- masters End -->
+
+
+   <!-- Admin Start -->
+   <div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h2 class="mb-5" id="researchers">Admins</h2>
+        </div>
+
+        <div class="row g-4">
+
+@foreach ($admins as $admin)
+            <div class="col-lg-3 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
+                <div class="team-item">
+                        <img class="card-img-top" alt="project photo" style="height:250px" src="images/team/{{ $admin->photo }}" alt="">
+
+                    <div class="position-relative d-flex justify-content-center" style="margin-top: -19px;">
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
+                    </div>
+
+                    <div class="text-center p-4">
+                        <h5 class="mb-0">{{ $admin->fname }}  {{ $admin->lname }}</h5>
+                        <small>{{ $admin->designation }}</small>
+                    <br>
+
+                 {{-- begin popup --}}
+                     <!-- Button trigger modal -->
+
+             <span class="collapsed-text">
+                <!-- Display only one line of text -->
+               {{ \Illuminate\Support\Str::words($admin->bio, $words = 10, $end = '....') }}
+             </span>
+
+            <a class="" data-bs-toggle="modal" data-bs-target="#{{ $admin->id }}" style="cursor:pointer;">
+                Read more <i class="fas fa-chevron-down"></i>
+            </a>
+            
+            <!-- Modal -->
+            <div class="modal fade" id="{{ $admin->id }}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="staticBackdropLabel">{{ $admin->fname }}  {{ $admin->lname }} 's biography</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {{-- {{ $team->bio }} --}}
+                    {!! preg_replace('/\r\n|\r|\n/', '<br>', $admin->bio) !!}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+      {{-- end bio popup --}}
+
+    </div>
+
+                </div>
+            </div>  
+     @endforeach
+
+        </div>
+    </div>
+</div>
+<!-- Admin End -->
+
 
      <!-- Intern Start -->
      <div class="container-xxl py-5">

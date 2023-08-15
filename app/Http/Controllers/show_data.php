@@ -21,14 +21,20 @@ class show_data extends Controller
            //$teams = members::all();
            //Non interns are displayed first as below
            
-           $teams = DB::table('members')->whereNotIn('role', ['intern'])->get();
-           $researchers = DB::table('members')->where('role', '=', 'researcher')->get();
+         //  $teams = DB::table('members')->whereNotIn('role', ['intern'])->get();
+           $teams = DB::table('members')
+                            ->where('role', '=', 'researcher')
+                            ->orWhere('role', '=', 'leader')
+                            ->get();
+           $PhDs = DB::table('members')->where('role', '=', 'phd_stdt')->get();
+           $masters = DB::table('members')->where('role', '=', 'masters_stdt')->get();
+           $admins = DB::table('members')->where('role', '=', 'admin')->get();
            $interns = DB::table('members')->where('role', '=', 'intern')->get();
             
            $randomPhotos = members::inRandomOrder()->limit(6)->get();
             $partners = partners::all();
 
-            return view('/about_us',compact('researchers','interns','partners','teams','contents','randomPhotos'));
+            return view('/about_us',compact('PhDs','masters','admins','interns','partners','teams','contents','randomPhotos'));
        
            }
 
