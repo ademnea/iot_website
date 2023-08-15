@@ -65,9 +65,24 @@ margin-right:10%;
                     <input type="radio" value="leader" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="default-radio-1" class="ml-2 text-sm font-medium text-gray-900">Team Leader</label>
                 </div>
-            
+
+                <div class="flex items-center">
+                    <input type="radio" value="phd_stdt" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900">PhD Student</label>
+                </div>
+                
                 <div class="flex items-center">
                     <input type="radio" value="researcher" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900">Researcher</label>
+                </div> 
+
+                <div class="flex items-center">
+                    <input type="radio" value="masters_stdt" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
+                    <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900">Masters Student</label>
+                </div> 
+            
+                <div class="flex items-center">
+                    <input type="radio" value="admin" name="role" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
                     <label for="default-radio-2" class="ml-2 text-sm font-medium text-gray-900">Admin or Employee</label>
                 </div> 
 
