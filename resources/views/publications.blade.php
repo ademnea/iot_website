@@ -120,6 +120,7 @@
     <!-- Service End -->
     <p>
     <div class="row g-4">
+        
         @foreach ($publications as $pub)
               <div class="col-lg-3 col-md- wow fadeInUp" data-wow-delay="0.7s">
                   <div class="team-item">

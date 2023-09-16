@@ -233,7 +233,6 @@ class edit_data extends Controller
 
        //lets check if the image is not null and update the table.
     
-       if ($request->hasFile('image')) {
           // this code uploads the picture from the form.
           $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
           $picname = $request->file('image')->getClientOriginalName();
@@ -245,8 +244,8 @@ class edit_data extends Controller
               'photo' => $picname,
               // add more fields as needed
           ]);
-
-      }
+   
+      
 
    return redirect('/newscontent')->with('success', 'event updated successfully!');
 
