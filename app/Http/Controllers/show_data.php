@@ -24,15 +24,32 @@ class show_data extends Controller
          //  $teams = DB::table('members')->whereNotIn('role', ['intern'])->get();
            $teams = DB::table('members')
                             ->where('role', '=', 'researcher')
+                            ->where('status', '=', 'Active')
                             ->orWhere('role', '=', 'leader')
                             ->get();
-           $PhDs = DB::table('members')->where('role', '=', 'phd_stdt')->get();
-           $masters = DB::table('members')->where('role', '=', 'masters_stdt')->get();
-           $admins = DB::table('members')->where('role', '=', 'admin')->get();
-           $interns = DB::table('members')->where('role', '=', 'intern')->get();
+
+           $PhDs = DB::table('members')
+           ->where('role', '=', 'phd_stdt')
+           ->where('status', '=', 'Active')
+           ->get();
+
+           $masters = DB::table('members')
+           ->where('role', '=', 'masters_stdt')
+           ->where('status', '=', 'Active')
+           ->get();
+
+           $admins = DB::table('members')
+           ->where('role', '=', 'admin')
+           ->where('status', '=', 'Active')
+           ->get();
+
+           $interns = DB::table('members')
+           ->where('role', '=', 'intern')
+           ->where('status', '=', 'Active')
+           ->get();
             
            $randomPhotos = members::inRandomOrder()->limit(6)->get();
-            $partners = partners::all();
+           $partners = partners::all();
 
             return view('/about_us',compact('PhDs','masters','admins','interns','partners','teams','contents','randomPhotos'));
        

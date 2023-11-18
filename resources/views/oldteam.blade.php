@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>IoT - About</title>
+    <title>IoT | old team </title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
@@ -14,34 +14,24 @@
    <div class="p-4 sm:ml-64">
    <div class="p-4 border-2 border-gray-200 border rounded-lg light:border-gray-700">
 
-<center>
 
-      {{-- displaying an alert  --}}
-         @if (session('success'))
+    <center>
+        {{-- displaying an alert  --}}
+        @if (session('success'))
             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
             <b> {{ session('success') }}</b>
             </div> 
         @endif
+    </center>
 
-{{-- start of the page content --}}
-
-<button type="button" id="top" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
-<a href="/register_team">New Team Member</a>
-</button>
-
-<button type="button" id="top" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
-<a href="/registeradminform">New System Admin</a>
-</button>
-
-</center>
 <br>
 <div style="
 margin-left:5%;
 margin-right:5%;
 ">
-<h1 class="font-medium">
-   About Us Content 
-</h1>
+<h3 class="font-medium">
+   meet people that served the lab and made impact. you can view all about them in the gallery. 
+</h3>
 <hr>
 <br>
 <br>
@@ -94,7 +84,7 @@ margin-right:5%;
                 </td>
                 <td class="px-6 py-4">
                     <a href="/editteam? id={{  $user->id }}&firstname={{ $user->fname }}&lastname={{ $user->lname}}&email={{ $user->email}}&phone={{ $user->phone}}&role={{ $user->role }}&designation={{ $user->designation }}&bio={{ $user->bio }}">
-                    <div class="font-medium text-blue-600 hover:underline">
+                    <div class="font-medium text-green-600 hover:underline">
                     Edit
                     </div>
                     </a>
@@ -103,9 +93,10 @@ margin-right:5%;
 
                     <a href="#" type="button" data-modal-target="{{ $user->id }}" data-modal-show="{{ $user->id }}">
                                             {{-- svg icon --}}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                    </svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-orange-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99" />
+                      </svg>
+                      
                     </a>
 
                 </td>
@@ -126,11 +117,11 @@ margin-right:5%;
                 </button>
                 <div class="p-6 text-center">
                     <svg aria-hidden="true" class="mx-auto mb-4 text-gray-400 w-14 h-14 dark:text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to delete this team member?</h3>
+                    <h3 class="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">Are you sure you want to recover this team member?</h3>
                     <!-- added id to the button Yes, I'm sure-->
-                    <form id="delete-user-form-{{ $user->id }}" method="POST" action="/deleteuser?user_id={{$user->id}}" accept-charset="UTF-8" style="display:inline">
+                    <form id="delete-user-form-{{ $user->id }}" method="POST" action="/restoreuser?user_id={{$user->id}}" accept-charset="UTF-8" style="display:inline">
                         {{ csrf_field() }}
-                        <button id="delete-user-btn" data-modal-hide="{{ $user->id }}"  type="submit" class="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        <button id="delete-user-btn" data-modal-hide="{{ $user->id }}"  type="submit" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             Yes, I'm sure
                         </button>
                     </form>

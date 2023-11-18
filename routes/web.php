@@ -57,6 +57,7 @@ Route::view('/register_news','register_news');
 Route::view('/register_home','register_home');
 Route::view('/register_team','register_team');
 
+
 //routes for editing content
 Route::view('/edithome','edithome');
 Route::view('/editleader','editleader');
@@ -91,6 +92,7 @@ Route::get('/projectscontent', 'App\Http\Controllers\retrieve_data@fetch_project
 Route::get('/publicationscontent', 'App\Http\Controllers\retrieve_data@fetch_publications');
 Route::get('/newscontent', 'App\Http\Controllers\retrieve_data@fetch_events');
 Route::get('/registerprototype','App\Http\Controllers\retrieve_data@fetch_project_prototype');
+Route::get('/oldteam','App\Http\Controllers\retrieve_data@fetch_oldteam');
 
 
 //controller routes for updating database content
@@ -106,8 +108,12 @@ Route::post('/editnews_route', 'App\Http\Controllers\edit_data@edit_event');
 Route::post('/editpublication_route', 'App\Http\Controllers\edit_data@edit_publication');
 Route::post('/editmember_route', 'App\Http\Controllers\edit_data@edit_team');
 
-//route for the logout.
-//Route::get('/logout', 'App\Http\Controllers\logout@destroy');
+
+//controllers for deleting stuff
+Route::post('/deleteuser', 'App\Http\Controllers\delete_stuff@delete_member');
+
+//controllers for rstoring stuff
+Route::post('/restoreuser', 'App\Http\Controllers\restore_stuff@restore_member');
 
 });
 

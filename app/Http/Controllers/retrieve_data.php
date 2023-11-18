@@ -30,9 +30,20 @@ class retrieve_data extends Controller
     public function fetch_team(){
         
         $contents = website_content::all();
-        $users = members::all();
+
+        $users = members::where('status', 'Active')->get();
         
         return view('/aboutuscontent',compact('users','contents'));
+   
+       }
+
+           //function fetches old team members who left
+    public function fetch_oldteam(){
+        
+
+        $users = members::where('status', 'Inactive')->get();
+        
+        return view('/oldteam',compact('users'));
    
        }
 
