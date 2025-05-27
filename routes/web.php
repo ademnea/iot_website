@@ -39,17 +39,19 @@ Route::get('/logmein', 'App\Http\Controllers\iot_admin_login@login');
 Route::post('/mylogin', 'App\Http\Controllers\iot_admin_login@login');
 Route::get('/oldlogin', 'App\Http\Controllers\iot_admin_login@logmein')->name('login');
 
+Route::get('/registeradminform', 'App\Http\Controllers\iot_admin_login@registerme');
+Route::get('/register', 'App\Http\Controllers\iot_admin_login@registerme')->name('register');
+Route::post('/registeradmin', 'App\Http\Controllers\insert_data@insert_admin');
+
 //admin side protected routes
 Route::middleware(['auth'])->group(function () {
     
 Route::view('/dashboard','dashboard')->name('dashboard');
-Route::get('/registeradminform', 'App\Http\Controllers\iot_admin_login@registerme');
-Route::get('/register', 'App\Http\Controllers\iot_admin_login@registerme')->name('register');
     
 Route::view('/projectscontent','projectscontent');
 Route::view('/homecontent','homecontent');
 Route::view('/publicationscontent','publicationscontent');
-Route::view('/newscontent','newscontent');
+Route::view('/newscontent','newscontent'); 
 Route::view('/aboutuscontent','aboutuscontent');
 Route::view('/register_projects','register_projects');
 Route::view('/register_publications','register_publications');
@@ -81,7 +83,6 @@ Route::post('/insert_publication', 'App\Http\Controllers\insert_data@insert_publ
 Route::post('/insert_team', 'App\Http\Controllers\insert_data@insert_team');
 Route::post('/insertcontacts', 'App\Http\Controllers\insert_data@insert_contacts');
 Route::post('/insertprototype', 'App\Http\Controllers\insert_data@insert_prototype');
-Route::post('/registeradmin', 'App\Http\Controllers\insert_data@insert_admin');
 
 
 

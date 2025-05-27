@@ -53,5 +53,5 @@ class iot_admin_login extends Controller
         $contents = website_content::all();
         return view('register', ['contents' => $contents, 'status' => '']);
     }
-
+ 
 }
