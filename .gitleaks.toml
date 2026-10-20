@@ -1,0 +1,16 @@
+# Secret scanning (scripts/check.sh secrets). Uses gitleaks' default rules; these paths are
+# never committed (they're git-ignored), so findings there are expected local values.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Local-only files: the developer's .env, installed dependencies, uploads, build output"
+paths = [
+    '''(^|/)\.env$''',
+    '''^vendor/''',
+    '''^node_modules/''',
+    '''^data/''',
+    '''^public/build/''',
+    '''^storage/''',
+    '''^reports/''',
+]
