@@ -56,6 +56,13 @@ return [
 
     'url' => env('APP_URL', 'http://localhost'),
 
+    /*
+    | Proxies whose X-Forwarded-* headers are trusted, e.g. the host's web server in front of
+    | the container. Comma-separated IPs/CIDRs, or * to trust any (only safe when the app port
+    | is reachable from localhost only).
+    */
+    'trusted_proxies' => env('TRUSTED_PROXIES'),
+
     'asset_url' => env('ASSET_URL'),
 
     /*

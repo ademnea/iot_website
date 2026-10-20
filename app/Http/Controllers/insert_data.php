@@ -9,8 +9,9 @@ use App\Models\prototypes;
 use App\Models\website_content;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
-use App\Models\User;
 
 
 class insert_data extends Controller
@@ -18,28 +19,24 @@ class insert_data extends Controller
     //lets insert an admin
 
     public function insert_admin(Request $request){
-     $password = $request->input('password');
-     $email = $request->input('email');
-     $password_confirm = $request->input('password_confirmation');
-     $rememberToken = Str::random(60);
 
-     $user = User::where('email', $email)->first();
-     if ($user) {
-        return redirect('/register')->with('message','this email already exists');
+     $validator = Validator::make($request->all(), [
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255|unique:users,email',
+        'password' => 'required|string|min:8|confirmed',
+     ]);
+
+     // the register view shows a single status line, so pass back the first error.
+     if ($validator->fails()) {
+        return redirect('/register')->withInput($request->except('password', 'password_confirmation'))
+            ->with('message', $validator->errors()->first());
      }
-
-
-     if($password != $password_confirm){
-
-        return redirect('/register')->with('message','these passwords do not match');
-     }
-
 
       DB::table('users')->insert([
         'name' => $request->name,
-        'email' => $email,
-        'password' => $password,
-        'remember_token' =>  $rememberToken,
+        'email' => $request->email,
+        'password' => Hash::make($request->password),
+        'remember_token' =>  Str::random(60),
         'created_at' => now(),
         'updated_at' => now(),
     ]);
@@ -101,7 +98,7 @@ class insert_data extends Controller
    public function insert_contacts(Request $request){
 
     $request->validate(['logo' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-    $picname = $request->file('logo')->getClientOriginalName();
+    $picname = $request->file('logo')->hashName();
     $request->logo->move(public_path('images/logo'), $picname);
 
      
@@ -154,10 +151,14 @@ class insert_data extends Controller
   // this function inserts partners into the database
    public function insert_partner(Request $request){
 
-    $admin = $request->input('admin');
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'description' => 'required|string',
+        'website' => 'nullable|string|max:255',
+        'image' => 'required|image|mimes:png,jpg,jpeg|max:11000',
+    ]);
 
-    $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-    $picname = $request->file('image')->getClientOriginalName();
+    $picname = $request->file('image')->hashName();
     $request->image->move(public_path('images/partners'), $picname);
 
     
@@ -167,7 +168,7 @@ class insert_data extends Controller
                 'name' => $request->name,
                 'description' => $request->description,
                 'website_link' => $request->website,
-                'admin_id' => $admin,
+                'admin_id' => auth()->id(),
                 'created_at' => now(),
                 'updated_at' => now(),
                   
@@ -182,11 +183,19 @@ class insert_data extends Controller
 
     public Function insert_news(Request $request){
 
-      //  return $request->input();
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date|after_or_equal:start_date',
+            'venue' => 'nullable|string|max:255',
+            'link' => 'nullable|string|max:255',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:png,jpg,jpeg|max:11000',
+        ]);
 
-        $admin = $request->input('admin');
-
-            DB::table('events')->insert([
+            //this method below inserts and gets id at the same time
+            $latestRecordId = DB::table('events')->insertGetId([
 
                 'title' => $request->title,
                 'start_date' => $request->start_date,
@@ -194,22 +203,18 @@ class insert_data extends Controller
                 'description' => $request->description,
                 'venue' => $request->venue,
                 'article_link' => $request->link,
-                'admin_id' => $admin,
+                'admin_id' => auth()->id(),
                 'created_at' => now(),
                 'updated_at' => now(),
                   
             ]);
-
-            //lets get the latest event and add this image to it.
-            $latestRecord = news::latest()->first();
-            $latestRecordId = $latestRecord->id;
 
             //now lets insert the images in the event images table.
           
             if ($request->hasFile('images')) {
             foreach ($request->images as $file) {
 
-               $picname = $file->getClientOriginalName();
+               $picname = $file->hashName();
                $file->move(public_path('images/events'), $picname);
 
                 $fileModel = new event_photos;
@@ -228,17 +233,23 @@ class insert_data extends Controller
 
 public Function insert_project(Request $request){
 
-
-          $admin = $request->input('admin');
+          $request->validate([
+              'projectName' => 'required|string|max:255',
+              'description' => 'required|string',
+              'venue' => 'nullable|string|max:255',
+              'participants' => 'nullable|string|max:255',
+              'start_date' => 'nullable|date',
+              'end_date' => 'nullable|date|after_or_equal:start_date',
+              'project_link' => 'nullable|string|max:255',
+              'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+          ]);
 
           $picname = null;
 
                 //this code uploads the picture from the form.
 
-            if($request->image){
-
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-            $picname = $request->file('image')->getClientOriginalName();
+            if($request->hasFile('image')){
+            $picname = $request->file('image')->hashName();
             $request->image->move(public_path('images/projects'), $picname);
                 }
 
@@ -252,17 +263,13 @@ public Function insert_project(Request $request){
                 'start_date' => $request->start_date,
                 'end_date' => $request->end_date,
                 'website' => $request->project_link,
-                'admin_id' => $admin,
+                'admin_id' => auth()->id(),
                 'created_at' => now(),
                 'updated_at' => now(),
                   
             ]);
 
-         // return $latestRecordId;
-
-
-
-    //now lets insert the image in the event images table.
+    //now lets insert the image in the project images table.
     DB::table('project_photos')->insert([
         'photo' => $picname,
         'project_id' => $latestRecordId,
@@ -276,22 +283,21 @@ public Function insert_project(Request $request){
 
 
 public Function insert_publication(Request $request){
-              
-             $admin = $request->input('admin');
-
-              $type = $request->input('type');
-    
-                   //this code uploads the publication file from the form.
-                   // Validate and capture document file
-
-            $request->validate(['photo' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-            $picname = $request->file('photo')->getClientOriginalName();
-            $request->photo->move(public_path('images/publications'), $picname);
 
             $request->validate([
+                'title' => 'required|string|max:255',
+                'author' => 'required|string|max:255',
+                'type' => 'required|string|max:255',
+                'description' => 'required|string',
+                'date_published' => 'nullable|date',
+                'photo' => 'required|image|mimes:png,jpg,jpeg|max:11000',
                 'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:11000',
             ]);
-            $filename = $request->file('file')->getClientOriginalName();
+
+            $picname = $request->file('photo')->hashName();
+            $request->photo->move(public_path('images/publications'), $picname);
+
+            $filename = $request->file('file')->hashName();
             $request->file('file')->move(public_path('documents/publications'), $filename);
 
 
@@ -301,10 +307,10 @@ public Function insert_publication(Request $request){
                 'author' => $request->author,
                 'photo' => $picname,
                 'date_published' => $request->date_published,
-                'type' => $type,
+                'type' => $request->type,
                 'description' => $request->description,
                 'file_link' => $filename,
-                'admin_id' => $admin,
+                'admin_id' => auth()->id(),
                 'created_at' => now(),
                 'updated_at' => now(),
                   
@@ -312,17 +318,24 @@ public Function insert_publication(Request $request){
 
             return redirect('/publicationscontent')->with('success', 'publication added successfully!');
 
-    //return $request->input();
 }
 
 
 public Function insert_team(Request $request){
-   
-         $admin = $request->input('admin');
+
+            $request->validate([
+                'firstname' => 'required|string|max:255',
+                'lastname' => 'required|string|max:255',
+                'email' => 'required|email|max:255|unique:members,email',
+                'phone' => 'required|string|max:255|unique:members,phone',
+                'designation' => 'required|string|max:255',
+                'role' => 'nullable|string|max:255',
+                'bio' => 'nullable|string',
+                'image' => 'required|image|mimes:png,jpg,jpeg|max:11000',
+            ]);
 
                 //this code uploads the picture from the form.
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-            $picname = $request->file('image')->getClientOriginalName();
+            $picname = $request->file('image')->hashName();
             $request->image->move(public_path('images/team'), $picname);
 
             DB::table('members')->insert([
@@ -335,7 +348,9 @@ public Function insert_team(Request $request){
                 'role' => $request->role,
                 'bio' => $request->bio,
                 'photo' => $picname,
-                'registered_by' => $admin,
+                // members.registered_by references members.id, not users.id, so the
+                // logged-in admin can't be stored here.
+                'registered_by' => null,
                 'created_at' => now(),
                 'updated_at' => now(),        
                   
@@ -349,36 +364,34 @@ public Function insert_team(Request $request){
 
 public Function insert_prototype(Request $request){
 
+    $request->validate([
+        'title' => 'required|string|max:255',
+        'description' => 'required|string',
+        'project_id' => 'nullable|exists:projects,id',
+        'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+    ]);
 
-    $admin = $request->input('admin');
-    $projectid = $request->input('project_id');
+    $picname = null;
 
                 //this code uploads the picture from the form.
 
-                if($request->image){
-
-            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-            $picname = $request->file('image')->getClientOriginalName();
+                if($request->hasFile('image')){
+            $picname = $request->file('image')->hashName();
             $request->image->move(public_path('images/prototypes'), $picname);
-
                 }
-                
-            DB::table('prototypes')->insert([
+
+            //this method below inserts and gets id at the same time
+            $latestRecordId = DB::table('prototypes')->insertGetId([
 
                 'name' => $request->title,
                 'description' => $request->description,
-                'project_id' => $projectid,
+                'project_id' => $request->input('project_id') ?: null,
                 'created_at' => now(),
                 'updated_at' => now(),
                   
             ]);
 
-
-    //lets get the latest project and add this image to it.
-    $latestRecord = prototypes::latest()->first();
-    $latestRecordId = $latestRecord->id;
-
-    //now lets insert the image in the event images table.
+    //now lets insert the image in the prototype images table.
     DB::table('prototype_photos')->insert([
         'photo' => $picname,
         'prototype_id' => $latestRecordId,
@@ -388,13 +401,17 @@ public Function insert_prototype(Request $request){
 
             return redirect('/publicationscontent')->with('success', 'prototype added successfully!');
 
-   // return $request->input();
 }
 
 
 public Function insert_message(Request $request){
 
-           //this code uploads the picture from the form.
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|max:255',
+                'phone' => 'nullable|string|max:50',
+                'message' => 'required|string|max:255',
+            ]);
 
             DB::table('messages')->insert([
 

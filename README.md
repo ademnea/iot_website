@@ -1,66 +1,121 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# IoT-ra Lab Website
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+The public website and content-management console for the IoT-ra (Internet of Things - Research & Applications) Lab
+at Makerere University (CoCIS, Block B). Visitors browse the lab's team, projects, prototypes, publications, news
+and partners. Admins log in to edit all of it without touching code.
 
-## About Laravel
+**Stack:** Laravel 13 · PHP 8.4 · Blade · Jetstream 5 / Fortify (login, 2FA, password reset)
+· MariaDB 11.4 · Apache. It runs in Docker, isolated from anything else on the server.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Quick start (Docker)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+You need Docker with the Compose plugin. PHP, Node and MySQL don't need to be installed.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+```bash
+git clone git@github.com:ademnea/iot_website.git
+cd iot_website
+cp .env.example .env
+```
 
-## Learning Laravel
+In `.env`, set `DB_PASSWORD` and `DB_ROOT_PASSWORD` (any strong values), then:
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+```bash
+docker compose run --rm --no-deps app php artisan key:generate --show   # put the output in .env as APP_KEY=
+docker compose up -d --build                                            # site on http://127.0.0.1:8080
+docker compose exec app php artisan admin:create you@example.org --name="Your Name"
+```
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Log in at **`/login`** and add the site content first: lab name, mission, logo and banner.
+Until that content exists, the public home page sends visitors to the login page.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+| Task | Command |
+|---|---|
+| Stop / start | `docker compose stop` / `docker compose start` |
+| Logs | `docker compose logs -f app` |
+| Artisan | `docker compose exec app php artisan <command>` |
+| Database shell | `docker compose exec db sh -c 'mariadb -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" "$MARIADB_DATABASE"'` |
+| Rebuild after pulling | `docker compose up -d --build` |
+| Reset an admin's password | `docker compose exec app php artisan admin:password you@example.org` |
+| Turn off an admin's 2FA (lost phone) | `docker compose exec app php artisan admin:reset-2fa you@example.org` |
 
-## Laravel Sponsors
+On every start the container runs the migrations, hashes any admin passwords still stored as
+plain text (`admin:hash-passwords`), and caches the config and views.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## Checks to run before every merge or deploy
 
-### Premium Partners
+```bash
+scripts/check.sh
+```
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+One command runs everything in Docker: the repository guard, the test suite and the
+DevSecOps scans. After the guard and the image build, the jobs run **in parallel**, so the
+security scans add almost no time. A typical run takes about 30 seconds; the first run takes
+longer because it builds the images.
 
-## Contributing
+| Job | What it checks |
+|---|---|
+| `guard` | No archives/executables committed (the [Dec 2025 malware](docs/incident-report-2025-12-malware.md) pattern), no webshell code, no `.env` files |
+| `tests` | The PHPUnit suite against a throwaway database (`iot_website_test`) |
+| `audit` | Known vulnerabilities in PHP packages (fails) and npm build tools (reported) |
+| `sast` | Semgrep static analysis of the code |
+| `secrets` | Gitleaks: secrets in git history and the working tree |
+| `image` | Trivy: fixable vulnerabilities or secrets in the Docker image; writes an SBOM |
+| `config` | Trivy: Dockerfile/compose misconfigurations |
+| `lint` | Hadolint: Dockerfile issues |
+| `compile` | Every Blade template, route and config file loads |
+| `smoke` | The running site answers correctly, sends security headers, and refuses to run scripts from uploads |
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+To run specific jobs, name them (`scripts/check.sh tests smoke`), or use
+`scripts/check.sh security` for the scanners only. Logs, the Semgrep report and the SBOM
+are saved in `reports/<timestamp>/`. The meaning of each job, and what to do when one
+fails, is in [docs/fixes/011](docs/fixes/011-maintainer-checks.md).
 
-## Code of Conduct
+## Deploying on the server
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. Clone the repo on the server and create `.env` as in the quick start, with
+   `APP_ENV=production`, `APP_DEBUG=false` and `APP_URL=https://<your domain>`.
+   Fill in the `MAIL_*` settings with the lab's email account, so "Forgot password?" can send
+   reset emails.
+2. Copy existing uploads into `./data/images` and `./data/documents`. To bring the database
+   over, load a `mysqldump` with `docker compose exec -T db mariadb …` (see
+   [fix 009](docs/fixes/009-containerisation.md)).
+3. Run `docker compose up -d --build`. The site listens on `127.0.0.1:8080` only.
+4. Have the host's web server proxy the domain to it (Apache example in
+   [fix 009](docs/fixes/009-containerisation.md)). `TRUSTED_PROXIES=*` in `.env` is safe
+   while the port is bound to localhost.
+5. Run `scripts/check.sh smoke` against the live stack.
 
-## Security Vulnerabilities
+**Back up** `./data/` and the database:
+`docker compose exec db sh -c 'mariadb-dump -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" "$MARIADB_DATABASE"' > backup.sql`.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## Project layout
 
-## License
+| Path | Contents |
+|---|---|
+| `app/Http/Controllers/` | `show_data` (public pages), `retrieve_data` (admin lists), `insert_data` / `edit_data` (create/update), `edit_forms` (edit pages) |
+| `resources/views/` | Public pages (Bootstrap theme) and admin pages (Tailwind) |
+| `routes/web.php` | All routes; admin pages are behind `auth` |
+| `routes/console.php` | `admin:create`, `admin:hash-passwords` |
+| `docker/`, `Dockerfile`, `docker-compose.yml` | The container setup |
+| `scripts/check.sh` | The maintainer check suite |
+| `tests/Feature/Fixes/` | Regression tests for every fixed defect |
+| `docs/` | Documentation (below) |
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## Documentation
+
+- [Workflows](docs/workflows.md): how to do everything in the admin area, step by step
+- [docs/](docs/README.md): SRS, architecture, system design, SDD and ADRs
+- [Defects and malware report](docs/defects-and-malware-report.md) and the
+  [fix log](docs/fixes/README.md)
+- [Incident report: Dec 2025 malware](docs/incident-report-2025-12-malware.md), including a
+  runbook of the clean-up commands
+
+## Security
+
+Report vulnerabilities privately to the lab maintainers, not in a public issue.
+
+- Never commit archives or executables (`.zip`, `.exe`, `.dll`, `.cmd`). `scripts/check.sh`
+  fails if you do.
+- Admin accounts are created only by another admin or with `php artisan admin:create`.
+- Two-factor authentication is available on each admin's profile page and is enforced at
+  login.

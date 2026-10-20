@@ -22,10 +22,13 @@ class show_data extends Controller
            //Non interns are displayed first as below
            
          //  $teams = DB::table('members')->whereNotIn('role', ['intern'])->get();
+           // grouped so the Active filter applies to the leader too.
            $teams = DB::table('members')
-                            ->where('role', '=', 'researcher')
                             ->where('status', '=', 'Active')
-                            ->orWhere('role', '=', 'leader')
+                            ->where(function ($query) {
+                                $query->where('role', '=', 'researcher')
+                                      ->orWhere('role', '=', 'leader');
+                            })
                             ->get();
 
            $PhDs = DB::table('members')
@@ -133,7 +136,7 @@ class show_data extends Controller
         // if we startup the system without data, redirect the admin to the login to enter some new data.
        if($contents->count() === 0){
 
-          return redirect('/oldlogin');
+          return redirect('/login');
 
        }
 

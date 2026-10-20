@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>add publications content</title>
+        <title>Add a publication · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
 
         <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -49,7 +49,6 @@ margin-right:10%;
                @csrf
 
 
-              <input type="hidden" name="admin" value="{{ Session::get('id') }}">
               
                 <div class="flex items-center mb-4">
                     <input type="radio" value="report" name="type" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 focus:ring-2">
@@ -62,22 +61,22 @@ margin-right:10%;
                 
                  <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Title</label>
-                      <input type="text" name="title" placeholder="title" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="text" name="title" placeholder="title" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Author</label>
-                      <input type="text" name="author" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="text" name="author" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                   <div>
                     <label for="photo" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Overview Picture(optional) </label>
-                     <input type="file" name="photo" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                     <input type="file" name="photo" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                  </div>
 
                  <div>
                     <label for="date_published" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Date Published (optional) </label>
-                     <input type="date" name="date_published" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                     <input type="date" name="date_published" placeholder="full name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                  </div>
 
                    <div>
@@ -87,10 +86,10 @@ margin-right:10%;
 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Attach File</label>
-                      <input type="file" name="file" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="file" name="file" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
     
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Submit
                   </button>
               </form>

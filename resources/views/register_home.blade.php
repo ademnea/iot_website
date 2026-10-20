@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>add home content</title>
+        <title>Add home content · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
 
         <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -34,12 +34,12 @@ margin-right:10%;
  
                  <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Motto</label>
-                      <input type="text" name="motto" placeholder="motto" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="motto" placeholder="motto" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                   <div>
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Lab Name</label>
-                     <input type="text" name="labname" placeholder="Lab Name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                     <input type="text" name="labname" placeholder="Lab Name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                  </div>
 
                 <div class="flex items-center mb-4">
@@ -67,7 +67,7 @@ margin-right:10%;
                     <textarea name="content"  placeholder="Write your content here..." rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
                   </div>
     
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Submit
                   </button>
               </form>
@@ -84,49 +84,49 @@ margin-right:10%;
 
                  <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Company Logo</label>
-                      <input type="file" name="logo" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="file" name="logo" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
                 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Physical Address</label>
-                      <input type="text" name="address" placeholder="physical Address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="address" placeholder="physical Address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Lab Telephone</label>
-                      <input type="text" name="telephone" placeholder="telephone" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="telephone" placeholder="telephone" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Lab Email</label>
-                      <input type="email" name="email" placeholder="email address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="email" name="email" placeholder="email address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Twitter link</label>
-                      <input type="text" name="twitter" placeholder="twitter" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="twitter" placeholder="twitter" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Facebook link</label>
-                      <input type="text" name="facebook" placeholder="facebook" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="facebook" placeholder="facebook" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">LinkedIn Link</label>
-                      <input type="text" name="linkedin" placeholder="linkedIn" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="linkedin" placeholder="linkedIn" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">YouTube Link</label>
-                      <input type="text" name="youtube" placeholder="youtube" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="youtube" placeholder="youtube" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                     <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Instagram Link</label>
-                      <input type="text" name="instagram" placeholder="instagram" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="instagram" placeholder="instagram" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Submit
                   </button>
 
@@ -146,11 +146,10 @@ margin-right:10%;
                @csrf
                 
 
-                <input type="hidden" name="admin" value="{{ Session::get('id') }}">
                 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Partner Name</label>
-                      <input type="text" name="name" placeholder="full name" required class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="name" placeholder="full name" required class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                   <div>
@@ -160,15 +159,15 @@ margin-right:10%;
 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Logo</label>
-                      <input type="file" name="image" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="file" name="image" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Website</label>
-                       <input type="text" name="website" placeholder="website link" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                       <input type="text" name="website" placeholder="website link" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
     
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Submit
                   </button>
               </form>

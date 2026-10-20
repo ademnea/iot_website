@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>IoT - publications</title>
+    <title>Publications &amp; prototypes · {{ config('app.name') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
@@ -20,18 +20,18 @@
 
       {{-- displaying an alert after registering a category --}}
          @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+            <div class="p-4 mb-4 text-sm text-brand-800 rounded-lg bg-brand-50" role="alert">
             <b> {{ session('success') }}</b>
             </div> 
 
         @elseif (session('updated')) 
-             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+             <div class="p-4 mb-4 text-sm text-brand-800 rounded-lg bg-brand-50" role="alert">
             <b> {{ session('updated') }}</b>
               </div>
             @endif
 {{-- start of the page content --}}
 
-<button type="button" id="top" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
+<button type="button" id="top" class="text-white bg-brand-700 hover:bg-brand-800 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
 <a href="/register_publications">Add New Publication</a>
 </button>
 
@@ -69,7 +69,7 @@ margin-right:10%;
 
 
             <div class="grid grid-cols-2 gap-4">
-        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-green-700 rounded-lg hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300">
+        <a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-brand-700 rounded-lg hover:bg-brand-800 focus:ring-4 focus:outline-none focus:ring-brand-300">
             Read more
         <svg aria-hidden="true" class="w-4 h-4 ml-2 -mr-1" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clip-rule="evenodd">
@@ -77,11 +77,7 @@ margin-right:10%;
         </svg>
         </a>
    <div class="col-span-1 flex justify-center items-center">
-         <a href="/editprototype? id={{  $prototype->id }}&name={{ $prototype->name }}&description={{ $prototype->description }} ">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-             <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
-            </svg>
-         </a>
+         {{-- prototype editing is not implemented yet (no edit route); link removed --}}
     </div>
                             
     </div>
@@ -163,7 +159,7 @@ margin-right:10%;
                    documents/{{ $pub->file_link }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="/editpublications? id={{  $pub->id }}&title={{ $pub->title }}&type={{ $pub->type }}&author={{ $pub->author }}&date_published={{ $pub->date_published}}&photo={{ $pub->photo }}&description={{ $pub->description }}" class="font-medium text-blue-600 hover:underline">Edit</a>
+                    <a href="/editpublications?id={{ $pub->id }}" class="font-medium text-blue-600 hover:underline">Edit</a>
                 </td>
                 <td class="px-6 py-4">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

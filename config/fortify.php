@@ -61,6 +61,12 @@ return [
     |
     */
 
+    /*
+    | Lowercase usernames (emails) before saving and comparing, so Admin@Lab and admin@lab
+    | are the same account.
+    */
+    'lowercase_usernames' => true,
+
     'home' => RouteServiceProvider::HOME,
 
     /*
@@ -132,7 +138,8 @@ return [
     */
 
     'features' => [
-        Features::registration(),
+        // Registration is disabled: admins are created by another admin (/register) or `php artisan admin:create`.
+        // Features::registration(),
         Features::resetPasswords(),
         // Features::emailVerification(),
         Features::updateProfileInformation(),

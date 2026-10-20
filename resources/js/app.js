@@ -1,9 +1,3 @@
 import './bootstrap';
 
-import Alpine from 'alpinejs';
-import focus from '@alpinejs/focus';
-window.Alpine = Alpine;
-
-Alpine.plugin(focus);
-
-Alpine.start();
+// Alpine.js ships with Livewire 3 (used by the Jetstream profile pages); starting a second copy here breaks both.

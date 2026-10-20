@@ -1,10 +1,10 @@
 <x-guest-layout>
     <x-authentication-card>
-        {{-- <x-slot name="logo">
+        <x-slot name="logo">
             <x-authentication-card-logo />
-        </x-slot> --}}
+        </x-slot>
 
-        <div class="mb-4 text-sm text-gray-600">
+        <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
             {{ __('This is a secure area of the application. Please confirm your password before continuing.') }}
         </div>
 
@@ -19,7 +19,7 @@
             </div>
 
             <div class="flex justify-end mt-4">
-                <x-button class="ml-4">
+                <x-button class="ms-4">
                     {{ __('Confirm') }}
                 </x-button>
             </div>

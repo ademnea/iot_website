@@ -1,0 +1,6 @@
+# Dockerfile lint (scripts/check.sh lint). Only error-level rules fail the check.
+failure-threshold: error
+ignored:
+  # Pinning Debian package versions breaks the build every time Debian ships a security
+  # update; the image is rebuilt with `apt-get upgrade` instead (see Dockerfile).
+  - DL3008

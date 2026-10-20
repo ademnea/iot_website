@@ -44,5 +44,11 @@ class RouteServiceProvider extends ServiceProvider
         RateLimiter::for('api', function (Request $request) {
             return Limit::perMinute(60)->by($request->user()?->id ?: $request->ip());
         });
+
+        // Its own budget: a plain throttle:5,1 shares one bucket per IP across every route that
+        // uses it, and a campus network puts many people behind one IP. (Logins use Fortify's.)
+        RateLimiter::for('contact', function (Request $request) {
+            return Limit::perMinute(5)->by('contact|'.$request->ip());
+        });
     }
 }

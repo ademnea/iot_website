@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,6 +44,19 @@ class Handler extends ExceptionHandler
     {
         $this->reportable(function (Throwable $e) {
             //
+        });
+
+        // Password reset emails need working mail settings (MAIL_* in .env). When the mail server
+        // can't be reached, tell the person what happened instead of showing an error page.
+        $this->renderable(function (TransportExceptionInterface $e, $request) {
+            if ($request->is('forgot-password')) {
+                report($e);
+
+                return back()->withInput($request->only('email'))->withErrors([
+                    'email' => "The reset email couldn't be sent because email isn't set up on this server yet. "
+                        .'Ask the site administrator to reset your password.',
+                ]);
+            }
         });
     }
 }

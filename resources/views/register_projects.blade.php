@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Project form</title>
+  <title>Add a project · {{ config('app.name') }}</title>
   <style>
     form {
       width: 100%;
@@ -42,7 +42,7 @@
     input[type="submit"] {
       display: inline-block;
       padding: 10px 20px;
-      background-color: #4CAF50;
+      background-color: #034486; /* brand navy */
       color: #ffffff;
       font-size: 16px;
       font-weight: bold;
@@ -54,7 +54,7 @@
     }
     
     input[type="submit"]:hover {
-      background-color: #3e8e41;
+      background-color: #04366B; /* brand navy, hover */
     }
     
   </style>
@@ -74,7 +74,6 @@
     @csrf
 
 
-     <input type="hidden" name="admin" value="{{ Session::get('id') }}">
     
       <label for="projectName">Project Name:</label><br/>
       <input type="text" id="projectName" name="projectName" required><br>
