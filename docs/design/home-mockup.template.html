@@ -1,0 +1,403 @@
+<meta charset="utf-8">
+<title>IoT-ra Home Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Heebo:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<style>
+/* Layout: like the former site: white page and header between navy bands (contact strip, banner, footer).
+   Split banner (copy left, the logo's tower drawn as a live network right); projects hang off one
+   connecting line, like nodes on a bus. A deliberate single light look, the same in every viewer theme. */
+:root {
+  --navy: #034486;        /* mesh navy, from the logo's mark and wordmark */
+  --signal: #0C9CF2;      /* signal blue, from the logo's Wi-Fi arcs (decoration, never body text) */
+  --signal-ink: #0A6CB4;  /* signal blue darkened for links on white (5.5:1) */
+  --honey: #FE8800;       /* honey orange: the one warm accent (status pills) */
+  --pill-ink: #1A0F00;
+  --ink: #0E1726;         /* near-black with a navy bias */
+  --muted: #4A5A70;
+  --paper: #FFFFFF;
+  --mist: #EEF2F7;        /* the logo's grey, nudged toward the navy */
+  --line: #D5DEE9;
+  --heading: #034486;
+  --btn-bg: #034486;
+  --btn-fg: #FFFFFF;
+  --band-bg: #034486;
+  --band-fg: #E8F1FB;
+  --hero-bg: #04294F;     /* the banner and footer: mesh navy, deepened */
+  --hero-fg: #FFFFFF;
+  --hero-muted: #C5D7EC;
+  --hero-accent: #46B8FF; /* signal blue, lifted for the navy band */
+  --hero-line: #1E4A78;
+  --mesh-link: #3F6E9F;
+  --mesh-frame: #D6E6F7;
+  --mesh-node: #FFFFFF;
+  --mesh-lit: #46B8FF;
+  --focus: #0C9CF2;
+  color-scheme: light;
+
+  --font-display: "Sora", "Segoe UI", system-ui, sans-serif;
+  --font-body: "Heebo", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --step-0: 1.0625rem;  /* body 17px */
+  --step-1: 1.25rem;
+  --step-2: 1.6rem;
+  --step-3: 2.1rem;
+  --step-4: clamp(2.3rem, 4.6vw + 0.6rem, 3.9rem);
+  --label: 0.74rem;
+  --col: 72rem;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--paper); color: var(--ink);
+  font: 400 var(--step-0)/1.65 var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-display); color: var(--heading); text-wrap: balance; margin: 0; }
+p { margin: 0; }
+a { color: var(--signal-ink); text-underline-offset: 3px; }
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: var(--col); margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font: 500 var(--label)/1.3 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--muted);
+}
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 30; background: var(--paper); padding: 8px 12px; }
+
+/* mockup ribbon */
+.ribbon { background: var(--mist); border-bottom: 1px solid var(--line); }
+.ribbon .wrap { display: flex; flex-wrap: wrap; gap: 4px 16px; padding-block: 8px; }
+
+/* contact band (kept from the current site) */
+.band { background: var(--band-bg); color: var(--band-fg); font-size: 0.86rem; }
+.band .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px 24px; padding-block: 8px; }
+.band span { user-select: all; }
+.band nav { display: flex; gap: 16px; }
+.band a { color: var(--band-fg); }
+
+/* header */
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+.site-header {
+  position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px); border-bottom: 1px solid var(--line);
+}
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding-block: 10px; }
+.logo img { height: 52px; width: auto; display: block; }
+.nav { display: flex; align-items: center; gap: 4px; overflow-x: auto; }
+.nav a {
+  font: 500 0.95rem/1 var(--font-display); color: var(--ink); text-decoration: none;
+  padding: 10px 12px; border-radius: 8px; white-space: nowrap;
+}
+.nav a[aria-current="page"] { color: var(--heading); box-shadow: inset 0 -2px 0 var(--signal); border-radius: 0; }
+.nav a:hover { background: var(--mist); }
+.nav .admin { margin-left: 8px; border: 1.5px solid var(--btn-bg); color: var(--heading); }
+
+/* hero */
+.hero { background: var(--hero-bg); color: var(--hero-fg); }
+.hero .wrap {
+  display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center; gap: clamp(24px, 4vw, 64px); padding-block: clamp(40px, 6vw, 88px);
+}
+.hero-copy { display: grid; gap: 22px; min-width: 0; }
+.hero h1 { font-size: var(--step-4); font-weight: 700; line-height: 1.05; letter-spacing: -0.025em; color: var(--hero-fg); }
+.hero h1 em { font-style: normal; color: var(--hero-accent); }
+.hero .label { color: var(--hero-muted); }
+.lead { font-size: var(--step-1); color: var(--hero-muted); max-width: 34rem; }
+.actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 24px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px; text-decoration: none;
+  background: var(--btn-bg); color: var(--btn-fg); font: 600 1rem/1 var(--font-display);
+  padding: 15px 22px; border-radius: 10px;
+}
+.btn:hover { filter: brightness(1.12); }
+.hero .btn { background: var(--hero-fg); color: var(--navy); }
+.hero .btn:hover { filter: none; background: var(--mist); }
+.hero .link-arrow { color: var(--hero-fg); }
+.link-arrow { font: 600 1rem/1 var(--font-display); text-decoration: none; }
+.link-arrow::after { content: " →"; }
+.deployed { display: flex; flex-wrap: wrap; gap: 8px 18px; padding-top: 6px; border-top: 1px solid var(--hero-line); }
+.deployed .label { color: var(--hero-muted); flex-basis: 100%; }
+sup.s { color: var(--honey); font: 700 0.75em/0 var(--font-mono); margin-left: 1px; }
+.deployed b { font: 500 0.88rem/1.4 var(--font-mono); color: var(--hero-fg); }
+
+.figure { margin: 0; display: grid; gap: 10px; justify-items: center; min-width: 0; }
+.mesh { width: 100%; max-width: 440px; height: auto; overflow: visible; }
+.mesh-ground { fill: var(--mesh-frame); }
+.mesh-web { stroke: var(--mesh-link); stroke-width: 1.4; }
+.mesh-frame { stroke: var(--mesh-frame); stroke-width: 3; fill: none; stroke-linecap: round; }
+.mesh-node { fill: var(--mesh-node); }
+.mesh-signal circle { fill: var(--mesh-lit); }
+.mesh-signal path { fill: none; stroke: var(--mesh-lit); stroke-width: 6; stroke-linecap: round; }
+.mesh-packet { fill: none; stroke: var(--mesh-lit); stroke-width: 6; stroke-linecap: round; stroke-dasharray: 4 96; stroke-dashoffset: 4; opacity: 0; }
+.figure figcaption { text-align: center; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .mesh-node { animation: node 7s ease-in-out infinite; animation-delay: calc(var(--i) * -0.23s); }
+  .mesh-packet { animation: packet 7s linear infinite; }
+  .mesh-packet-r { animation-delay: -0.35s; }
+  .mesh-signal path { animation: signal 7s ease-out infinite; }
+  .mesh-signal path:nth-of-type(n+3) { animation-delay: 0.15s; }
+}
+@keyframes node { 0%, 70%, 100% { fill: var(--mesh-node); } 78% { fill: var(--mesh-lit); } }
+@keyframes packet {
+  0% { stroke-dashoffset: 4; opacity: 0; } 4% { opacity: 1; }
+  58% { stroke-dashoffset: -96; opacity: 1; } 60%, 100% { stroke-dashoffset: -96; opacity: 0; }
+}
+@keyframes signal { 0%, 58% { opacity: 1; } 66% { opacity: 0.25; } 76%, 100% { opacity: 1; } }
+
+/* sections */
+.section .wrap { display: grid; gap: 28px; padding-block: clamp(48px, 6vw, 80px); }
+.section + .section .wrap { border-top: 1px solid var(--line); }
+.section-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 24px; }
+.section-head h2 { font-size: var(--step-3); font-weight: 600; letter-spacing: -0.015em; }
+.section-head p { color: var(--muted); max-width: 38rem; }
+
+/* projects: cards hang off one line (the "bus"), each with its own node */
+.projects { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px 24px; padding-top: 22px; }
+.projects::before { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: linear-gradient(90deg, var(--signal), var(--navy)); }
+.project { position: relative; display: grid; gap: 10px; align-content: start; }
+.project::before {
+  content: ""; position: absolute; top: -29px; left: 0; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--paper); border: 3px solid var(--signal);
+}
+.project::after { content: ""; position: absolute; top: -17px; left: 6px; width: 2px; height: 17px; background: var(--line); }
+.project h3 { font-size: var(--step-1); font-weight: 600; }
+.project p { color: var(--muted); }
+.meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; }
+.pill {
+  font: 500 var(--label)/1 var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase;
+  background: var(--honey); color: var(--pill-ink); padding: 6px 9px; border-radius: 999px;
+}
+.pill.past { background: var(--mist); color: var(--muted); }
+
+/* research output */
+.research { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 40px; }
+.rows { display: grid; }
+.row { display: grid; grid-template-columns: 7.5rem minmax(0, 1fr) auto; gap: 16px; align-items: baseline; padding-block: 16px; border-bottom: 1px solid var(--line); }
+.row:first-child { border-top: 1px solid var(--line); }
+.row h3 { font-size: 1.05rem; font-weight: 600; }
+.row .by { color: var(--muted); font-size: 0.93rem; }
+.row .year { font: 500 0.85rem/1 var(--font-mono); color: var(--muted); font-variant-numeric: tabular-nums; }
+.protos { display: grid; gap: 14px; align-content: start; }
+.proto { background: var(--mist); border-radius: 14px; padding: 20px; display: grid; gap: 6px; }
+.proto h3 { font-size: 1.05rem; font-weight: 600; }
+.proto p { color: var(--muted); font-size: 0.95rem; }
+
+/* lab lead quote */
+.quote .wrap { padding-block: clamp(48px, 7vw, 96px); }
+.quote blockquote { margin: 0; display: grid; gap: 18px; max-width: 52rem; border-left: 3px solid var(--signal); padding-left: clamp(18px, 3vw, 32px); }
+.quote p { font: 500 var(--step-2)/1.35 var(--font-display); color: var(--heading); letter-spacing: -0.01em; text-wrap: balance; }
+
+/* news */
+.news { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.news article { display: grid; gap: 8px; align-content: start; }
+.news time { font: 500 0.82rem/1 var(--font-mono); color: var(--signal-ink); letter-spacing: 0.04em; }
+.news h3 { font-size: 1.1rem; font-weight: 600; }
+.news p { color: var(--muted); font-size: 0.95rem; }
+
+/* partners */
+.partners { display: flex; flex-wrap: wrap; gap: 12px 40px; align-items: center; }
+.partners span { font: 600 1.05rem/1.3 var(--font-display); color: var(--muted); }
+
+/* contact + footer */
+.contact { background: var(--mist); }
+.contact .wrap { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 32px; padding-block: clamp(40px, 5vw, 64px); }
+.contact h2 { font-size: var(--step-2); font-weight: 600; }
+.contact dl { margin: 0; display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 10px 20px; }
+.contact dd { margin: 0; user-select: all; }
+footer { background: var(--hero-bg); }
+footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-block: 32px; color: var(--hero-muted); font-size: 0.9rem; }
+footer a { color: var(--hero-fg); }
+footer nav { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.foot-mark { font: 700 1.3rem/1 var(--font-display); color: var(--hero-fg); letter-spacing: -0.01em; }
+
+@media (max-width: 860px) {
+  .hero .wrap { grid-template-columns: minmax(0, 1fr); }
+  .figure { order: -1; }
+  .mesh { max-width: 280px; }
+  .projects, .news { grid-template-columns: minmax(0, 1fr); }
+  .research, .contact .wrap { grid-template-columns: minmax(0, 1fr); }
+  /* the bus line runs down the left on phones */
+  .projects { padding-top: 0; padding-left: 30px; gap: 28px; }
+  .projects::before { top: 0; bottom: 0; left: 6px; right: auto; width: 2px; height: auto; background: linear-gradient(180deg, var(--signal), var(--navy)); }
+  .project::before { top: 4px; left: -31px; }
+  .project::after { display: none; }
+  .row { grid-template-columns: minmax(0, 1fr) auto; }
+  .row .label { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .site-header .wrap { flex-wrap: wrap; }
+  .logo img { height: 44px; }
+  .nav { width: 100%; }
+}
+</style>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<div class="ribbon"><div class="wrap">
+  <span class="label">Home page mockup · for review</span>
+  <span class="label">Text marked * is a placeholder</span>
+</div></div>
+
+<div class="band"><div class="wrap">
+  <div>CoCIS, Block B · Makerere University, Kampala</div>
+  <nav aria-label="Social">
+    <a href="https://www.linkedin.com/">LinkedIn</a>
+    <a href="https://www.youtube.com/">YouTube</a>
+    <a href="https://x.com/">X</a>
+  </nav>
+</div></div>
+
+<header class="site-header"><div class="wrap">
+  <a class="logo" href="#main" aria-label="IoT-ra Lab, home">
+    <img src="%%LOGO_LIGHT%%" alt="IoT-ra Smart Connections">
+  </a>
+  <nav class="nav" aria-label="Main">
+    <a href="#main" aria-current="page">Home</a>
+    <a href="#projects">Projects</a>
+    <a href="#research">Research</a>
+    <a href="#news">News</a>
+    <a href="#contact">Team &amp; contact</a>
+    <a class="admin" href="#contact">Admin login</a>
+  </nav>
+</div></header>
+
+<main id="main">
+  <section class="hero"><div class="wrap">
+    <div class="hero-copy">
+      <span class="label">IoT-ra (Internet of Things - Research &amp; Applications) Lab</span>
+      <h1>Connecting the world, <em>one device at a time.</em></h1>
+      <p class="lead">We design low-cost connected sensors for Uganda's apiaries, farms and power networks, and train the engineers who build and maintain them.<sup class="s" aria-label="sample text">*</sup></p>
+      <div class="actions">
+        <a class="btn" href="#projects">See our projects</a>
+        <a class="link-arrow" href="#contact">Meet the team</a>
+      </div>
+      <div class="deployed">
+        <span class="label">In the field now</span>
+        <b>hive monitors</b><b>bee counters</b><b>weather stations</b><b>power monitors</b>
+      </div>
+    </div>
+    <figure class="figure">
+%%MESH%%
+      <figcaption class="label">The Makerere tower, drawn as a network: the lab's logo</figcaption>
+    </figure>
+  </div></section>
+
+  <section class="section" id="projects" aria-labelledby="projects-h"><div class="wrap">
+    <div class="section-head">
+      <h2 id="projects-h">What we're building</h2>
+      <p>Every project starts in the field with the people who will use it: beekeepers, farmers and utility engineers.<sup class="s" aria-label="sample text">*</sup></p>
+    </div>
+    <div class="projects">
+      <article class="project">
+        <div class="meta"><span class="pill">Ongoing</span><span class="label">Apiaries</span></div>
+        <h3>Smart hive monitor</h3>
+        <p>Sensors inside the hive report weight, temperature and sound so beekeepers know when to inspect.<sup class="s" aria-label="sample text">*</sup></p>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="pill">Ongoing</span><span class="label">Computer vision</span></div>
+        <h3>Bee detection</h3>
+        <p>A camera model that counts bees at the hive entrance and flags unusual activity.<sup class="s" aria-label="sample text">*</sup></p>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="pill">Ongoing</span><span class="label">Mobile</span></div>
+        <h3>Beekeeper's app</h3>
+        <p>Puts hive readings and alerts on the beekeeper's phone, built with farmers in the field.<sup class="s" aria-label="sample text">*</sup></p>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="pill">Ongoing</span><span class="label">Data</span></div>
+        <h3>Apiary analytics platform</h3>
+        <p>One place to compare colonies, seasons and sites across the lab's deployments.<sup class="s" aria-label="sample text">*</sup></p>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="pill past">Past</span><span class="label">Climate</span></div>
+        <h3>IoT weather station</h3>
+        <p>A low-cost station on a custom circuit board, logging local weather for nearby farms.<sup class="s" aria-label="sample text">*</sup></p>
+      </article>
+      <article class="project">
+        <div class="meta"><span class="pill past">Past</span><span class="label">Energy</span></div>
+        <h3>Power monitoring</h3>
+        <p>Measures supply quality and energy use, with a matching power-supply module for field kits.<sup class="s" aria-label="sample text">*</sup></p>
+      </article>
+    </div>
+  </div></section>
+
+  <section class="section" id="research" aria-labelledby="research-h"><div class="wrap">
+    <div class="section-head">
+      <h2 id="research-h">Research output</h2>
+      <p>Reports and datasets from our deployments, and the prototypes they produced.</p>
+    </div>
+    <div class="research">
+      <div class="rows">
+        <article class="row">
+          <span class="label">Report</span>
+          <div><h3>Low-power hive telemetry: a field report<sup class="s" aria-label="sample text">*</sup></h3><span class="by">IoT Lab</span></div>
+          <span class="year">2026</span>
+        </article>
+        <article class="row">
+          <span class="label">Dataset</span>
+          <div><h3>Hive weight and temperature, 12 colonies<sup class="s" aria-label="sample text">*</sup></h3><span class="by">IoT Lab</span></div>
+          <span class="year">2026</span>
+        </article>
+        <article class="row">
+          <span class="label">Report</span>
+          <div><h3>Counting bees at the entrance with on-device vision<sup class="s" aria-label="sample text">*</sup></h3><span class="by">IoT Lab</span></div>
+          <span class="year">2025</span>
+        </article>
+      </div>
+      <div class="protos">
+        <span class="label">Prototypes</span>
+        <article class="proto"><h3>Smart hive inspector<sup class="s" aria-label="sample text">*</sup></h3><p>Handheld kit for checking a hive without opening it.<sup class="s" aria-label="sample text">*</sup></p></article>
+        <article class="proto"><h3>Field power module<sup class="s" aria-label="sample text">*</sup></h3><p>Solar supply board shared by the lab's sensor nodes.<sup class="s" aria-label="sample text">*</sup></p></article>
+      </div>
+    </div>
+  </div></section>
+
+  <section class="section quote" aria-label="Word from the lab lead"><div class="wrap">
+    <blockquote>
+      <p>“We build sensing systems that work in the field, not just on the bench, and we build them with the people who depend on them.”<sup class="s" aria-label="sample text">*</sup></p>
+      <span class="label">Lab lead, IoT-ra Lab</span>
+    </blockquote>
+  </div></section>
+
+  <section class="section" id="news" aria-labelledby="news-h"><div class="wrap">
+    <div class="section-head"><h2 id="news-h">Latest from the lab</h2><a class="link-arrow" href="#news">All news</a></div>
+    <div class="news">
+      <article><time datetime="2026-09-12">12 Sep 2026</time><h3>Open lab day<sup class="s" aria-label="sample text">*</sup></h3><p>Visitors toured the hive monitors and weather stations, and students demonstrated their prototypes.<sup class="s" aria-label="sample text">*</sup></p></article>
+      <article><time datetime="2026-07-03">03 Jul 2026</time><h3>Apiary analytics goes live<sup class="s" aria-label="sample text">*</sup></h3><p>The first colonies now report to the shared analytics platform.<sup class="s" aria-label="sample text">*</sup></p></article>
+      <article><time datetime="2026-05-20">20 May 2026</time><h3>Field week in Luweero<sup class="s" aria-label="sample text">*</sup></h3><p>The team installed new hive monitors with local beekeepers.<sup class="s" aria-label="sample text">*</sup></p></article>
+    </div>
+  </div></section>
+
+  <section class="section" aria-labelledby="partners-h"><div class="wrap">
+    <div class="section-head"><h2 id="partners-h">We work with</h2></div>
+    <div class="partners">
+      <span>Makerere University</span><span>NTNU<sup class="s" aria-label="sample text">*</sup></span><span>University of Bergen<sup class="s" aria-label="sample text">*</sup></span><span>University of Dar es Salaam<sup class="s" aria-label="sample text">*</sup></span><span>University of Juba<sup class="s" aria-label="sample text">*</sup></span>
+    </div>
+  </div></section>
+</main>
+
+<section class="contact" id="contact" aria-labelledby="contact-h"><div class="wrap">
+  <div style="display:grid; gap:12px">
+    <h2 id="contact-h">Visit or get in touch</h2>
+    <p style="color:var(--muted)">Students, partners and farmers: send us a message from the Team page, or find us on campus.</p>
+  </div>
+  <dl>
+    <dt class="label">Address</dt><dd>CoCIS, Block B, Makerere University, Kampala</dd>
+    <dt class="label">Email</dt><dd>iotlab@example.org<sup class="s" aria-label="sample text">*</sup></dd>
+    <dt class="label">Phone</dt><dd>+256 000 000 000<sup class="s" aria-label="sample text">*</sup></dd>
+  </dl>
+</div></section>
+
+<footer><div class="wrap">
+  <span class="foot-mark">IoT-ra</span>
+  <nav aria-label="Footer"><a href="#projects">Projects</a><a href="#research">Research</a><a href="#news">News</a><a href="#contact">Team &amp; contact</a></nav>
+  <span>© 2026 IoT-ra Lab · Smart Connections</span>
+</div></footer>
