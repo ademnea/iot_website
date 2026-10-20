@@ -16,7 +16,7 @@ class edit_data extends Controller
     
        // this code uploads the picture from the form.
         $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-        $picname = $request->file('image')->getClientOriginalName();
+        $picname = $request->file('image')->hashName();
         $request->image->move(public_path('images/logo'), $picname);
 
         $id = $request->input('id');
@@ -36,7 +36,7 @@ class edit_data extends Controller
     
             // this code uploads the picture from the form.
              $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-             $picname = $request->file('image')->getClientOriginalName();
+             $picname = $request->file('image')->hashName();
              $request->image->move(public_path('images/banner'), $picname);
      
              $id = $request->input('id');
@@ -55,6 +55,13 @@ class edit_data extends Controller
     //editing the leader's content.
 
     public function edit_leader(Request $request){
+
+        // validate everything before any update so a bad upload can't leave a half-saved record.
+        $request->validate([
+            'id' => 'required|exists:website_content,id',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+        ]);
+
          
         $id = $request->input('id');
      
@@ -69,7 +76,7 @@ class edit_data extends Controller
         if ($request->hasFile('image')) {
            // this code uploads the picture from the form.
            $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-           $picname = $request->file('image')->getClientOriginalName();
+           $picname = $request->file('image')->hashName();
            $request->image->move(public_path('images/team'), $picname);
 
            DB::table('members')
@@ -119,7 +126,12 @@ class edit_data extends Controller
             'youtube' => $request->youtube,
             'instagram' => $request->instagram,
             'facebook' => $request->facebook,
-            // add more fields as needed
+            // "Show on the website" switches; an unticked box isn't sent, so it saves as hidden.
+            'twitter_visible' => $request->boolean('twitter_visible'),
+            'linkedin_visible' => $request->boolean('linkedin_visible'),
+            'youtube_visible' => $request->boolean('youtube_visible'),
+            'instagram_visible' => $request->boolean('instagram_visible'),
+            'facebook_visible' => $request->boolean('facebook_visible'),
         ]);
     return redirect('/homecontent')->with('success', 'social links updated successfully!');
 
@@ -136,7 +148,9 @@ class edit_data extends Controller
             'physical_address' => $request->address,
             'company_email' => $request->email,
             'company_telephone' => $request->phone,
-            // add more fields as needed
+            'address_visible' => $request->boolean('address_visible'),
+            'email_visible' => $request->boolean('email_visible'),
+            'phone_visible' => $request->boolean('phone_visible'),
         ]);
     return redirect('/homecontent')->with('success', 'lab contacts updated successfully!');
 
@@ -145,6 +159,14 @@ class edit_data extends Controller
     //editing the partner
 
     public function edit_partner(Request $request){
+
+        // validate everything before any update so a bad upload can't leave a half-saved record.
+        $request->validate([
+            'id' => 'required|exists:partners,id',
+            'fullname' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+        ]);
+
     
           $id = $request->input('id');
      
@@ -158,9 +180,9 @@ class edit_data extends Controller
          if ($request->hasFile('image')) {
             // this code uploads the picture from the form.
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-            $picname = $request->file('image')->getClientOriginalName();
-            $request->image->move(public_path('images/events'), $picname);
-  
+            $picname = $request->file('image')->hashName();
+            $request->image->move(public_path('images/partners'), $picname);
+
             DB::table('partners')
             ->where('id', $id)
             ->update([
@@ -178,6 +200,18 @@ class edit_data extends Controller
 
      //edit project info
      public function edit_project(Request $request){
+
+        // validate everything before any update so a bad upload can't leave a half-saved record.
+        $request->validate([
+            'id' => 'required|exists:projects,id',
+            'projectName' => 'required|string|max:255',
+            'description' => 'required|string',
+            'venue' => 'nullable|string|max:255',
+            'participants' => 'nullable|string|max:255',
+            'link' => 'nullable|string|max:255',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+        ]);
+
  
          $id = $request->input('id');
      
@@ -197,7 +231,7 @@ class edit_data extends Controller
          if ($request->hasFile('image')) {
             // this code uploads the picture from the form.
             $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-            $picname = $request->file('image')->getClientOriginalName();
+            $picname = $request->file('image')->hashName();
             $request->image->move(public_path('images/projects'), $picname);
 
             DB::table('project_photos')
@@ -216,6 +250,19 @@ class edit_data extends Controller
 
      //editing news info
      public function edit_event(Request $request){
+
+        // validate everything before any update so a bad upload can't leave a half-saved record.
+        $request->validate([
+            'id' => 'required|exists:events,id',
+            'news' => 'required|string|max:255',
+            'description' => 'required|string',
+            'venue' => 'nullable|string|max:255',
+            'link' => 'nullable|string|max:255',
+            'startdate' => 'nullable|date',
+            'enddate' => 'nullable|date|after_or_equal:startdate',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+        ]);
+
  
         $id = $request->input('id');
    
@@ -231,21 +278,20 @@ class edit_data extends Controller
            // add more fields as needed
        ]);
 
-       //lets check if the image is not null and update the table.
-    
-          // this code uploads the picture from the form.
-          $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-          $picname = $request->file('image')->getClientOriginalName();
+       //the image is optional; a new one is added to the event's photos instead of overwriting them all.
+       if ($request->hasFile('image')) {
+          $request->validate(['image' => 'image|mimes:png,jpg,jpeg|max:11000']);
+          $picname = $request->file('image')->hashName();
           $request->image->move(public_path('images/events'), $picname);
 
-          DB::table('event_photos')
-          ->where('event_id', $id)
-          ->update([
+          DB::table('event_photos')->insert([
               'photo' => $picname,
-              // add more fields as needed
+              'event_id' => $id,
+              'created_at' => now(),
+              'updated_at' => now(),
           ]);
-   
-      
+       }
+
 
    return redirect('/newscontent')->with('success', 'event updated successfully!');
 
@@ -255,6 +301,19 @@ class edit_data extends Controller
 
    //editing news info
    public function edit_publication(Request $request){
+
+        // validate everything before any update so a bad upload can't leave a half-saved record.
+        $request->validate([
+            'id' => 'required|exists:publications,id',
+            'title' => 'required|string|max:255',
+            'type' => 'required|string|max:255',
+            'author' => 'required|string|max:255',
+            'description' => 'required|string',
+            'date_published' => 'nullable|date',
+            'file' => 'nullable|mimes:csv,pdf,doc,docx,xls,xlsx|max:11000',
+            'photo' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+        ]);
+
  
     $id = $request->input('id');
 
@@ -276,7 +335,7 @@ class edit_data extends Controller
       $request->validate([
         'file' => 'required|mimes:csv,pdf,doc,docx,xls,xlsx|max:11000',
           ]);
-    $filename = $request->file('file')->getClientOriginalName();
+    $filename = $request->file('file')->hashName();
     $request->file('file')->move(public_path('documents/publications'), $filename);
 
       DB::table('publications')
@@ -291,7 +350,7 @@ class edit_data extends Controller
   if($request->hasFile('photo')){
 
     $request->validate(['photo' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-    $picname = $request->file('photo')->getClientOriginalName();
+    $picname = $request->file('photo')->hashName();
     $request->photo->move(public_path('images/publications'), $picname);
 
     DB::table('publications')
@@ -310,6 +369,19 @@ return redirect('/publicationscontent')->with('success', 'publication updated su
 
 //editing the team members
  public function edit_team(Request $request){
+
+        // validate everything before any update so a bad upload can't leave a half-saved record.
+        $request->validate([
+            'id' => 'required|exists:members,id',
+            'firstname' => 'required|string|max:255',
+            'lastname' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:members,email,'.$request->input('id'),
+            'designation' => 'required|string|max:255',
+            'role' => 'nullable|string|max:255',
+            'bio' => 'nullable|string',
+            'image' => 'nullable|image|mimes:png,jpg,jpeg|max:11000',
+        ]);
+
     $id = $request->input('id');
    
     DB::table('members')
@@ -329,7 +401,7 @@ return redirect('/publicationscontent')->with('success', 'publication updated su
     if ($request->hasFile('image')) {
        // this code uploads the picture from the form.
        $request->validate(['image' => 'required|image|mimes:png,jpg,jpeg|max:11000']);
-       $picname = $request->file('image')->getClientOriginalName();
+       $picname = $request->file('image')->hashName();
        $request->image->move(public_path('images/team'), $picname);
 
        DB::table('members')

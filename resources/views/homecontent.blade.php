@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>IoT - Home</title>
+    <title>Home content · {{ config('app.name') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
 </head>
 
 <body>
@@ -23,7 +23,7 @@
 
       {{-- displaying an alert after registering a category --}}
          @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+            <div class="p-4 mb-4 text-sm text-brand-800 rounded-lg bg-brand-50" role="alert">
             <b> {{ session('success') }}</b>
             </div> 
 
@@ -34,7 +34,7 @@
         @endif
 {{-- start of the page content --}}
 
-<button type="button" id="top" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
+<button type="button" id="top" class="text-white bg-brand-700 hover:bg-brand-800 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
 <a href="/register_home">Add New Home Content</a>
 </button>
 
@@ -72,7 +72,7 @@ margin-right:10%;
             </div>
             <div class="col-span-1 flex justify-center items-center">
                          {{-- action to edit, rewriting this url --}}
-              <a href="/editlogo? id={{ $content->id }}">
+              <a href="/editlogo?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -101,7 +101,7 @@ margin-right:10%;
     </div>
     <div class="col-span-1 flex justify-center items-center">
                  {{-- action to edit, rewriting this url --}}
-      <a href="/editbanner? id={{ $content->id }}">
+      <a href="/editbanner?id={{ $content->id }}">
          <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
          <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
         </svg>
@@ -121,24 +121,24 @@ margin-right:10%;
             <div class="col-span-1 flex justify-center items-center">
 <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside">
     <li>
-        <span class="font-semibold text-gray-900">Twitter:</span> {{ $content->twitter }}
+        <span class="font-semibold text-gray-900">X (Twitter):</span> {{ $content->twitter }} @if (! $content->twitter_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
     <li>
-        <span class="font-semibold text-gray-900">Facebook:</span> {{ $content->facebook }}
+        <span class="font-semibold text-gray-900">Facebook:</span> {{ $content->facebook }} @if (! $content->facebook_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
     <li>
-        <span class="font-semibold text-gray-900">LinkedIn:</span> {{ $content->linkedin }}
+        <span class="font-semibold text-gray-900">LinkedIn:</span> {{ $content->linkedin }} @if (! $content->linkedin_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     <li>
-        <span class="font-semibold text-gray-900">Instagram:</span> {{ $content->instagram }} 
+        <span class="font-semibold text-gray-900">Instagram:</span> {{ $content->instagram }} @if (! $content->instagram_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
     <li>
-        <span class="font-semibold text-gray-900">Youtube:</span> {{ $content->youtube }}
+        <span class="font-semibold text-gray-900">Youtube:</span> {{ $content->youtube }} @if (! $content->youtube_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
    </ol>
             </div>
   {{-- editing action for the social links --}}
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edittopbar? id={{  $content->id }}&facebook={{ $content->facebook }}&twitter={{ $content->twitter }}&linkedin={{ $content->linkedin }}&instagram={{ $content->instagram }}&youtube={{ $content->youtube }}">
+            <a href="/edittopbar?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -154,19 +154,19 @@ margin-right:10%;
     <div class="col-span-1 flex justify-center items-center">
 <ol class="max-w-md space-y-1 text-gray-500 list-decimal list-inside">
     <li>
-        <span class="font-semibold text-gray-900">Email</span> {{ $content->company_email }}
+        <span class="font-semibold text-gray-900">Email</span> {{ $content->company_email }} @if (! $content->email_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
     <li>
-        <span class="font-semibold text-gray-900">Telephone</span> {{ $content->company_telephone }}
+        <span class="font-semibold text-gray-900">Telephone</span> {{ $content->company_telephone }} @if (! $content->phone_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
     <li>
-        <span class="font-semibold text-gray-900">Physical Address</span> {{ $content->physical_address }}
+        <span class="font-semibold text-gray-900">Physical Address</span> {{ $content->physical_address }} @if (! $content->address_visible) <span class="ml-2 px-2 py-0.5 rounded text-xs bg-gray-200 text-gray-700">Hidden on the website</span>@endif
     </li>
 </ol>
     </div>
   {{-- editing action for the social links --}}
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/editcontacts? id={{ $content->id }}&email={{ $content->company_email }}&phone={{ $content->company_telephone }}&address={{ $content->physical_address }}">
+            <a href="/editcontacts?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -194,7 +194,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome? id={{  $content->id }}&vision={{ $content->vision }}&labname={{ $content->Labname }}&motto={{ $content->motto }}&objectives={{ $content->objectives }}&mission={{ $content->mission }}">
+            <a href="/edithome?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -216,7 +216,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome? id={{  $content->id }}&vision={{ $content->vision }}&labname={{ $content->Labname }}&motto={{ $content->motto }}&objectives={{ $content->objectives }}&mission={{ $content->mission }}">
+            <a href="/edithome?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -238,7 +238,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome? id={{  $content->id }}&vision={{ $content->vision }}&labname={{ $content->Labname }}&motto={{ $content->motto }}&objectives={{ $content->objectives }}&mission={{ $content->mission }}">
+            <a href="/edithome?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -260,7 +260,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome? id={{  $content->id }}&motto={{ $content->motto }}&labname={{ $content->Labname }}&objectives={{ $content->objectives }}&mission={{ $content->mission }}&vision={{ $content->vision }}">
+            <a href="/edithome?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -270,7 +270,7 @@ margin-right:10%;
      <br><br>
      <p>
     <h1 class="font-medium">Objectives</h1>
-        {!! preg_replace('/\r\n|\r|\n/', '<br>', $content->objectives) !!}  
+        {!! nl2br(e($content->objectives)) !!}  
        </p> <br>
        <hr>
 
@@ -282,7 +282,7 @@ margin-right:10%;
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
-            <a href="/edithome? id={{  $content->id }}&motto={{ $content->motto }}&labname={{ $content->Labname }}&objectives={{ $content->objectives }}&vision={{ $content->vision }}&mission={{ $content->mission }}">
+            <a href="/edithome?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -307,7 +307,7 @@ margin-right:10%;
     </div>
     <div class="w-2/3">
         <p class="mt-4">
-            {!! preg_replace('/\r\n|\r|\n/', '<br>', $content->team_leader_word) !!}
+            {!! nl2br(e($content->team_leader_word)) !!}
         </p><br>
         <hr>
    @endforeach
@@ -331,7 +331,7 @@ margin-right:10%;
 
             <div class="col-span-1 flex justify-center items-center">
                          {{-- action to edit, rewriting this url --}}
-              <a href="/editleader? id={{  $content->id }}&word={{ $content->team_leader_word }}&photo={{ $content->photo }}">
+              <a href="/editleader?id={{ $content->id }}">
                  <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                  <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>
@@ -362,7 +362,7 @@ margin-right:10%;
 
             <div class="col-span-1 flex justify-center items-center">
             <a href="register_home#partners">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-green-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-brand-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM4 19.235v-.11a6.375 6.375 0 0112.75 0v.109A12.318 12.318 0 0110.374 21c-2.331 0-4.512-.645-6.374-1.766z" />
               </svg>
             </a>
@@ -388,7 +388,7 @@ margin-right:10%;
             <div class="col-span-1 flex justify-center items-center">
 
             {{-- action to edit, rewriting this url --}}
-            <a href="/editpartner? id={{  $partner->id }}&name={{ $partner->name }}">
+            <a href="/editpartner?id={{ $partner->id }}">
                <svg xmlns="http://www.w3.org/2000/svg" fill="none"  class="h-6 w-6 text-blue-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10" />
                 </svg>

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>IoT - About</title>
+    <title>Current team · {{ config('app.name') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
@@ -18,14 +18,14 @@
 
       {{-- displaying an alert  --}}
          @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+            <div class="p-4 mb-4 text-sm text-brand-800 rounded-lg bg-brand-50" role="alert">
             <b> {{ session('success') }}</b>
             </div> 
         @endif
 
 {{-- start of the page content --}}
 
-<button type="button" id="top" class="text-white bg-green-700 hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
+<button type="button" id="top" class="text-white bg-brand-700 hover:bg-brand-800 focus:outline-none focus:ring-4 focus:ring-brand-300 font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2">
 <a href="/register_team">New Team Member</a>
 </button>
 
@@ -93,7 +93,7 @@ margin-right:5%;
                     {{ $user->phone }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="/editteam? id={{  $user->id }}&firstname={{ $user->fname }}&lastname={{ $user->lname}}&email={{ $user->email}}&phone={{ $user->phone}}&role={{ $user->role }}&designation={{ $user->designation }}&bio={{ $user->bio }}">
+                    <a href="/editteam?id={{ $user->id }}">
                     <div class="font-medium text-blue-600 hover:underline">
                     Edit
                     </div>

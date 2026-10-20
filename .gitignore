@@ -17,8 +17,14 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
-public/images
-public/documents
+public/images/*
+!public/images/.htaccess
+public/documents/*
+!public/documents/.htaccess
 composer.lock
 package-lock.json
 package.json
+
+/data
+
+/reports

@@ -14,6 +14,18 @@ class TrustProxies extends Middleware
      */
     protected $proxies;
 
+    // Read from config/app.php (TRUSTED_PROXIES) so it works with a cached config.
+    protected function proxies()
+    {
+        $proxies = config('app.trusted_proxies');
+
+        if ($proxies === null || $proxies === '' || $proxies === '*') {
+            return $proxies ?: $this->proxies;
+        }
+
+        return array_map('trim', explode(',', $proxies));
+    }
+
     /**
      * The headers that should be used to detect proxies.
      *

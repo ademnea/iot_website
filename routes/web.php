@@ -35,17 +35,18 @@ Route::get('/prototypes_gallery','App\Http\Controllers\show_data@fetch_prototype
 Route::get('/events_gallery','App\Http\Controllers\show_data@fetch_events_gallery');
 
 //these routes handle the login functionality.
-Route::get('/logmein', 'App\Http\Controllers\iot_admin_login@login');
-Route::post('/mylogin', 'App\Http\Controllers\iot_admin_login@login');
-Route::get('/oldlogin', 'App\Http\Controllers\iot_admin_login@logmein')->name('login');
+// Logging in is handled by Fortify (GET/POST /login, with 2FA and a 5-per-minute limit).
+// The old address still works for bookmarks and links.
+Route::redirect('/oldlogin', '/login');
 
+//admin side protected routes
+Route::middleware(['auth'])->group(function () {
+
+//only a logged-in admin can register another admin.
 Route::get('/registeradminform', 'App\Http\Controllers\iot_admin_login@registerme');
 Route::get('/register', 'App\Http\Controllers\iot_admin_login@registerme')->name('register');
 Route::post('/registeradmin', 'App\Http\Controllers\insert_data@insert_admin');
 
-//admin side protected routes
-Route::middleware(['auth'])->group(function () {
-    
 Route::view('/dashboard','dashboard')->name('dashboard');
     
 Route::view('/projectscontent','projectscontent');
@@ -61,17 +62,17 @@ Route::view('/register_team','register_team');
 
 
 //routes for editing content
-Route::view('/edithome','edithome');
-Route::view('/editleader','editleader');
-Route::view('/editproject','editproject');
-Route::view('/editteam','editteam');
-Route::view('/editpublications','editpublications');
-Route::view('/editnews','editnews');
-Route::view('/editpartner','editpartner');
-Route::view('/edittopbar','edittopbar');
-Route::view('/editcontacts','editcontacts');
-Route::view('/editlogo','editlogo');
-Route::view('/editbanner','editbanner');
+Route::get('/edithome', 'App\Http\Controllers\edit_forms@edithome');
+Route::get('/editleader', 'App\Http\Controllers\edit_forms@editleader');
+Route::get('/editproject', 'App\Http\Controllers\edit_forms@editproject');
+Route::get('/editteam', 'App\Http\Controllers\edit_forms@editteam');
+Route::get('/editpublications', 'App\Http\Controllers\edit_forms@editpublications');
+Route::get('/editnews', 'App\Http\Controllers\edit_forms@editnews');
+Route::get('/editpartner', 'App\Http\Controllers\edit_forms@editpartner');
+Route::get('/edittopbar', 'App\Http\Controllers\edit_forms@edittopbar');
+Route::get('/editcontacts', 'App\Http\Controllers\edit_forms@editcontacts');
+Route::get('/editlogo', 'App\Http\Controllers\edit_forms@editlogo');
+Route::get('/editbanner', 'App\Http\Controllers\edit_forms@editbanner');
 
 
 //routes to insert data into the database
@@ -119,4 +120,5 @@ Route::post('/restoreuser', 'App\Http\Controllers\restore_stuff@restore_member')
 });
 
 //inserting feedback message into the database
-Route::post('/insert_message', 'App\Http\Controllers\insert_data@insert_message');
+// 5 messages per minute per IP to stop spam floods (its own limit, see RouteServiceProvider).
+Route::post('/insert_message', 'App\Http\Controllers\insert_data@insert_message')->middleware('throttle:contact');

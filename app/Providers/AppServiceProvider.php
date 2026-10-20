@@ -4,7 +4,6 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use App\Models\website_content;
 use Illuminate\Support\Facades\View;
-use Illuminate\Support\Facades\Schema;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -20,15 +19,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-           //we need an if statement to first check if the table exists, before attempting to pick data.
-   
-            // Execute query to fetch data from my_table
-
-    // if(Schema::hasTable('website_content')){
-    //     $contents = website_content::all();
-    //     View::share('contents', $contents);
-
-    //      }
-
+        // The Fortify/Jetstream auth pages (login, forgot/reset password, confirm password) show
+        // the lab logo from website_content, but Fortify renders them without $contents.
+        // A composer only queries when one of these views renders, so it is safe before migrations
+        // (unlike View::share in boot, which was tried here before).
+        View::composer(['auth.*', 'components.authentication-card'], function ($view) {
+            if (! array_key_exists('contents', $view->getData())) {
+                $view->with('contents', website_content::all());
+            }
+            // the customised login view shows a $status line, as the branded login page does.
+            if (! array_key_exists('status', $view->getData())) {
+                $view->with('status', session('status', ''));
+            }
+        });
     }
 }

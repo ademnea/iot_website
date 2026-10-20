@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>edit mission</title>
+        <title>Edit lab information · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
 
     </head>
     <body>
@@ -19,37 +19,37 @@
 
                @csrf
 
-            <input type="hidden" value="{{ $_GET['id']}}" name="id" >
+            <input type="hidden" value="{{ $form['id']}}" name="id" >
 
 
                   <div>
                     <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Lab Name</label>
-                    <input type="text" name="labname" value="{{ $_GET['labname']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                    <input type="text" name="labname" value="{{ $form['labname']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                 </div>
 
                  <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Motto</label>
-                      <input type="text" name="motto" value="{{ $_GET['motto']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500">
+                      <input type="text" name="motto" value="{{ $form['motto']}}" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500">
                   </div>
 
                   <div>
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Vision</label>
                     <textarea name="vision" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500">
-                        {{ $_GET['vision']}}
+                        {{ $form['vision']}}
                     </textarea>
                   </div>
 
                  <div>
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Mission</label>
                     <textarea name="mission" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500">
-                        {{ $_GET['mission']}}
+                        {{ $form['mission']}}
                     </textarea>
                   </div>
 
                   <div>
                     <label for="description" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Objectives</label>
                     <textarea name="objectives" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-blue-500 light:focus:border-blue-500">
-                       {{ $_GET['objectives']}}
+                       {{ $form['objectives']}}
                     </textarea>
                   </div>
 
@@ -62,7 +62,7 @@
                           </div>
 
                           <div class="flex items-center h-5">
-                            <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                            <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Save Changes
                             </button>
                           </div>

@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <html >
     <head>
-        <title>add-team</title>
+        <title>Add a team member · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
 
         <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -32,31 +32,30 @@ margin-right:10%;
                 
                 {{-- capturing the admin who registers this user --}}
               
-               <input type="hidden" name="admin" value="{{ Session('id') }} "> 
 
                   <div>
                       <label for="item name" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">First Name</label>
-                      <input type="text" name="firstname" id="fname" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" placeholder="first name" required="true">
+                      <input type="text" name="firstname" id="fname" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" placeholder="first name" required="true">
                   </div>
 
                   <div>
                       <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Last Name</label>
-                      <input type="text" name="lastname" id="cost" placeholder="Last Name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="text" name="lastname" id="cost" placeholder="Last Name" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                   <div>
                       <label for="email" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Email Address</label>
-                      <input type="email" name="email" id="email" placeholder="email address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="email" name="email" id="email" placeholder="email address" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                   <div>
                       <label for="phone" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Tel Number</label>
-                      <input type="phone" name="phone" id="phone" placeholder="phone number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="phone" name="phone" id="phone" placeholder="phone number" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                  <div>
                       <label for="lname" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">sector / Work field</label>
-                      <input type="text" name="designation" id="cost" placeholder="Designation" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="text" name="designation" id="cost" placeholder="Designation" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                   <div>
@@ -96,7 +95,7 @@ margin-right:10%;
 
                  <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Picture</label>
-                      <input type="file" name="image" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="file" name="image" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                    <div>
@@ -104,7 +103,7 @@ margin-right:10%;
                     <textarea name="bio"  placeholder="Write the bio content here..." rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"></textarea>
                   </div>
 
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Register
                   </button>
                   <p class="text-sm font-light text-gray-500 light:text-gray-400">

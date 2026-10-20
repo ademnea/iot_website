@@ -18,14 +18,23 @@
         </include>
     </source>
     <php>
-        <env name="APP_ENV" value="testing"/>
-        <env name="BCRYPT_ROUNDS" value="4"/>
-        <env name="CACHE_DRIVER" value="array"/>
+        <env name="APP_ENV" value="testing" force="true"/>
+        <env name="BCRYPT_ROUNDS" value="4" force="true"/>
+        <env name="CACHE_DRIVER" value="array" force="true"/>
         <!-- <env name="DB_CONNECTION" value="sqlite"/> -->
         <!-- <env name="DB_DATABASE" value=":memory:"/> -->
-        <env name="MAIL_MAILER" value="array"/>
-        <env name="QUEUE_CONNECTION" value="sync"/>
-        <env name="SESSION_DRIVER" value="array"/>
-        <env name="TELESCOPE_ENABLED" value="false"/>
+        <!-- tests run against a separate MySQL database; create it once with: CREATE DATABASE iot_website_test; -->
+        <env name="DB_DATABASE" value="iot_website_test" force="true"/>
+        <env name="MAIL_MAILER" value="array" force="true"/>
+        <env name="QUEUE_CONNECTION" value="sync" force="true"/>
+        <env name="SESSION_DRIVER" value="array" force="true"/>
+        <env name="TELESCOPE_ENABLED" value="false" force="true"/>
+        <!-- <server> sets $_SERVER, which Laravel reads before real environment variables (e.g. Docker's). -->
+        <server name="APP_ENV" value="testing" force="true"/>
+        <server name="DB_DATABASE" value="iot_website_test" force="true"/>
+        <server name="CACHE_DRIVER" value="array" force="true"/>
+        <server name="SESSION_DRIVER" value="array" force="true"/>
+        <server name="QUEUE_CONNECTION" value="sync" force="true"/>
+        <server name="MAIL_MAILER" value="array" force="true"/>
     </php>
 </phpunit>

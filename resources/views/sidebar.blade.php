@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title></title>
+        
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
     </head>
     <body>
 
@@ -20,7 +20,7 @@
    <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50">
       <ul class="space-y-2 font-medium">
          
-{{-- 
+         {{-- Profile & security: password change and two-factor authentication (fix 012). --}}
          <li>
             <a href="{{ route('profile.show') }}" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -28,10 +28,10 @@
                </svg>
 
                <span class="ml-3">
-                     {{ __('Profile') }}  
+                     Profile &amp; security
                </span>
             </a>
-         </li> --}}
+         </li>
          
          <li>
             <a href="/dashboard" class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100">
@@ -111,6 +111,17 @@
       </ul>
    </div>
 </aside>
+
+{{-- validation errors from any admin form --}}
+@if ($errors->any())
+<div class="p-4 sm:ml-64">
+   <div class="p-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+      @foreach ($errors->all() as $error)
+         <p>{{ $error }}</p>
+      @endforeach
+   </div>
+</div>
+@endif
 
 <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
 </body>

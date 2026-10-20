@@ -1,0 +1,8 @@
+# Uploaded files are data, never code: do not run scripts from this folder.
+<FilesMatch "\.(php\d?|phtml|phar|pl|py|cgi|sh)$">
+    Require all denied
+</FilesMatch>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+Options -ExecCGI -Indexes

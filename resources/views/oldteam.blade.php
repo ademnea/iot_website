@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>IoT | old team </title>
+    <title>Past team · {{ config('app.name') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 </head>
 
@@ -18,7 +18,7 @@
     <center>
         {{-- displaying an alert  --}}
         @if (session('success'))
-            <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
+            <div class="p-4 mb-4 text-sm text-brand-800 rounded-lg bg-brand-50" role="alert">
             <b> {{ session('success') }}</b>
             </div> 
         @endif
@@ -83,8 +83,8 @@ margin-right:5%;
                     {{ $user->phone }}
                 </td>
                 <td class="px-6 py-4">
-                    <a href="/editteam? id={{  $user->id }}&firstname={{ $user->fname }}&lastname={{ $user->lname}}&email={{ $user->email}}&phone={{ $user->phone}}&role={{ $user->role }}&designation={{ $user->designation }}&bio={{ $user->bio }}">
-                    <div class="font-medium text-green-600 hover:underline">
+                    <a href="/editteam?id={{ $user->id }}">
+                    <div class="font-medium text-brand-600 hover:underline">
                     Edit
                     </div>
                     </a>
@@ -121,7 +121,7 @@ margin-right:5%;
                     <!-- added id to the button Yes, I'm sure-->
                     <form id="delete-user-form-{{ $user->id }}" method="POST" action="/restoreuser?user_id={{$user->id}}" accept-charset="UTF-8" style="display:inline">
                         {{ csrf_field() }}
-                        <button id="delete-user-btn" data-modal-hide="{{ $user->id }}"  type="submit" class="text-white bg-green-600 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 dark:focus:ring-green-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
+                        <button id="delete-user-btn" data-modal-hide="{{ $user->id }}"  type="submit" class="text-white bg-brand-600 hover:bg-brand-800 focus:ring-4 focus:outline-none focus:ring-brand-300 dark:focus:ring-brand-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center mr-2">
                             Yes, I'm sure
                         </button>
                     </form>

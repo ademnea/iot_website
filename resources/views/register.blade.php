@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Admin - IoT</title>
+    <title>Register an admin · {{ config('app.name') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -35,6 +35,7 @@
 
     <style>
     </style>
+    @include('partials.admin-theme')
 </head>
 
 <body>
@@ -100,9 +101,9 @@
                                 <label for="remember" class="text-gray-500">Remember me</label>
                             </div>
                         </div>
-                        <a href="/forgot_password" class="text-sm font-medium text-gray-600 hover:underline">Forgot password?</a>
+                        <a href="/forgot-password" class="text-sm font-medium text-gray-600 hover:underline">Forgot password?</a>
                     </div>
-                    <button type="submit" class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                    <button type="submit" class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                         Register
                     </button>
                     <p class="text-sm font-light text-gray-500">

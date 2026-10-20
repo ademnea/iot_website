@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Admin - IoT</title>
+    <title>Admin login · {{ config('app.name') }}</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta content="" name="description">
@@ -35,6 +35,7 @@
 
     <style>
     </style>
+    @include('partials.admin-theme')
 </head>
 
 <body>
@@ -62,6 +63,13 @@
                 {{-- ALERT --}}
                 <center>
                     <div style="width:400px; border-radius:8px; font-size:20px">
+                        @if ($errors->any())
+                            <div class="p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50" role="alert">
+                                @foreach ($errors->all() as $error)
+                                    <p>{{ $error }}</p>
+                                @endforeach
+                            </div>
+                        @endif
                         @if ($status)
                             <div class="mb-4 font-medium text-sm text-red-600">
                                 {{ $status }}
@@ -73,7 +81,7 @@
                 <h1 class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl">
                     Admin Login
                 </h1>
-                <form class="space-y-4 md:space-y-6" action="/mylogin" method="post">
+                <form class="space-y-4 md:space-y-6" action="/login" method="post">
                     @csrf
                     <div>
                         <label for="username" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
@@ -86,15 +94,15 @@
                     <div class="flex items-center justify-between">
                         <div class="flex items-start">
                             <div class="flex items-center h-5">
-                                <input id="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300">
+                                <input id="remember" name="remember" aria-describedby="remember" type="checkbox" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300">
                             </div>
                             <div class="ml-3 text-sm">
                                 <label for="remember" class="text-gray-500">Remember me</label>
                             </div>
                         </div>
-                        <a href="/forgot_password" class="text-sm font-medium text-gray-600 hover:underline">Forgot password?</a>
+                        <a href="/forgot-password" class="text-sm font-medium text-gray-600 hover:underline">Forgot password?</a>
                     </div>
-                    <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                    <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                         Login
                     </button>
                     <p class="text-sm font-light text-gray-500">

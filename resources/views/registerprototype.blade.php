@@ -2,10 +2,10 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
-        <title>add prototypes content</title>
+        <title>Add a prototype · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
-        <script src="https://cdn.tailwindcss.com"></script>
+        @include('partials.admin-theme')
 
         <link href="//cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css" rel="stylesheet">
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -39,11 +39,11 @@ margin-right:10%;
                 
                  <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">Title</label>
-                      <input type="text" name="title" placeholder="title" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="text" name="title" placeholder="title" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
 
                   <label for="project" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Select A Project</label>
-                    <select name="project_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-green-500 focus:border-green-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-green-500 dark:focus:border-green-500">
+                    <select name="project_id" id="category" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-brand-500 focus:border-brand-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-brand-500 dark:focus:border-brand-500">
                        {{-- we will use a loop from the database here --}}
                     @foreach ($projects as $project )  
                      <option value= "{{ $project->id }}"> {{ $project->name }} </option>
@@ -57,10 +57,10 @@ margin-right:10%;
 
                   <div>
                      <label for="username" class="block mb-2 text-sm font-medium text-gray-900 light:text-white">image</label>
-                      <input type="file" name="image" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-green-500 light:focus:border-green-500" required="true">
+                      <input type="file" name="image" placeholder="" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 light:bg-gray-700 light:border-gray-600 light:placeholder-gray-400 light:text-white light:focus:ring-brand-500 light:focus:border-brand-500" required="true">
                   </div>
     
-                  <button class="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full">
+                  <button class="bg-brand-500 text-white font-bold py-2 px-4 rounded-full w-full">
                               Submit
                   </button>
               </form>
