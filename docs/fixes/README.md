@@ -21,6 +21,7 @@ the problem, what changed, how it was verified, and what is left.
 | [013](013-public-redesign.md) | Public site redesign in the IoT-ra brand: shared layout, no CDN libraries, admin-only placeholders | W10–W12, W14, W17 | Medium | Done, tests pass |
 | [014](014-show-hide-contacts-and-socials.md) | Show/hide switches for socials and contacts, social icons, tab icon, password help (graceful reset, `admin:password`, `admin:reset-2fa`), blue admin | — | Medium | Done, tests pass |
 | [015](015-dashboard-shortcuts.md) | Dashboard "+" boxes are working shortcuts; no green or indigo left anywhere | W20 | Low | Done, tests pass |
+| [016](016-home-page-first.md) | The home page always shows first, even before any content is added | F5 | Medium | Done, tests pass |
 
 ## Deploying these fixes
 
@@ -39,7 +40,6 @@ the problem, what changed, how it was verified, and what is left.
 
 | Report ID | Defect | Why not yet |
 |---|---|---|
-| F5 | Empty `website_content` sends the home page to login | Intended first-run behaviour. Needs a product decision. |
 | F8 | `APP_DEBUG=true` in `.env.example` | Correct for local development. Production must override it (deploy step 7). |
 | D9 | Projects and events without a photo hidden on public pages | Changes what visitors see. Confirm with stakeholders first. |
 | T1, T2, T4–T6 | Structural debt (resource controllers, Storage disk, duplicate libs) | See ADR-0005, 0007. Larger refactors, planned separately. T3 (tests/checks) is done in 011; CI still to wire up. |

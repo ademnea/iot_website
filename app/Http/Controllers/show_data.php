@@ -133,13 +133,8 @@ class show_data extends Controller
         $contents = website_content::all();
 
  
-        // if we startup the system without data, redirect the admin to the login to enter some new data.
-       if($contents->count() === 0){
-
-          return redirect('/login');
-
-       }
-
+        // Visitors always get the home page, even before an admin has added any content.
+        // Signed-in admins see "add it" hints for whatever is missing.
 
         return view('/index',compact('contents','leader','partners','randomPhotos'));
    
