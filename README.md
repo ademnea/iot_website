@@ -18,6 +18,8 @@ Things - Research & Applications) Lab at Makerere University (CoCIS, Block B).
 - [Deploying on the server](#deploying-on-the-server)
 - [Documentation](#documentation) · [Security](#security)
 
+**Live:** https://iot-ra.net (deployed 21 Oct 2026; see [docs/deployment.md](docs/deployment.md))
+
 ---
 
 ## For editors who used the old system
@@ -56,7 +58,7 @@ cp .env.example .env
 In `.env`, set `DB_PASSWORD` and `DB_ROOT_PASSWORD` (any strong values), then:
 
 ```bash
-docker compose run --rm --no-deps app php artisan key:generate --show   # put the output in .env as APP_KEY=
+docker compose run --rm -T --no-deps app php artisan key:generate --show   # put the output in .env as APP_KEY=
 docker compose up -d --build                                            # site on http://127.0.0.1:8080
 docker compose exec app php artisan admin:create you@example.org --name="Your Name"
 ```
@@ -325,24 +327,21 @@ What each job means, and what to do when one fails, is in
 
 ## Deploying on the server
 
-1. **Configure.** Clone the repo on the server and create `.env` as in the quick start, with
-   `APP_ENV=production`, `APP_DEBUG=false` and `APP_URL=https://<your domain>`. Fill in the
-   `MAIL_*` settings with the lab's email account, so "Forgot password?" can send reset
-   emails.
-2. **Bring the content over.**
-   - Copy the existing uploads into `./data/images` and `./data/documents`.
-   - Load a `mysqldump` of the old database with `docker compose exec -T db mariadb …` (see
-     [fix 009](docs/fixes/009-containerisation.md)).
-   - Admins' plain-text passwords are hashed on the first start, so editors keep their
-     passwords.
-3. **Start.** Run `docker compose up -d --build`. The site listens on `127.0.0.1:8080`
-   only.
-4. **Proxy.** Have the host's web server proxy the domain to the site (Apache example in
-   [fix 009](docs/fixes/009-containerisation.md)). `TRUSTED_PROXIES=*` in `.env` is safe
-   while the port is bound to localhost.
-5. **Check.** Run `scripts/check.sh smoke` against the live stack.
+The live site, https://iot-ra.net, runs from `/srv/iot-website` on the lab's server. It's
+in Docker, behind the server's Apache, on `127.0.0.1:8095`.
+[docs/deployment.md](docs/deployment.md) has everything for it:
+- the layout and the production settings;
+- the exact first-deploy steps and the Apache config;
+- updates, backups, troubleshooting;
+- rolling back and retiring the old site.
 
-**Back up** `./data/` and the database:
+**Updating** after a pull request is merged:
+
+```bash
+cd /srv/iot-website && git pull && docker compose up -d --build --wait
+```
+
+**Backing up** `./data/` and the database:
 `docker compose exec db sh -c 'mariadb-dump -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" "$MARIADB_DATABASE"' > backup.sql`.
 
 ---
@@ -352,6 +351,7 @@ What each job means, and what to do when one fails, is in
 | Document | For |
 |---|---|
 | [Workflows](docs/workflows.md) | Editors: how to do each task in the admin area, step by step |
+| [Deployment](docs/deployment.md) | Maintainers: how the live site runs, and how to update, back up and roll it back |
 | [docs/README.md](docs/README.md) | The index: SRS, architecture, system design, SDD and ADRs |
 | [Defects and malware report](docs/defects-and-malware-report.md) · [fix log](docs/fixes/README.md) | What was wrong, and how each item was fixed and tested |
 | [Incident report: Dec 2025 malware](docs/incident-report-2025-12-malware.md) | What happened, and a runbook of the clean-up commands |

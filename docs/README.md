@@ -1,12 +1,16 @@
 # IoT-ra Lab Website — Documentation
 
-This folder documents the **as-built** system in this repository as of 2026-10-20
-(commit `af3c109`). It is the baseline to plan further work against: these
-documents describe what the code *does today*, and they call out where that
-differs from what it *should* do.
+This folder documents the IoT-ra Lab website. The analysis documents (SRS, architecture,
+system design, SDD and the defects report) describe the **baseline**, commit `af3c109`
+from 2026-10-20, as found before any fixes. Each one starts with a note on what has changed
+since.
+
+The fix log, ADRs, workflows and deployment guide are kept current. The site went live in
+its new form on **21 October 2026**: see [deployment.md](deployment.md).
 
 | Document | Purpose |
 |---|---|
+| [deployment.md](deployment.md) | How the live site (https://iot-ra.net) runs: layout, settings, first deploy, updates, backups, troubleshooting, rollback |
 | [workflows.md](workflows.md) | How admins and visitors use the site, step by step, verified in Chrome on 2026-10-20 |
 | [SRS.md](SRS.md) | Software Requirements Specification: scope, actors, functional and non-functional requirements |
 | [architecture.md](architecture.md) | Architecture overview: context, containers, components, deployment, cross-cutting concerns |
@@ -28,6 +32,12 @@ GitHub repositories. Commit `af3c109` then rewrote every link in the root
 
 **Do not download, extract or run that archive.** Remove it and restore the
 README before doing anything else (see [ADR-0008](adr/0008-repository-hygiene-and-supply-chain.md)).
+
+> **Status (2026-10-21):** done.
+> - The zip was removed and the README restored (fix 001).
+> - The live server was checked on 21 Oct 2026, and no zip file was present in the site's
+>   folders.
+> - `scripts/check.sh` now fails if an archive or executable is committed.
 Anyone who downloaded the zip from GitHub on a Windows machine should treat that
 machine as compromised.
 

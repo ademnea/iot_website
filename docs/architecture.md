@@ -2,6 +2,12 @@
 
 **System:** IoT-ra Lab website. **Baseline:** commit `af3c109`, 2026-10-20.
 
+> **Update 2026-10-21:** this document describes the baseline. The site now runs in Docker
+> (Laravel 13, PHP 8.4, MariaDB 11.4), behind the server's Apache, with one login path
+> through Fortify and controllers grouped by content type. Section 4 shows the current
+> deployment. For details, see [deployment.md](deployment.md),
+> [ADR-0009](adr/0009-controllers-by-content-type.md) and the [fix log](fixes/README.md).
+
 This document uses a C4-style view: context → containers → components →
 deployment, followed by cross-cutting concerns and a risk register.
 
@@ -85,6 +91,27 @@ Key traits of the component layer:
 
 ## 4. Deployment view
 
+### 4.1 Current (since 21 Oct 2026)
+
+```mermaid
+flowchart LR
+    U([Users]) -- HTTPS --> WS["Host Apache<br/>TLS for iot-ra.net + other sites"]
+    WS -- "proxy 127.0.0.1:8095" --> APP["app container<br/>Apache + PHP 8.4 + Laravel 13"]
+    APP --> MY[("db container<br/>MariaDB 11.4")]
+    APP --> D[("/srv/iot-website/data<br/>images, documents")]
+```
+
+- **Code and settings:** in `/srv/iot-website` on the lab's server.
+- **Runtime:** the site runs in its own containers, with its own PHP and database, so the
+  other sites on the server are isolated from it.
+- **Builds:** the Docker image is built on the server with `docker compose up -d --build`.
+- **On start:** migrations and password hashing run automatically.
+- **Checks:** `scripts/check.sh` runs the tests and the security scans before a merge.
+
+See [deployment.md](deployment.md) for everything else.
+
+### 4.2 Baseline (until 21 Oct 2026)
+
 ```mermaid
 flowchart LR
     U([Users]) -- HTTPS --> WS[Apache/Nginx<br/>docroot = public/]
@@ -93,16 +120,19 @@ flowchart LR
     PHP --> D[(public/images<br/>public/documents)]
 ```
 
-Build and deploy, from `installation.txt`:
+**How it was built and deployed**, from `installation.txt`:
 1. `composer install` (the notes say `composer update`; prefer `install` with the lock file)
 2. `npm install && npm run build` (Vite builds `resources/css/app.css` and `resources/js/app.js`)
 3. Create `.env`, `php artisan key:generate`, `php artisan migrate`
 4. Create the first admin (currently by inserting into `users` directly)
 5. Point the web server's docroot at `public/`
 
-There is no CI/CD, containerisation, backup job or environment separation in
-the repo. Uploaded media lives under `public/` and is git-ignored, so it must
-be backed up separately from the database.
+**What was missing:**
+- **CI/CD, containers, backups, separate environments:** none of these were in the repo.
+- **Upload backups:** uploaded media lives under `public/` and is git-ignored, so it had to
+  be backed up separately from the database.
+- **On the server:** the old site ran from `/var/www/iot-ra.net/public_html/iot_website`
+  on the host's PHP-FPM 8.2, sharing the server's MySQL.
 
 ---
 

@@ -193,3 +193,5 @@ publications. These are candidates for future scope.
 3. Who should receive contact-form messages: email, the dashboard, or both?
 4. Is there a hosting target (shared cPanel, VPS, university server)? This
    determines how storage and deployment can change.
+   **Answered 2026-10-21:** the lab's own Ubuntu server, which was moved there from cPanel.
+   The site now runs in Docker behind the server's Apache ([deployment.md](deployment.md)).

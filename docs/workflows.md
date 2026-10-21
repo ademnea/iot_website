@@ -11,6 +11,10 @@ are referenced as **W1–W20**. They're listed in
 | **Visitor** (anyone) | Browse the public pages and send a message through the contact form |
 | **Admin** (a row in `users`) | Everything in the admin area. There are no roles: every admin can change everything. |
 
+**Live site:** https://iot-ra.net, with the admin login at https://iot-ra.net/login. It was
+deployed on 21 Oct 2026 with an empty database, so the content is being re-entered through
+these workflows (see [deployment.md §4](deployment.md#4-content-after-the-deployment)).
+
 ---
 
 ## 1. Site map
@@ -57,8 +61,8 @@ sequenceDiagram
     actor Op as Server operator
     actor Ad as First admin
     participant S as Site
-    Op->>S: docker compose up -d --build
-    Op->>S: php artisan admin:create you@lab --name="…"
+    Op->>S: docker compose up -d --build --wait
+    Op->>S: docker compose exec app php artisan admin:create you@lab --name="…"
     Ad->>S: GET /  (no content yet)
     S-->>Ad: home page under the lab's name
     Ad->>S: Admin login → log in
@@ -76,6 +80,9 @@ sequenceDiagram
 4. mission and objectives
 5. the team leader
 6. the leader's message
+7. the rest of the team, then projects, news, publications and partners
+
+The login card shows the uploaded logo, so it stays blank until step 2 is done.
 
 The leader's message needs a leader on the team first. The leader's photo comes from their
 team entry.
