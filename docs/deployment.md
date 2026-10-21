@@ -342,7 +342,7 @@ The old copy was in `/var/www/iot-ra.net/public_html/iot_website`, with an empty
    mysqldump --no-tablespaces -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/archive/iotra_iotra_final.sql
    unset MYSQL_PWD
    cp ~/iot-ra.net-le-ssl.conf.before-deploy ~/archive/
-   sudo cp /etc/apache2/sites-available/iot-ra.net.conf ~/archive/iot-ra.net.conf.before-cleanup
+   sudo cat /etc/apache2/sites-available/iot-ra.net.conf > ~/archive/iot-ra.net.conf.before-cleanup   # cat, so you own the copy
    cd /var/www/iot-ra.net/public_html
    tar czf ~/archive/old_iot_website_$(date +%F).tar.gz iot_website "iot_website backup" \
      -C ~/archive iotra_iotra_final.sql iot-ra.net-le-ssl.conf.before-deploy iot-ra.net.conf.before-cleanup
