@@ -83,7 +83,7 @@ them, which `grep -r` doesn't follow.
 ```bash
 cd /var/www/iot-ra.net/public_html/iot_website          # the old site
 set -a; . ./.env; set +a; export MYSQL_PWD="$DB_PASSWORD"
-mysqldump -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/iotra_iotra_before_deploy_$(date +%F).sql
+mysqldump --no-tablespaces -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/iotra_iotra_before_deploy_$(date +%F).sql
 unset MYSQL_PWD; chmod 600 ~/iotra_iotra_before_deploy_*.sql
 ```
 
@@ -307,7 +307,13 @@ Fill in the lab's mail account in `.env`:
 Then run `docker compose up -d --wait`. Until it's set up, reset passwords with
 `admin:password` (5.3).
 
-### 6.6 Uploads fail
+### 6.6 mysqldump: "you need … the PROCESS privilege"
+The site's MySQL account can't read the server's tablespace information. Add
+`--no-tablespaces`, as the commands in this guide do. Without it, the dump stops early and
+the file is incomplete. Check any dump with `tail -1 file.sql`: it should end with
+`-- Dump completed`.
+
+### 6.7 Uploads fail
 - **Size:** files up to about 11 MB are accepted; the container's PHP allows 12 MB.
 - **Permissions:** check that `/srv/iot-website/data` exists. The container sets its
   permissions on start.
@@ -333,7 +339,7 @@ The old copy was in `/var/www/iot-ra.net/public_html/iot_website`, with an empty
    mkdir -p ~/archive && chmod 700 ~/archive
    cd /var/www/iot-ra.net/public_html/iot_website
    set -a; . ./.env; set +a; export MYSQL_PWD="$DB_PASSWORD"
-   mysqldump -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/archive/iotra_iotra_final.sql
+   mysqldump --no-tablespaces -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/archive/iotra_iotra_final.sql
    unset MYSQL_PWD
    cp ~/iot-ra.net-le-ssl.conf.before-deploy ~/archive/
    sudo cp /etc/apache2/sites-available/iot-ra.net.conf ~/archive/iot-ra.net.conf.before-cleanup
