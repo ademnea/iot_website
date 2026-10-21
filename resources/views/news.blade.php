@@ -1,4 +1,4 @@
-{{-- Public news page. Data: show_data@fetch_events ($onevents grouped by event with photos, $pastevents rows, $contents). --}}
+{{-- Public news page. Data: PublicPageController@fetch_events ($onevents grouped by event with photos, $pastevents rows, $contents). --}}
 @extends('layouts.public')
 
 @php

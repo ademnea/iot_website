@@ -1,124 +1,133 @@
 <?php
 
+use App\Http\Controllers\AdminAccountController;
+use App\Http\Controllers\EventController;
+use App\Http\Controllers\HomeContentController;
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\MessageController;
+use App\Http\Controllers\PartnerController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\PrototypeController;
+use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\PublicPageController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Auth\Middleware\Authenticate;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| Every URL is the one the site has always used (admins' bookmarks and the forms depend on
+| them); the controllers behind them are grouped by content type. Login, logout, two-factor
+| authentication, password reset and the profile page are registered by Fortify and Jetstream.
 |
 */
 
+// ---- Public site -----------------------------------------------------------------------------
 
-//routes to all the pages begin here.
+Route::controller(PublicPageController::class)->group(function () {
+    Route::get('/', 'fetch_home');
+    Route::get('/about', 'fetch_team');
+    Route::get('/projects', 'fetch_projects');
+    Route::get('/publications', 'fetch_publications');
+    Route::get('/news', 'fetch_events');
+    Route::get('/partners', 'fetch_partners');
+    Route::get('/gallery', 'fetch_gallery');
+    Route::get('/project_gallery', 'fetch_project_gallery');
+    Route::get('/team_gallery', 'fetch_team_gallery');
+    Route::get('/prototypes_gallery', 'fetch_prototype_gallery');
+    Route::get('/events_gallery', 'fetch_events_gallery');
+});
 
+// The contact form: 5 messages per minute per visitor (its own limit, see RouteServiceProvider).
+Route::post('/insert_message', [MessageController::class, 'store'])->middleware('throttle:contact');
 
-// routes for displaying/ showing data to the outside pages.
-// to pick data from the database
-Route::get('/about', 'App\Http\Controllers\show_data@fetch_team');
-Route::get('/', 'App\Http\Controllers\show_data@fetch_home');
-Route::get('/projects', 'App\Http\Controllers\show_data@fetch_projects');
-Route::get('/publications', 'App\Http\Controllers\show_data@fetch_publications');
-Route::get('/news', 'App\Http\Controllers\show_data@fetch_events');
-Route::get('/partners', 'App\Http\Controllers\show_data@fetch_partners');
-Route::get('/gallery', 'App\Http\Controllers\show_data@fetch_gallery');
-
-//dummy route
-Route::get('/project_gallery','App\Http\Controllers\show_data@fetch_project_gallery');
-Route::get('/team_gallery','App\Http\Controllers\show_data@fetch_team_gallery');
-Route::get('/prototypes_gallery','App\Http\Controllers\show_data@fetch_prototype_gallery');
-Route::get('/events_gallery','App\Http\Controllers\show_data@fetch_events_gallery');
-
-//these routes handle the login functionality.
 // Logging in is handled by Fortify (GET/POST /login, with 2FA and a 5-per-minute limit).
 // The old address still works for bookmarks and links.
 Route::redirect('/oldlogin', '/login');
 
-//admin side protected routes
+// ---- Admin area (login required) -------------------------------------------------------------
+
 Route::middleware(['auth'])->group(function () {
 
-//only a logged-in admin can register another admin.
-Route::get('/registeradminform', 'App\Http\Controllers\iot_admin_login@registerme');
-Route::get('/register', 'App\Http\Controllers\iot_admin_login@registerme')->name('register');
-Route::post('/registeradmin', 'App\Http\Controllers\insert_data@insert_admin');
+    Route::view('/dashboard', 'dashboard')->name('dashboard');
 
-Route::view('/dashboard','dashboard')->name('dashboard');
-    
-Route::view('/projectscontent','projectscontent');
-Route::view('/homecontent','homecontent');
-Route::view('/publicationscontent','publicationscontent');
-Route::view('/newscontent','newscontent'); 
-Route::view('/aboutuscontent','aboutuscontent');
-Route::view('/register_projects','register_projects');
-Route::view('/register_publications','register_publications');
-Route::view('/register_news','register_news');
-Route::view('/register_home','register_home');
-Route::view('/register_team','register_team');
+    // Add forms that need no data from the database.
+    Route::view('/register_home', 'register_home');
+    Route::view('/register_projects', 'register_projects');
+    Route::view('/register_publications', 'register_publications');
+    Route::view('/register_news', 'register_news');
+    Route::view('/register_team', 'register_team');
 
+    // Sidebar → Home: lab details, logo, banner, contacts, social links, leader's message.
+    Route::controller(HomeContentController::class)->group(function () {
+        Route::get('/homecontent', 'index');
+        Route::post('/insertmission', 'storeInfo');
+        Route::post('/insertcontacts', 'storeContacts');
+        Route::get('/edithome', 'editInfo');
+        Route::post('/editmission_route', 'updateInfo');
+        Route::get('/editlogo', 'editLogo');
+        Route::post('/editlogo_route', 'updateLogo');
+        Route::get('/editbanner', 'editBanner');
+        Route::post('/editbanner_route', 'updateBanner');
+        Route::get('/edittopbar', 'editSocials');
+        Route::post('/edittopbar_route', 'updateSocials');
+        Route::get('/editcontacts', 'editContacts');
+        Route::post('/editlabinfo_route', 'updateContacts');
+        Route::get('/editleader', 'editLeader');
+        Route::post('/editleader_route', 'updateLeader');
+    });
 
-//routes for editing content
-Route::get('/edithome', 'App\Http\Controllers\edit_forms@edithome');
-Route::get('/editleader', 'App\Http\Controllers\edit_forms@editleader');
-Route::get('/editproject', 'App\Http\Controllers\edit_forms@editproject');
-Route::get('/editteam', 'App\Http\Controllers\edit_forms@editteam');
-Route::get('/editpublications', 'App\Http\Controllers\edit_forms@editpublications');
-Route::get('/editnews', 'App\Http\Controllers\edit_forms@editnews');
-Route::get('/editpartner', 'App\Http\Controllers\edit_forms@editpartner');
-Route::get('/edittopbar', 'App\Http\Controllers\edit_forms@edittopbar');
-Route::get('/editcontacts', 'App\Http\Controllers\edit_forms@editcontacts');
-Route::get('/editlogo', 'App\Http\Controllers\edit_forms@editlogo');
-Route::get('/editbanner', 'App\Http\Controllers\edit_forms@editbanner');
+    // Partners (added and listed on the Home admin page).
+    Route::controller(PartnerController::class)->group(function () {
+        Route::post('/insertpartner', 'store');
+        Route::get('/editpartner', 'edit');
+        Route::post('/editpartner_route', 'update');
+    });
 
+    // Sidebar → Projects.
+    Route::controller(ProjectController::class)->group(function () {
+        Route::get('/projectscontent', 'index');
+        Route::post('/submit-project', 'store');
+        Route::get('/editproject', 'edit');
+        Route::post('/editproject_route', 'update');
+    });
 
-//routes to insert data into the database
-Route::post('/insertmission', 'App\Http\Controllers\insert_data@insert_home_form1');
-Route::post('/insertpartner', 'App\Http\Controllers\insert_data@insert_partner');
-Route::post('/insert_news', 'App\Http\Controllers\insert_data@insert_news');
-Route::post('/submit-project', 'App\Http\Controllers\insert_data@insert_project');
-Route::post('/insert_publication', 'App\Http\Controllers\insert_data@insert_publication');
-Route::post('/insert_team', 'App\Http\Controllers\insert_data@insert_team');
-Route::post('/insertcontacts', 'App\Http\Controllers\insert_data@insert_contacts');
-Route::post('/insertprototype', 'App\Http\Controllers\insert_data@insert_prototype');
+    // Sidebar → Products: publications and prototypes.
+    Route::controller(PublicationController::class)->group(function () {
+        Route::get('/publicationscontent', 'index');
+        Route::post('/insert_publication', 'store');
+        Route::get('/editpublications', 'edit');
+        Route::post('/editpublication_route', 'update');
+    });
+    Route::controller(PrototypeController::class)->group(function () {
+        Route::get('/registerprototype', 'create');
+        Route::post('/insertprototype', 'store');
+    });
 
+    // Sidebar → News.
+    Route::controller(EventController::class)->group(function () {
+        Route::get('/newscontent', 'index');
+        Route::post('/insert_news', 'store');
+        Route::get('/editnews', 'edit');
+        Route::post('/editnews_route', 'update');
+    });
 
+    // Sidebar → Current Team and Past Team.
+    Route::controller(MemberController::class)->group(function () {
+        Route::get('/aboutuscontent', 'index');
+        Route::get('/oldteam', 'past');
+        Route::post('/insert_team', 'store');
+        Route::get('/editteam', 'edit');
+        Route::post('/editmember_route', 'update');
+        Route::post('/deleteuser', 'deactivate');
+        Route::post('/restoreuser', 'restore');
+    });
 
-//routes to pick data from the database
-Route::get('/aboutuscontent', 'App\Http\Controllers\retrieve_data@fetch_team');
-Route::get('/homecontent', 'App\Http\Controllers\retrieve_data@fetch_home');
-Route::get('/projectscontent', 'App\Http\Controllers\retrieve_data@fetch_projects');
-Route::get('/publicationscontent', 'App\Http\Controllers\retrieve_data@fetch_publications');
-Route::get('/newscontent', 'App\Http\Controllers\retrieve_data@fetch_events');
-Route::get('/registerprototype','App\Http\Controllers\retrieve_data@fetch_project_prototype');
-Route::get('/oldteam','App\Http\Controllers\retrieve_data@fetch_oldteam');
-
-
-//controller routes for updating database content
-Route::post('/editmission_route', 'App\Http\Controllers\edit_data@edit_mission');
-Route::post('/editlogo_route', 'App\Http\Controllers\edit_data@edit_logo');
-Route::post('/editbanner_route', 'App\Http\Controllers\edit_data@edit_banner');
-Route::post('/editleader_route', 'App\Http\Controllers\edit_data@edit_leader');
-Route::post('/editpartner_route', 'App\Http\Controllers\edit_data@edit_partner');
-Route::post('/edittopbar_route', 'App\Http\Controllers\edit_data@edit_topbar');
-Route::post('/editlabinfo_route', 'App\Http\Controllers\edit_data@edit_labcontacts');
-Route::post('/editproject_route', 'App\Http\Controllers\edit_data@edit_project');
-Route::post('/editnews_route', 'App\Http\Controllers\edit_data@edit_event');
-Route::post('/editpublication_route', 'App\Http\Controllers\edit_data@edit_publication');
-Route::post('/editmember_route', 'App\Http\Controllers\edit_data@edit_team');
-
-
-//controllers for deleting stuff
-Route::post('/deleteuser', 'App\Http\Controllers\delete_stuff@delete_member');
-
-//controllers for rstoring stuff
-Route::post('/restoreuser', 'App\Http\Controllers\restore_stuff@restore_member');
-
+    // Dashboard → Add another admin. Only a logged-in admin can register another admin.
+    Route::controller(AdminAccountController::class)->group(function () {
+        Route::get('/register', 'create')->name('register');
+        Route::get('/registeradminform', 'create');
+        Route::post('/registeradmin', 'store');
+    });
 });
-
-//inserting feedback message into the database
-// 5 messages per minute per IP to stop spam floods (its own limit, see RouteServiceProvider).
-Route::post('/insert_message', 'App\Http\Controllers\insert_data@insert_message')->middleware('throttle:contact');

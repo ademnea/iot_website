@@ -1,4 +1,4 @@
-{{-- Public prototype gallery. Data: show_data@fetch_prototype_gallery ($prototypes grouped by prototype with photos), $contents. --}}
+{{-- Public prototype gallery. Data: PublicPageController@fetch_prototype_gallery ($prototypes grouped by prototype with photos), $contents. --}}
 @extends('layouts.public')
 
 @section('title', 'Prototype gallery')

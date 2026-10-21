@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         // these views renders, so it is safe before migrations (unlike View::share in boot, which
         // was tried here before).
         View::composer([
-            // public pages (show_data) and the shared layout
+            // public pages (PublicPageController) and the shared layout
             'index', 'about_us', 'projects', 'publications', 'news', 'partners',
             'gallery', 'team_gallery', 'project_gallery', 'prototypes_gallery', 'events_gallery',
             'layouts.public',

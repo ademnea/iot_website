@@ -1,4 +1,4 @@
-{{-- Public team & contact page. Data: show_data@fetch_team ($teams, $PhDs, $masters, $admins, $interns, $partners, $contents). --}}
+{{-- Public team & contact page. Data: PublicPageController@fetch_team ($teams, $PhDs, $masters, $admins, $interns, $partners, $contents). --}}
 @extends('layouts.public')
 
 @php

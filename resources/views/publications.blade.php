@@ -1,4 +1,4 @@
-{{-- Public research page. Data: show_data@fetch_publications ($publications, $prototypes with photos, $contents). --}}
+{{-- Public research page. Data: PublicPageController@fetch_publications ($publications, $prototypes with photos, $contents). --}}
 @extends('layouts.public')
 
 @php
