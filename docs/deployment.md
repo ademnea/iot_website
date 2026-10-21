@@ -330,8 +330,10 @@ sudo apache2ctl configtest && sudo systemctl reload apache2
 
 ### 7.2 Retire the old site
 
-**Done on 21 Oct 2026** except step 5: the archive is in the maintainer's `~/archive`, the
-port-80 config was cleaned, and the old folders were removed.
+**Done on 21 Oct 2026.**
+- The archive is in the maintainer's `~/archive`.
+- The port-80 config was cleaned and the old folders were removed.
+- The `iotra_iotra` database and its user were dropped, using the MySQL root password.
 The old copy was in `/var/www/iot-ra.net/public_html/iot_website`, with an empty
 `iot_website backup` folder beside it. It ran on the host's PHP-FPM 8.2 and the
 `iotra_iotra` MySQL database. Once the new site is confirmed working:
@@ -378,11 +380,11 @@ The old copy was in `/var/www/iot-ra.net/public_html/iot_website`, with an empty
    rm -rf -- "/var/www/iot-ra.net/public_html/iot_website" "/var/www/iot-ra.net/public_html/iot_website backup"
    ```
 5. **Drop the old database and its user.** This needs MySQL's administrator login. On
-   this server, `root` requires a password, so `sudo mysql` and
-   `/etc/mysql/debian.cnf` are refused. Whoever holds the password runs:
-   ```sql
-   DROP DATABASE iotra_iotra;
-   DROP USER 'iotra_iotra'@'localhost';
+   this server, `root` requires a password, so `sudo mysql` and `/etc/mysql/debian.cnf`
+   are refused. `-p` prompts for the password without showing it:
+   ```bash
+   mysql -u root -p -e "SELECT user, host FROM mysql.user WHERE user='iotra_iotra';"
+   mysql -u root -p -e "DROP DATABASE iotra_iotra; DROP USER 'iotra_iotra'@'localhost';"
    ```
 6. **Re-run the checks in 5.1.**
 
@@ -399,4 +401,3 @@ months.
 | Scheduled off-server backups (5.5) | The content was lost once already |
 | Branch protection on `main` and CI running `scripts/check.sh` | See the incident report's open actions |
 | Remove `~/iot_uploads_2026-10-21.tar.gz` from the server | Once the editor has the photos |
-| Drop the old `iotra_iotra` database and user (7.2 step 5) | Needs the MySQL root password. The database is empty and archived in `~/archive`. |
