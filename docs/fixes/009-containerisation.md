@@ -52,6 +52,9 @@ On the server, the host's Apache proxies the domain to the container:
     # ... existing SSL certificate lines ...
 </VirtualHost>
 ```
+**Production differs from this example:** the live server's Apache already uses 8080, so
+production sets `APP_PORT=8095` and proxies to `127.0.0.1:8095`. The exact config is in
+[deployment.md §3.6](../deployment.md#36-switch-the-domain-to-the-new-site).
 
 Moving existing uploads in: copy the server's current `public/images/*` and
 `public/documents/*` into `./data/images` and `./data/documents` before the first

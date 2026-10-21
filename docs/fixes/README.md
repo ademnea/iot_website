@@ -26,6 +26,10 @@ the problem, what changed, how it was verified, and what is left.
 
 ## Deploying these fixes
 
+> **The live site now runs in Docker** ([deployment.md](../deployment.md)). The container
+> does steps 1–3 and 6 on every start, and production `.env` sets `APP_DEBUG=false`. The
+> list below is kept for a deployment without Docker.
+
 1. `composer install --no-dev --optimize-autoloader`
 2. `php artisan migrate` (no new migrations in this batch, safe to run)
 3. **`php artisan admin:hash-passwords`.** Run this immediately after deploying. Until it
