@@ -1,4 +1,4 @@
-{{-- Public partners page. Data: show_data@fetch_partners ($partners, $contents). --}}
+{{-- Public partners page. Data: PublicPageController@fetch_partners ($partners, $contents). --}}
 @extends('layouts.public')
 
 @section('title', 'Partners')

@@ -1,4 +1,4 @@
-{{-- Public project gallery. Data: show_data@fetch_project_gallery ($projects grouped by project with photos), $contents. --}}
+{{-- Public project gallery. Data: PublicPageController@fetch_project_gallery ($projects grouped by project with photos), $contents. --}}
 @extends('layouts.public')
 
 @section('title', 'Project gallery')

@@ -4,6 +4,12 @@
 **Baseline:** commit `af3c109`, 2026-10-20
 **Structure:** loosely follows IEEE 1016 (design viewpoints)
 
+> **Update 2026-10-21:** the controllers have been reorganised by content type, with the same
+> URLs and behaviour ([ADR-0009](adr/0009-controllers-by-content-type.md)). This document
+> describes the baseline layout. For the old-to-new mapping, see
+> [legacy/controllers/README.md](../legacy/controllers/README.md); for the current
+> structure, see the [README](../README.md#system-structure).
+
 ---
 
 ## 1. Introduction

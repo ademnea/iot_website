@@ -109,50 +109,66 @@ front-end app.
 
 ```mermaid
 flowchart TB
-    R["routes/web.php"] --> PUB & ADM
-    subgraph PUB["Public pages (no login)"]
-        SD["show_data<br/>reads content"] --> PV["public views<br/>layouts/public.blade.php"]
-        IM["insert_data@insert_message<br/>contact form (rate limited)"]
+    R["routes/web.php<br/>(URLs unchanged since the old system)"] --> PUB & ADM
+    subgraph PUB["Public site (no login)"]
+        PP["PublicPageController"] --> PV["public views<br/>layouts/public.blade.php"]
+        MC["MessageController<br/>contact form (rate limited)"]
     end
     subgraph ADM["Admin area (auth middleware)"]
-        RD["retrieve_data<br/>content lists"] --> AV["admin views<br/>sidebar + Tailwind"]
-        EF["edit_forms<br/>edit pages"] --> AV
-        ID["insert_data<br/>add (validated)"]
-        ED["edit_data<br/>update (validated)"]
-        DS["delete_stuff / restore_stuff<br/>member status"]
+        HC["HomeContentController"]
+        CT["PartnerController · ProjectController · EventController<br/>PublicationController · PrototypeController · MemberController"]
+        AC["AdminAccountController"]
+        HC & CT & AC --> AV["admin views<br/>sidebar + Tailwind"]
     end
+    VC["View composer (AppServiceProvider)<br/>adds the site content to every view that shows it"] -.-> PV & AV
     F["Fortify + Jetstream<br/>login, 2FA, password reset, profile"] --> ADM
     PUB & ADM --> DB[("MariaDB")]
-    ID & ED --> FS["public/images, public/documents"]
+    HC & CT --> UP["Support/Upload"] --> FS["public/images, public/documents"]
 ```
 
-The controllers are grouped by what they do, not by what they edit:
+There is one controller per kind of content. Each one holds everything for that content
+type: its admin list (`index`), add (`store`), edit page (`edit`) and save (`update`).
 
-| Controller | Job |
+| Controller | Sidebar | Handles |
+|---|---|---|
+| `PublicPageController` | — | Every public page (`fetch_home`, `fetch_projects`, …) |
+| `HomeContentController` | Home | Lab details, logo, banner, contacts, social links, the leader's message |
+| `PartnerController` | Home | Partners: add, edit |
+| `ProjectController` | Projects | List, add, edit |
+| `PublicationController` | Products | List (with the prototypes), add, edit |
+| `PrototypeController` | Products | Add (there is no edit page) |
+| `EventController` | News | List, add, edit; extra photos are added, not replaced |
+| `MemberController` | Current Team, Past Team | List, add, edit, deactivate (to Past Team), restore |
+| `AdminAccountController` | Dashboard | "Add another admin" |
+| `MessageController` | — | The public contact form |
+
+**Shared code:**
+
+| Code | Does |
 |---|---|
-| `show_data` | Reads content for the public pages |
-| `retrieve_data` | Reads content for the admin lists |
-| `insert_data` | Creates content: every add form, plus the public contact form |
-| `edit_forms` | Opens edit pages (Not Found for a record that doesn't exist) |
-| `edit_data` | Saves edits |
-| `delete_stuff`, `restore_stuff` | Mark team members inactive or active again |
-| `iot_admin_login` | The admin-only "register another admin" page |
+| `App\Support\Upload` | Holds the upload rules (`Upload::IMAGE`, `Upload::DOCUMENT`) and stores every file under a generated name (`Upload::store`) |
+| `Controller::findForEdit()` | Loads the record an edit page opens, or shows Not Found |
+| `Controller::dateInput()` | Formats a date for a date field |
+| The view composer in `AppServiceProvider` | Passes `$contents` (the lab's details) to every view that shows them, so controllers don't load it |
 
-[ADR-0002](docs/adr/0002-query-builder-and-verb-grouped-controllers.md) explains why the
-controllers are grouped this way.
+**Background:**
+- [ADR-0009](docs/adr/0009-controllers-by-content-type.md) records why the controllers are
+  organised this way.
+- The previous controllers, grouped by operation (`insert_data`, `edit_data`, …), are kept
+  in `legacy/controllers/`, with a table showing where each method moved.
 
 ### Public pages
 
 | URL | Controller method | View | Shows (tables) |
 |---|---|---|---|
-| `/` | `show_data@fetch_home` | `index` | Lab identity, vision/mission/objectives, leader's message, partners (`website_content`, `members`, `partners`) |
+| `/` | `PublicPageController@fetch_home` | `index` | Lab identity, vision/mission/objectives, leader's message, partners (`website_content`, `members`, `partners`) |
 | `/projects` | `fetch_projects` | `projects` | Ongoing projects with photos (`projects`, `project_photos`) |
 | `/publications` ("Research") | `fetch_publications` | `publications` | Publications and prototypes (`publications`, `prototypes`, `prototype_photos`) |
 | `/news` | `fetch_events` | `news` | Current and past events (`events`, `event_photos`) |
 | `/about` ("Team & contact") | `fetch_team` | `about_us` | Leader, researchers, students, interns, partners, and the contact form (`members`, `partners`) |
 | `/partners` | `fetch_partners` | `partners` | All partners |
 | `/gallery`, `/team_gallery`, `/project_gallery`, `/prototypes_gallery`, `/events_gallery` | `fetch_*gallery` | same names | Photo galleries |
-| `POST /insert_message` | `insert_data@insert_message` | — | Saves a visitor's message (`messages`); limited to 5 per minute per visitor |
+| `POST /insert_message` | `MessageController@store` | — | Saves a visitor's message (`messages`); limited to 5 per minute per visitor |
 
 Every public page uses the shared `layouts/public.blade.php`. It provides the top bar,
 header, navigation and footer, and reads the single `website_content` row for the lab's
@@ -224,11 +240,12 @@ All content is stored in MariaDB. The main tables are:
 
 ```text
 app/
-  Http/Controllers/     show_data, retrieve_data, insert_data, edit_forms, edit_data, delete_stuff, restore_stuff, iot_admin_login
+  Http/Controllers/     One controller per content type (PublicPage, HomeContent, Partner, Project, Event, Publication,
+                        Prototype, Member, AdminAccount, Message); shared helpers in Controller.php
   Models/               Eloquent models (website_content, members, projects, publications, prototypes, partners, User, …)
-  Support/              Url (cleans links typed by admins), SiteContent (which contacts/socials are shown)
+  Support/              Upload (rules + generated names), Url (cleans links typed by admins), SiteContent (which contacts/socials are shown)
   Actions/Fortify/      Password rules, profile and password updates
-  Providers/            Fortify setup (login page, rate limits), named rate limiters
+  Providers/            View composer for the site content, Fortify setup (login page, rate limits), named rate limiters
 database/migrations/    The schema, from 2023 plus the show/hide switches (2026-10-21)
 resources/
   views/                Admin pages (homecontent, register_*, edit*, dashboard, sidebar) and public pages (index, projects, news, …)
@@ -245,7 +262,9 @@ docker/                 entrypoint.sh, Apache and PHP settings, database init sc
 Dockerfile              Images: vendor → assets → app (production) → test
 docker-compose.yml      app + db (+ test profile)
 scripts/check.sh        Guard, tests and DevSecOps scans
-tests/Feature/          Feature tests; Fixes/ has one regression test file per fixed defect
+tests/Feature/          Feature tests; Fixes/ has one regression test file per fixed defect, Refactor/ pins down
+                        every admin form and page's data
+legacy/controllers/     The pre-2026-10-21 controllers, kept for reference (not loaded)
 docs/                   SRS, architecture, design, ADRs, workflows, reports, fix log
 ```
 

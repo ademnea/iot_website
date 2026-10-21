@@ -1,4 +1,4 @@
-{{-- Public event gallery. Data: show_data@fetch_events_gallery ($events grouped by event with photos), $contents. --}}
+{{-- Public event gallery. Data: PublicPageController@fetch_events_gallery ($events grouped by event with photos), $contents. --}}
 @extends('layouts.public')
 
 @section('title', 'Event gallery')

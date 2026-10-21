@@ -1,4 +1,4 @@
-{{-- Public projects page. Data: show_data@fetch_projects ($onprojects = all projects with their photo, $contents). --}}
+{{-- Public projects page. Data: PublicPageController@fetch_projects ($onprojects = all projects with their photo, $contents). --}}
 @extends('layouts.public')
 
 @php
