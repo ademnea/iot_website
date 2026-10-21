@@ -37,8 +37,12 @@ crashed once a past event existed (fix 017).
   - Base `Controller::findForEdit()` and `dateInput()`, used by every edit page.
   - A view composer in `AppServiceProvider` that gives every view needing it the site
     content (`$contents`).
-- **Persistence:** queries still use `DB::table()`. Moving to Eloquent relationships is a
-  separate step.
+- **Persistence:** photos are reached through model relationships. `projects`, `news`
+  (the `events` table) and `prototypes` each have `photos()` and a `cover` accessor (the
+  first photo), so the hand-written joins and the one-row-per-photo grouping in the views
+  are gone. Simple writes still use `DB::table()`.
+  - **Remaining D9 behaviour:** records without a photo row stay hidden where they were
+    before, now via `has('photos')`.
 - **The old controllers are kept** in `legacy/controllers/` for reference. Nothing loads
   them.
 

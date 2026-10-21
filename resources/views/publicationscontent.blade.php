@@ -55,7 +55,7 @@ margin-right:10%;
       
 <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow">
     <a href="#">
-        <img class="rounded-t-lg" src="images/prototypes/{{ $prototype->photo }}" alt="" />
+        <img class="rounded-t-lg" src="images/prototypes/{{ $prototype->cover }}" alt="" />
     </a>
     <div class="p-5">
         <a href="#">

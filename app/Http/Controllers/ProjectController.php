@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\projects;
 use App\Support\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,11 +13,8 @@ class ProjectController extends Controller
     // /projectscontent
     public function index()
     {
-        // projects without a photo row are not listed (inner join; defect D9, awaiting a decision).
-        $projects = DB::table('projects')
-            ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
-            ->select('projects.*', 'project_photos.photo')
-            ->get();
+        // projects without a photo row are not listed (defect D9, awaiting a decision).
+        $projects = projects::has('photos')->with('photos')->get();
 
         return view('projectscontent', [
             'onprojects' => $projects->where('status', 'Ongoing')->values(),

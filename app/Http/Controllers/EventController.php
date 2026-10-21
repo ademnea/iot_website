@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\news;
 use App\Support\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -12,13 +13,8 @@ class EventController extends Controller
     // /newscontent
     public function index()
     {
-        // events without a photo are not listed (inner join; defect D9). Only the photo column is
-        // taken from event_photos, so each row keeps the event's own id (for Edit) and status.
-        $events = DB::table('events')
-            ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
-            ->select('events.*', 'event_photos.photo')
-            ->get()
-            ->unique('id');   // one card per event, with its first photo
+        // events without a photo are not listed (defect D9).
+        $events = news::has('photos')->with('photos')->get();
 
         return view('newscontent', [
             'onevents' => $events->where('status', 'Ongoing')->values(),

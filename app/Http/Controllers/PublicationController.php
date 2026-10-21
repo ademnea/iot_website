@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\prototypes;
 use App\Models\publications;
 use App\Support\Upload;
 use Illuminate\Http\Request;
@@ -16,10 +17,7 @@ class PublicationController extends Controller
     {
         return view('publicationscontent', [
             'publications' => publications::all(),
-            'prototypes' => DB::table('prototypes')
-                ->join('prototype_photos', 'prototypes.id', '=', 'prototype_photos.prototype_id')
-                ->select('prototypes.*', 'prototype_photos.*')
-                ->get(),
+            'prototypes' => prototypes::has('photos')->with('photos')->get(),
         ]);
     }
 
