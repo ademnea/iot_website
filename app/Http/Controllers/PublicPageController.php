@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\members;
+use App\Models\news;
 use App\Models\partners;
+use App\Models\projects;
+use App\Models\prototypes;
 use App\Models\publications;
 use Illuminate\Support\Facades\DB;
 
@@ -38,40 +41,24 @@ class PublicPageController extends Controller
 
     public function fetch_projects()
     {
-        // projects without a photo are not listed (inner join; defect D9, awaiting a decision).
-        return view('projects', [
-            'onprojects' => DB::table('projects')
-                ->join('project_photos', 'projects.id', '=', 'project_photos.project_id')
-                ->select('projects.*', 'project_photos.photo')
-                ->get(),
-        ]);
+        // projects without a photo row are not listed (defect D9, awaiting a decision).
+        return view('projects', ['onprojects' => projects::has('photos')->with('photos')->get()]);
     }
 
     public function fetch_publications()
     {
         return view('publications', [
             'publications' => publications::all(),
-            'prototypes' => DB::table('prototypes')
-                ->join('prototype_photos', 'prototypes.id', '=', 'prototype_photos.prototype_id')
-                ->select('prototypes.*', 'prototype_photos.*')
-                ->get(),
+            'prototypes' => prototypes::has('photos')->with('photos')->get(),
         ]);
     }
 
     public function fetch_events()
     {
         return view('news', [
-            // grouped by event: one entry per event with all of its photos.
-            'onevents' => $this->withPhotos('events', 'event_photos', 'event_id')
-                ->where('events.status', 'Ongoing')
-                ->get()
-                ->groupBy('id'),
-            // past events without a photo are not listed (inner join; defect D9).
-            'pastevents' => DB::table('events')
-                ->join('event_photos', 'events.id', '=', 'event_photos.event_id')
-                ->select('events.*', 'event_photos.*')
-                ->where('events.status', 'Past')
-                ->get(),
+            'onevents' => news::with('photos')->where('status', 'Ongoing')->get(),
+            // past events without a photo are not listed (defect D9).
+            'pastevents' => news::has('photos')->with('photos')->where('status', 'Past')->get(),
         ]);
     }
 
@@ -94,30 +81,22 @@ class PublicPageController extends Controller
     public function fetch_project_gallery()
     {
         return view('project_gallery', [
-            'projects' => $this->withPhotos('projects', 'project_photos', 'project_id')->get()->groupBy('id'),
+            'projects' => projects::with('photos')->get(),
         ]);
     }
 
     public function fetch_prototype_gallery()
     {
         return view('prototypes_gallery', [
-            'prototypes' => $this->withPhotos('prototypes', 'prototype_photos', 'prototype_id')->get()->groupBy('id'),
+            'prototypes' => prototypes::with('photos')->get(),
         ]);
     }
 
     public function fetch_events_gallery()
     {
         return view('events_gallery', [
-            'events' => $this->withPhotos('events', 'event_photos', 'event_id')->get()->groupBy('id'),
+            'events' => news::with('photos')->get(),
         ]);
     }
 
-    // Every record of $table with each of its photos (one row per photo; records without a
-    // photo appear once with photo = null).
-    private function withPhotos(string $table, string $photos, string $key)
-    {
-        return DB::table($table)
-            ->leftJoin($photos, "$table.id", '=', "$photos.$key")
-            ->select("$table.*", "$photos.photo");
-    }
 }

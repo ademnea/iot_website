@@ -1,16 +1,14 @@
-{{-- Public news page. Data: PublicPageController@fetch_events ($onevents grouped by event with photos, $pastevents rows, $contents). --}}
+{{-- Public news page. Data: PublicPageController@fetch_events ($onevents, $pastevents: events with their photos; $contents). --}}
 @extends('layouts.public')
 
 @php
-    // Past events arrive as one row per photo (events joined to event_photos); group them per event.
-    $past = $pastevents->groupBy('event_id');
     $when = function ($e) {
         $s = $e->start_date ? \Illuminate\Support\Carbon::parse($e->start_date) : null;
         $f = $e->end_date ? \Illuminate\Support\Carbon::parse($e->end_date) : null;
         if (! $s) return null;
         return ($f && ! $f->isSameDay($s)) ? $s->format('j M').' – '.$f->format('j M Y') : $s->format('j M Y');
     };
-    $groups = ['upcoming' => ['Upcoming and ongoing', $onevents], 'past' => ['Past events', $past]];
+    $groups = ['upcoming' => ['Upcoming and ongoing', $onevents], 'past' => ['Past events', $pastevents]];
 @endphp
 
 @section('title', 'News')
@@ -30,9 +28,8 @@
             <x-admin-hint what="An event" href="/register_news" />
         @else
             <div class="cards">
-                @foreach ($events as $rows)
-                    @php($event = $rows->first())
-                    @php($photos = $rows->pluck('photo')->filter()->unique())
+                @foreach ($events as $event)
+                    @php($photos = $event->photos->pluck('photo')->filter()->unique())
                     <article class="card">
                         @if ($photos->isNotEmpty())
                             <img class="thumb" src="{{ asset('images/events/'.rawurlencode($photos->first())) }}" alt="">

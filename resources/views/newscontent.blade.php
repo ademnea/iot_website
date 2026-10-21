@@ -57,7 +57,7 @@ margin-right:10%;
 
                 <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="images/events/{{ $onevent->photo }}" alt="">
+                        <img class="" src="images/events/{{ $onevent->cover }}" alt="">
                     </div>
                     <div class="flex border-b border-gray-200">
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-brand-700 me-2"></i>
@@ -107,7 +107,7 @@ margin-right:10%;
 
                 <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="images/events/{{ $pastevent->photo }}" alt="">
+                        <img class="" src="images/events/{{ $pastevent->cover }}" alt="">
                     </div>
                     <div class="flex border-b border-gray-200">
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-brand-700 me-2"></i>

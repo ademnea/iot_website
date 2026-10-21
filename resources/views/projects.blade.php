@@ -1,4 +1,4 @@
-{{-- Public projects page. Data: PublicPageController@fetch_projects ($onprojects = all projects with their photo, $contents). --}}
+{{-- Public projects page. Data: PublicPageController@fetch_projects ($onprojects = projects with their photos, $contents). --}}
 @extends('layouts.public')
 
 @php
@@ -28,8 +28,8 @@
             <div class="bus">
                 @foreach ($projects as $project)
                     <article class="node-card">
-                        @if ($project->photo)
-                            <img class="thumb" src="{{ asset('images/projects/'.rawurlencode($project->photo)) }}" alt="">
+                        @if ($project->cover)
+                            <img class="thumb" src="{{ asset('images/projects/'.rawurlencode($project->cover)) }}" alt="">
                         @endif
                         <div class="meta">
                             <span class="pill {{ $project->status === 'Past' ? 'past' : '' }}">{{ $project->status }}</span>

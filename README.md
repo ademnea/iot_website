@@ -147,6 +147,7 @@ type: its admin list (`index`), add (`store`), edit page (`edit`) and save (`upd
 | Code | Does |
 |---|---|
 | `App\Support\Upload` | Holds the upload rules (`Upload::IMAGE`, `Upload::DOCUMENT`) and stores every file under a generated name (`Upload::store`) |
+| `photos()` and `cover` on the `projects`, `news` (events) and `prototypes` models | Load a record's photos; `cover` is the first one, used on list cards |
 | `Controller::findForEdit()` | Loads the record an edit page opens, or shows Not Found |
 | `Controller::dateInput()` | Formats a date for a date field |
 | The view composer in `AppServiceProvider` | Passes `$contents` (the lab's details) to every view that shows them, so controllers don't load it |

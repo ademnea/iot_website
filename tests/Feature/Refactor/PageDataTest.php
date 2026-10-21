@@ -49,4 +49,23 @@ class PageDataTest extends FixesTestCase
             ->assertViewHas('pastevents', fn ($r) => $r->pluck('id')->all() === [$past])
             ->assertSee('href="/editnews?id='.$past.'"', false);
     }
+
+    public function test_public_pages_show_each_record_once_with_all_its_photos(): void
+    {
+        $admin = $this->admin();
+        $event = DB::table('events')->insertGetId(['title' => 'Field day', 'status' => 'Past', 'description' => 'd', 'admin_id' => $admin->id]);
+        DB::table('event_photos')->insert([['photo' => 'e1.jpg', 'event_id' => $event], ['photo' => 'e2.jpg', 'event_id' => $event]]);
+        DB::table('events')->insert(['title' => 'No photo', 'status' => 'Past', 'description' => 'd', 'admin_id' => $admin->id]);
+        $project = DB::table('projects')->insertGetId(['name' => 'Hive', 'description' => 'd', 'admin_id' => $admin->id]);
+        DB::table('project_photos')->insert([['photo' => 'p1.jpg', 'project_id' => $project], ['photo' => 'p2.jpg', 'project_id' => $project]]);
+
+        // a past event is listed once, with both photos; one without photos isn't listed (D9).
+        $news = $this->get('/news')->assertOk()->getContent();
+        $this->assertSame(1, substr_count($news, '<h3>Field day</h3>'));
+        $this->assertStringContainsString('images/events/e2.jpg', $news);
+        $this->assertStringNotContainsString('No photo', $news);
+
+        $this->get('/events_gallery')->assertOk()->assertSee('images/events/e1.jpg', false)->assertSee('images/events/e2.jpg', false);
+        $this->get('/project_gallery')->assertOk()->assertSee('images/projects/p1.jpg', false)->assertSee('images/projects/p2.jpg', false);
+    }
 }
