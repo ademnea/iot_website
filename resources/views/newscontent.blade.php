@@ -57,7 +57,7 @@ margin-right:10%;
 
                 <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="images/events/{{ $onevent->photo }}" alt="">
+                        <img class="" src="images/events/{{ $onevent->cover }}" alt="">
                     </div>
                     <div class="flex border-b border-gray-200">
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-brand-700 me-2"></i>
@@ -103,15 +103,15 @@ margin-right:10%;
             <h1 class="font-medium"> Past Events</h1>
             <br>
 
-        @foreach ($pastevents as $pastvent)
+        @foreach ($pastevents as $pastevent)
 
                 <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="images/events/{{ $pastvent->photo }}" alt="">
+                        <img class="" src="images/events/{{ $pastevent->cover }}" alt="">
                     </div>
                     <div class="flex border-b border-gray-200">
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-brand-700 me-2"></i>
-                        {{ $pastvent->venue }}
+                        {{ $pastevent->venue }}
                         </small>
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="far fa-calendar-alt text-brand-700 me-2"></i>
                         auto generated
@@ -121,8 +121,8 @@ margin-right:10%;
                         </small>
                     </div>
                     <div class="p-4">
-                       <h1>{{ $pastvent->title }}</h1>
-                        <p>{{ $pastvent->description }}</p>
+                       <h1>{{ $pastevent->title }}</h1>
+                        <p>{{ $pastevent->description }}</p>
                          <br><hr>
                         <div class="grid grid-cols-2 gap-4">
                             <div class="col-span-1 flex justify-center items-center">

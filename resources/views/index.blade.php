@@ -1,4 +1,4 @@
-{{-- Public home page. Data: show_data@fetch_home ($contents, $leader, $partners, $randomPhotos). --}}
+{{-- Public home page. Data: PublicPageController@fetch_home ($leader, $partners; $contents from the view composer). --}}
 @extends('layouts.public')
 
 @php

@@ -1,4 +1,4 @@
-{{-- Public gallery index. Data: show_data@fetch_gallery ($contents, $randomPhotos = six random members). --}}
+{{-- Public gallery index. Data: PublicPageController@fetch_gallery ($contents, $randomPhotos = six random members). --}}
 @extends('layouts.public')
 
 @section('title', 'Gallery')

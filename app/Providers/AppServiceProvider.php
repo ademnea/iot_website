@@ -19,11 +19,20 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // The Fortify/Jetstream auth pages (login, forgot/reset password, confirm password) show
-        // the lab logo from website_content, but Fortify renders them without $contents.
-        // A composer only queries when one of these views renders, so it is safe before migrations
-        // (unlike View::share in boot, which was tried here before).
-        View::composer(['auth.*', 'components.authentication-card'], function ($view) {
+        // Every view that shows the lab's name, logo or contacts gets $contents (the website_content
+        // row) here, instead of each controller loading it. A composer only queries when one of
+        // these views renders, so it is safe before migrations (unlike View::share in boot, which
+        // was tried here before).
+        View::composer([
+            // public pages (PublicPageController) and the shared layout
+            'index', 'about_us', 'projects', 'publications', 'news', 'partners',
+            'gallery', 'team_gallery', 'project_gallery', 'prototypes_gallery', 'events_gallery',
+            'layouts.public',
+            // admin pages that show the home content
+            'homecontent',
+            // login, register-an-admin and the Fortify/Jetstream auth pages
+            'oldlogin', 'register', 'auth.*', 'components.authentication-card',
+        ], function ($view) {
             if (! array_key_exists('contents', $view->getData())) {
                 $view->with('contents', website_content::all());
             }

@@ -22,6 +22,7 @@ the problem, what changed, how it was verified, and what is left.
 | [014](014-show-hide-contacts-and-socials.md) | Show/hide switches for socials and contacts, social icons, tab icon, password help (graceful reset, `admin:password`, `admin:reset-2fa`), blue admin | — | Medium | Done, tests pass |
 | [015](015-dashboard-shortcuts.md) | Dashboard "+" boxes are working shortcuts; no green or indigo left anywhere | W20 | Low | Done, tests pass |
 | [016](016-home-page-first.md) | The home page always shows first, even before any content is added | F5 | Medium | Done, tests pass |
+| [017](017-admin-news-list.md) | Admin News list crashed once a past event existed; Edit opened the wrong event | — | High | Done, tests pass |
 
 ## Deploying these fixes
 

@@ -1,4 +1,4 @@
-{{-- Public research page. Data: show_data@fetch_publications ($publications, $prototypes with photos, $contents). --}}
+{{-- Public research page. Data: PublicPageController@fetch_publications ($publications, $prototypes with photos, $contents). --}}
 @extends('layouts.public')
 
 @php
@@ -59,7 +59,7 @@
         <div class="cards">
             @foreach ($prototypes as $prototype)
                 <article class="card">
-                    @if ($prototype->photo)<img class="thumb" src="{{ asset('images/prototypes/'.rawurlencode($prototype->photo)) }}" alt="">@endif
+                    @if ($prototype->cover)<img class="thumb" src="{{ asset('images/prototypes/'.rawurlencode($prototype->cover)) }}" alt="">@endif
                     <h3>{{ $prototype->name }}</h3>
                     <p>{!! nl2br(e($prototype->description)) !!}</p>
                 </article>

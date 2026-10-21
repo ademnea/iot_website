@@ -1,6 +1,6 @@
 # ADR-0002: Query builder with verb-grouped controllers
 
-- **Status:** Accepted (legacy, retroactive). Part B of ADR-0005 proposes the replacement.
+- **Status:** Controller grouping superseded by [ADR-0009](0009-controllers-by-content-type.md) (2026-10-21). The query builder is still in use.
 - **Date:** 2023-04 (recorded 2026-10-20)
 
 ## Context

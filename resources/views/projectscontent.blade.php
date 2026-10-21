@@ -56,7 +56,7 @@ margin-right:10%;
     <br>
                 <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="images/projects/{{ $onproject->photo }}" >
+                        <img class="" src="images/projects/{{ $onproject->cover }}" >
                     </div>
                     <div class="flex border-b border-gray-200">
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-brand-700 me-2"></i>
@@ -98,7 +98,7 @@ margin-right:10%;
             <br>
                             <div class="bg-white rounded-lg overflow-hidden shadow-md" style="width:50%; height:30%">
                     <div class="overflow-hidden">
-                        <img class="" src="images/projects/{{ $pastproject->photo }}" >
+                        <img class="" src="images/projects/{{ $pastproject->cover }}" >
                     </div>
                     <div class="flex border-b border-gray-200">
                         <small class="flex-1 text-center py-2 border-r border-gray-200"><i class="fas fa-map-marker-alt text-brand-700 me-2"></i>

@@ -1,4 +1,4 @@
-{{-- Public team gallery. Data: show_data@fetch_team_gallery ($teams = all members, $contents). --}}
+{{-- Public team gallery. Data: PublicPageController@fetch_team_gallery ($teams = all members, $contents). --}}
 @extends('layouts.public')
 
 @section('title', 'Team gallery')
