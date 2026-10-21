@@ -45,7 +45,7 @@ redirects with a flash message.
 ### 3.1 `show_data`: public read model
 | Method | Route | Data passed to view | View |
 |---|---|---|---|
-| `fetch_home` | `/` | `contents`, `leader`, `partners`, `randomPhotos` (redirects to `/oldlogin` when `contents` is empty) | `index` |
+| `fetch_home` | `/` | `contents`, `leader`, `partners`, `randomPhotos` (renders even when `contents` is empty; fix 016) | `index` |
 | `fetch_team` | `/about` | `teams` (researchers + leader), `PhDs`, `masters`, `admins`, `interns`, `partners`, `contents`, `randomPhotos` | `about_us` |
 | `fetch_projects` | `/projects` | `onprojects` (all projects ⨝ photos) | `projects` |
 | `fetch_publications` | `/publications` | `publications`, `prototypes` (⨝ photos) | `publications` |

@@ -4,6 +4,8 @@
 @php
     $site = $contents->first();
     $lead = $leader->first();
+    // Where the "add it" hints point: the edit form once home content exists, the add form before.
+    $homeForm = $site ? '/edithome?id='.$site->id : '/register_home';
     $objectives = collect(preg_split('/\r\n|\r|\n/', (string) $site?->objectives))->map(fn ($l) => trim($l))->filter();
 @endphp
 
@@ -15,10 +17,10 @@
         @if ($site?->Labname)<span class="label">{{ $site->Labname }}</span>@endif
         @if ($site?->motto)
             <h1>{{ $site->motto }}</h1>
-        @elseif ($site?->Labname)
-            <h1>{{ $site->Labname }}</h1>
+        @else
+            <h1>{{ $site?->Labname ?: config('app.name') }}</h1>
         @endif
-        @if (! $site?->motto)<x-admin-hint what="The lab's motto" href="/edithome?id={{ $site?->id }}" />@endif
+        @if (! $site?->motto)<x-admin-hint what="The lab's motto" href="{{ $homeForm }}" />@endif
         @if ($site?->vision)<p class="lead">{{ $site->vision }}</p>@endif
         <div class="actions">
             <a class="btn" href="/projects">See our projects</a>
@@ -49,9 +51,9 @@
     @else
         <p class="empty">The lab's vision, mission and objectives will appear here.</p>
     @endif
-    @if (! $site?->vision)<x-admin-hint what="Vision" href="/edithome?id={{ $site?->id }}" />@endif
-    @if (! $site?->mission)<x-admin-hint what="Mission" href="/edithome?id={{ $site?->id }}" />@endif
-    @if ($objectives->isEmpty())<x-admin-hint what="Objectives" href="/edithome?id={{ $site?->id }}" />@endif
+    @if (! $site?->vision)<x-admin-hint what="Vision" href="{{ $homeForm }}" />@endif
+    @if (! $site?->mission)<x-admin-hint what="Mission" href="{{ $homeForm }}" />@endif
+    @if ($objectives->isEmpty())<x-admin-hint what="Objectives" href="{{ $homeForm }}" />@endif
 </div></section>
 
 @if ($lead && $site?->team_leader_word)
@@ -71,7 +73,7 @@
             @if (! $lead)
                 <x-admin-hint what="A team leader" href="/register_team" />
             @else
-                <x-admin-hint what="The team leader's message" href="/editleader?id={{ $site?->id }}" />
+                <x-admin-hint what="The team leader's message" href="{{ $site ? '/editleader?id='.$site->id : '/register_home' }}" />
             @endif
         </div></section>
     @endauth

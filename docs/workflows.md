@@ -47,8 +47,10 @@ the sidebar is the only navigation.
 
 ## 2. First-run setup (new install)
 
-A fresh install has no site content, so the public home page sends everyone to the login
-page until an admin adds it.
+A fresh install has no site content yet. The public home page still shows, under the lab's
+name from `APP_NAME`. The first admin logs in with the **Admin login** button and adds the
+content. Until then, signed-in admins see "hasn't been added yet" hints on the home page,
+linking to the right form (fix 016).
 
 ```mermaid
 sequenceDiagram
@@ -58,8 +60,8 @@ sequenceDiagram
     Op->>S: docker compose up -d --build
     Op->>S: php artisan admin:create you@lab --name="…"
     Ad->>S: GET /  (no content yet)
-    S-->>Ad: redirect to /login
-    Ad->>S: log in
+    S-->>Ad: home page under the lab's name
+    Ad->>S: Admin login → log in
     Ad->>S: Home → Add New Home Content: lab name, motto, vision
     Ad->>S: Home → edit logo, banner, contacts, social links, mission & objectives
     Ad->>S: Current Team → add the team leader (role: Team Leader)

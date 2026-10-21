@@ -70,8 +70,8 @@ stored on the web server's local disk under `public/`.
   render correctly.
 
 ### 2.5 Assumptions
-- Exactly one `website_content` row exists. The home page redirects to login
-  when there is none (`show_data@fetch_home`).
+- Exactly one `website_content` row exists. When there is none, the home page
+  still renders under the lab's name (fix 016).
 - Exactly one member has `role = 'leader'`.
 
 ---
@@ -87,7 +87,7 @@ defects), or *Not implemented*.
 | FR-HOME-1 | Show lab name, motto, vision, mission, objectives, banner and logo from `website_content`. | Implemented |
 | FR-HOME-2 | Show the team leader's photo and message. | Implemented |
 | FR-HOME-3 | Show partners. | Implemented |
-| FR-HOME-4 | When no website content exists, redirect to the admin login so first-run setup can happen. | Implemented |
+| FR-HOME-4 | When no website content exists, still show the home page; signed-in admins are pointed to Add New Home Content. | Implemented (fix 016; previously redirected to login) |
 
 ### 3.2 About / team (`/about`)
 | ID | Requirement | Status |

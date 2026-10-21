@@ -3,6 +3,7 @@
 namespace Tests\Feature\Fixes;
 
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 // docs/fixes/002-authentication.md
@@ -166,5 +167,18 @@ class AuthenticationFixesTest extends FixesTestCase
 
         $this->assertTrue(Hash::check('legacy-plain', $user->fresh()->password));
         $this->artisan('admin:hash-passwords')->expectsOutput('Hashed 0 plain-text password(s).');
+    }
+
+    public function test_an_admin_from_the_old_system_logs_in_with_the_same_password(): void
+    {
+        // as left by the old system: a plain-text password, no 2FA
+        DB::table('users')->insert(['name' => 'Editor', 'email' => 'editor@example.org', 'password' => 'old-pass-1',
+                                    'created_at' => now(), 'updated_at' => now()]);
+        $this->artisan('admin:hash-passwords')->assertSuccessful();
+
+        $this->post('/login', ['email' => 'editor@example.org', 'password' => 'old-pass-1'])->assertRedirect('/dashboard');
+        foreach (['/dashboard', '/homecontent', '/projectscontent', '/newscontent', '/publicationscontent', '/aboutuscontent'] as $page) {
+            $this->get($page)->assertOk();
+        }
     }
 }
