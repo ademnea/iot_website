@@ -101,6 +101,15 @@ class DeleteContentTest extends FixesTestCase
             ->assertSee('Delete “Open day”?', false);
     }
 
+    public function test_names_in_the_confirmation_are_escaped_once(): void
+    {
+        $this->event('Tom & "Jerry"');
+
+        $this->actingAs($this->user)->get('/newscontent')->assertOk()
+            ->assertSee('data-confirm="Delete “Tom &amp; &quot;Jerry&quot;”?"', false)
+            ->assertDontSee('&amp;amp;', false);
+    }
+
     // ---- publications, partners, home content ------------------------------------------------
 
     public function test_deleting_a_publication(): void

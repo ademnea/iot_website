@@ -21,9 +21,10 @@ The trash icons on Current Team already worked (they move a member to Past Team)
 unchanged.
 
 ## Change
-Each icon is now a delete button inside a form, and the browser asks for confirmation
-first. The confirmation handler lives in `partials/admin-theme`, which every admin page
-includes.
+Each icon is now `<x-trash-button>` (`resources/views/components/trash-button.blade.php`):
+a delete button inside a form, and the browser asks for confirmation first. The
+confirmation handler lives in `partials/admin-theme`, which every admin page includes.
+The four deletes share `Controller::deleteRecord()`.
 
 | Icon | Route | What it does |
 |---|---|---|
@@ -46,4 +47,5 @@ includes.
 - Each Home value is cleared on its own, without changing the others.
 - Fields outside the list and unknown ids are rejected.
 - Visitors are sent to the login page and nothing is changed.
-- The pages render the forms with their confirmation text.
+- The pages render the forms with their confirmation text, and names in it are escaped
+  once (a title such as `Tom & "Jerry"` shows as written).

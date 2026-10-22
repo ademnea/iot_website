@@ -100,14 +100,9 @@ class PublicationController extends Controller
         return redirect('/publicationscontent')->with('success', 'publication updated successfully!');
     }
 
-    // POST /deletepublication: the database also removes its links to team members (foreign key
-    // cascade). Its document and cover stay on disk, as they do when they are replaced.
+    // POST /deletepublication: its links to team members go with it.
     public function destroy(Request $request)
     {
-        $request->validate(['id' => 'required|exists:publications,id']);
-
-        DB::table('publications')->where('id', $request->input('id'))->delete();
-
-        return redirect('/publicationscontent')->with('success', 'publication deleted successfully!');
+        return $this->deleteRecord($request, 'publications', '/publicationscontent', 'publication deleted successfully!');
     }
 }

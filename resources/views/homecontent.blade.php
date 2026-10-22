@@ -61,16 +61,7 @@
             <div class="col-span-1 flex justify-center items-center">
       <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the logo? The website shows the default IoT-ra logo instead.">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="logo">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the logo? The website shows the default IoT-ra logo instead." :fields="['id' => $content->id, 'field' => 'logo']" />
             </div>
             <div class="col-span-1 flex justify-center items-center">
                          {{-- action to edit, rewriting this url --}}
@@ -97,16 +88,7 @@
     <div class="col-span-1 flex justify-center items-center">
 <div class="grid grid-cols-2 gap-4">
     <div class="col-span-1 flex justify-center items-center">
-        <form method="POST" action="/clearhomefield" data-confirm="Remove the banner photo? The page banners stay plain navy.">
-            @csrf
-            <input type="hidden" name="id" value="{{ $content->id }}">
-            <input type="hidden" name="field" value="banner">
-            <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-        </svg>
-            </button>
-        </form>
+        <x-trash-button action="/clearhomefield" confirm="Remove the banner photo? The page banners stay plain navy." :fields="['id' => $content->id, 'field' => 'banner']" />
     </div>
     <div class="col-span-1 flex justify-center items-center">
                  {{-- action to edit, rewriting this url --}}
@@ -197,16 +179,7 @@
 
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the lab name? The website uses its default name instead.">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="Labname">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the lab name? The website uses its default name instead." :fields="['id' => $content->id, 'field' => 'Labname']" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
@@ -226,16 +199,7 @@
 
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the vision from the website?">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="vision">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the vision from the website?" :fields="['id' => $content->id, 'field' => 'vision']" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
@@ -255,16 +219,7 @@
 
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the motto from the website?">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="motto">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the motto from the website?" :fields="['id' => $content->id, 'field' => 'motto']" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
@@ -284,16 +239,7 @@
     <hr>
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the mission from the website?">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="mission">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the mission from the website?" :fields="['id' => $content->id, 'field' => 'mission']" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
@@ -313,16 +259,7 @@
 
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the objectives from the website?">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="objectives">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the objectives from the website?" :fields="['id' => $content->id, 'field' => 'objectives']" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
@@ -368,16 +305,7 @@
      @endif
             <div class="grid grid-cols-2 gap-4">
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/clearhomefield" data-confirm="Remove the team leader's message from the website?">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $content->id }}">
-                    <input type="hidden" name="field" value="team_leader_word">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/clearhomefield" confirm="Remove the team leader's message from the website?" :fields="['id' => $content->id, 'field' => 'team_leader_word']" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">
@@ -431,15 +359,7 @@
             <div class="grid grid-cols-2 gap-4">
         
             <div class="col-span-1 flex justify-center items-center">
-                <form method="POST" action="/deletepartner" data-confirm="Delete the partner “{{ $partner->name }}”?">
-                    @csrf
-                    <input type="hidden" name="id" value="{{ $partner->id }}">
-                    <button type="submit" class="p-2 rounded-lg hover:bg-red-50" aria-label="Delete">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="h-6 w-6 text-red-500" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
-                </svg>
-                    </button>
-                </form>
+                <x-trash-button action="/deletepartner" :confirm="'Delete the partner “'.$partner->name.'”?'" :fields="['id' => $partner->id]" />
             </div>
 
             <div class="col-span-1 flex justify-center items-center">

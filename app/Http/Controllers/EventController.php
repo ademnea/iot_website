@@ -104,15 +104,10 @@ class EventController extends Controller
         return redirect('/newscontent')->with('success', 'event updated successfully!');
     }
 
-    // POST /deletenews: the database also removes its photo rows (foreign key cascade).
-    // Uploaded files stay on disk, as they do for projects.
+    // POST /deletenews: its photo rows go with it.
     public function destroy(Request $request)
     {
-        $request->validate(['id' => 'required|exists:events,id']);
-
-        DB::table('events')->where('id', $request->input('id'))->delete();
-
-        return redirect('/newscontent')->with('success', 'event deleted successfully!');
+        return $this->deleteRecord($request, 'events', '/newscontent', 'event deleted successfully!');
     }
 
     private function addPhoto(int|string $eventId, $file): void

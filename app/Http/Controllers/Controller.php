@@ -24,6 +24,17 @@ class Controller extends BaseController
         return $record;
     }
 
+    // What a trash icon posts to: deletes the record with the posted id (rows that point to it
+    // go too, through the foreign keys' ON DELETE CASCADE) and returns to the list. Uploaded
+    // files stay on disk, as they do when a photo or document is replaced.
+    protected function deleteRecord(Request $request, string $table, string $list, string $message)
+    {
+        $request->validate(['id' => "required|exists:$table,id"]);
+        DB::table($table)->where('id', $request->input('id'))->delete();
+
+        return redirect($list)->with('success', $message);
+    }
+
     // date inputs need Y-m-d; the database stores a datetime.
     protected function dateInput(?string $value): string
     {

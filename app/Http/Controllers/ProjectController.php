@@ -111,15 +111,10 @@ class ProjectController extends Controller
         return redirect('/projectscontent')->with('success', 'project info updated successfully!');
     }
 
-    // POST /deleteproject: the database also removes its photo rows and its prototypes
-    // (foreign keys cascade), so the confirmation on the card names the prototypes.
-    // Uploaded files stay on disk, as they do when a photo is replaced.
+    // POST /deleteproject: its photo rows and its prototypes go with it (the confirmation on
+    // the card names the prototypes).
     public function destroy(Request $request)
     {
-        $request->validate(['id' => 'required|exists:projects,id']);
-
-        DB::table('projects')->where('id', $request->input('id'))->delete();
-
-        return redirect('/projectscontent')->with('success', 'project deleted successfully!');
+        return $this->deleteRecord($request, 'projects', '/projectscontent', 'project deleted successfully!');
     }
 }
