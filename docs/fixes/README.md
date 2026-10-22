@@ -23,6 +23,8 @@ the problem, what changed, how it was verified, and what is left.
 | [015](015-dashboard-shortcuts.md) | Dashboard "+" boxes are working shortcuts; no green or indigo left anywhere | W20 | Low | Done, tests pass |
 | [016](016-home-page-first.md) | The home page always shows first, even before any content is added | F5 | Medium | Done, tests pass |
 | [017](017-admin-news-list.md) | Admin News list crashed once a past event existed; Edit opened the wrong event | — | High | Done, tests pass |
+| [018](018-phones-and-tablets.md) | Public menu lost links on phones; 15 admin pages had no viewport and fixed widths squeezed content | — | Medium | Done, tests pass |
+| [019](019-trash-icons.md) | The 14 admin trash icons (Projects, News, Products, Home) did nothing | — | Medium | Done, tests pass |
 
 ## Deploying these fixes
 
@@ -49,4 +51,4 @@ the problem, what changed, how it was verified, and what is left.
 | D9 | Projects and events without a photo hidden on public pages | Changes what visitors see. Confirm with stakeholders first. |
 | T1, T2, T4–T6 | Structural debt (resource controllers, Storage disk, duplicate libs) | See ADR-0005, 0007. Larger refactors, planned separately. T3 (tests/checks) is done in 011; CI still to wire up. |
 | — | Prototype editing | Never implemented. The dead link was removed (006). |
-| — | Admin roles, delete for projects/events/publications/partners, viewing messages | New features, not defects. |
+| — | Admin roles, viewing messages | New features, not defects. |

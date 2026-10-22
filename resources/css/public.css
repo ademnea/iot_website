@@ -103,6 +103,12 @@ a { color: var(--signal-ink); text-underline-offset: 3px; }
 .nav a[aria-current="page"] { color: var(--heading); box-shadow: inset 0 -2px 0 var(--signal); border-radius: 0; }
 .nav a:hover { background: var(--mist); }
 .nav .admin { margin-left: 8px; border: 1.5px solid var(--btn-bg); color: var(--heading); }
+.menu-toggle {
+  display: none; align-items: center; gap: 8px; min-height: 44px; padding: 0 14px;
+  background: none; border: 1.5px solid var(--line); border-radius: 10px; cursor: pointer;
+  font: 500 0.95rem/1 var(--font-display); color: var(--heading);
+}
+.menu-toggle svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
 /* navy banners (home hero and page headers). The admin's uploaded banner photo sits underneath. */
 .banner {
@@ -295,11 +301,25 @@ footer ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
   .node-card::before { top: 4px; left: -31px; }
   .node-card::after { display: none; }
   .word { grid-template-columns: minmax(0, 1fr); }
+  /* the menu folds behind the Menu button and opens as a full-width list */
+  .has-toggle .wrap { flex-wrap: wrap; }
+  .has-toggle .menu-toggle { display: inline-flex; }
+  .has-toggle .nav { display: none; width: 100%; flex-direction: column; align-items: stretch; gap: 2px; padding-bottom: 8px; }
+  .has-toggle.open .nav { display: flex; }
+  .has-toggle .nav a { padding: 14px 12px; }
+  .has-toggle .nav a[aria-current="page"] { box-shadow: inset 3px 0 0 var(--signal); background: var(--mist); }
+  .has-toggle .nav .admin { margin: 6px 0 0; text-align: center; }
 }
 @media (max-width: 560px) {
   .site-header .wrap { flex-wrap: wrap; }
   .logo img { height: 44px; }
   .nav { width: 100%; }
+  /* keep the contact strip to one or two lines; the address is also in the footer */
+  .band-contacts > span { display: none; }
+  .band .wrap { padding-block: 6px; }
+  .mesh { max-width: 200px; }
+  .socials a { width: 36px; height: 36px; }
+  footer ul a { display: inline-block; padding-block: 6px; }
   .people { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .row { grid-template-columns: 3.5rem minmax(0, 1fr); }
   .row .cover { width: 3.5rem; }

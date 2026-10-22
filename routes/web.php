@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/editlabinfo_route', 'updateContacts');
         Route::get('/editleader', 'editLeader');
         Route::post('/editleader_route', 'updateLeader');
+        Route::post('/clearhomefield', 'clearField');
     });
 
     // Partners (added and listed on the Home admin page).
@@ -83,6 +84,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/insertpartner', 'store');
         Route::get('/editpartner', 'edit');
         Route::post('/editpartner_route', 'update');
+        Route::post('/deletepartner', 'destroy');
     });
 
     // Sidebar → Projects.
@@ -91,6 +93,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/submit-project', 'store');
         Route::get('/editproject', 'edit');
         Route::post('/editproject_route', 'update');
+        Route::post('/deleteproject', 'destroy');
     });
 
     // Sidebar → Products: publications and prototypes.
@@ -99,6 +102,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/insert_publication', 'store');
         Route::get('/editpublications', 'edit');
         Route::post('/editpublication_route', 'update');
+        Route::post('/deletepublication', 'destroy');
     });
     Route::controller(PrototypeController::class)->group(function () {
         Route::get('/registerprototype', 'create');
@@ -111,6 +115,7 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/insert_news', 'store');
         Route::get('/editnews', 'edit');
         Route::post('/editnews_route', 'update');
+        Route::post('/deletenews', 'destroy');
     });
 
     // Sidebar → Current Team and Past Team.

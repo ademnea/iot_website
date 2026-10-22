@@ -25,10 +25,7 @@
     </center>
 
 <br>
-<div style="
-margin-left:5%;
-margin-right:5%;
-">
+<div class="sm:mx-[5%]">
 <h3 class="font-medium">
    meet people that served the lab and made impact. you can view all about them in the gallery. 
 </h3>

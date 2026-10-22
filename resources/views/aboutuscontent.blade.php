@@ -35,10 +35,7 @@
 
 </center>
 <br>
-<div style="
-margin-left:5%;
-margin-right:5%;
-">
+<div class="sm:mx-[5%]">
 <h1 class="font-medium">
    About Us Content 
 </h1>

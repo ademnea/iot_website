@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Edit logo · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         @include('partials.admin-theme')

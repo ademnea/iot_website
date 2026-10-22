@@ -54,7 +54,12 @@
         {{-- An uploaded logo wins; until one is uploaded, the lab's IoT-ra logo from the repository is shown. --}}
         <img src="{{ $site?->logo ? asset('images/logo/'.rawurlencode($site->logo)) : asset('img/logo-iot-ra.png') }}" alt="{{ $labName }}">
     </a>
-    <nav class="nav" aria-label="Main">
+    {{-- Phones and tablets: the menu folds behind this button (the script below turns it on, so without JS the links stay visible). --}}
+    <button class="menu-toggle" type="button" aria-controls="site-nav" aria-expanded="false" hidden>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        <span>Menu</span>
+    </button>
+    <nav class="nav" id="site-nav" aria-label="Main">
         @foreach ($nav as $href => $label)
             <a href="{{ $href }}" @if (request()->is(ltrim($href, '/') ?: '/')) aria-current="page" @endif>{{ $label }}</a>
         @endforeach
@@ -106,5 +111,16 @@
         @endif
     </div></div>
 </footer>
+<script>
+    (() => {
+        const header = document.querySelector('.site-header');
+        const toggle = header.querySelector('.menu-toggle');
+        const setOpen = open => { header.classList.toggle('open', open); toggle.setAttribute('aria-expanded', open); };
+        toggle.hidden = false;
+        header.classList.add('has-toggle');
+        toggle.addEventListener('click', () => setOpen(! header.classList.contains('open')));
+        document.addEventListener('keydown', e => { if (e.key === 'Escape' && header.classList.contains('open')) { setOpen(false); toggle.focus(); } });
+    })();
+</script>
 </body>
 </html>

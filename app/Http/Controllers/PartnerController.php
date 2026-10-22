@@ -59,4 +59,14 @@ class PartnerController extends Controller
 
         return redirect('/homecontent')->with('success', 'partner info updated successfully!');
     }
+
+    // POST /deletepartner: its uploaded logo stays on disk, as it does when it is replaced.
+    public function destroy(Request $request)
+    {
+        $request->validate(['id' => 'required|exists:partners,id']);
+
+        DB::table('partners')->where('id', $request->input('id'))->delete();
+
+        return redirect('/homecontent')->with('success', 'partner deleted successfully!');
+    }
 }

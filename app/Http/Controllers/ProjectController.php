@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         // projects without a photo row are not listed (defect D9, awaiting a decision).
-        $projects = projects::has('photos')->with('photos')->get();
+        $projects = projects::has('photos')->with('photos')->withCount('prototypes')->get();
 
         return view('projectscontent', [
             'onprojects' => $projects->where('status', 'Ongoing')->values(),
@@ -109,5 +109,17 @@ class ProjectController extends Controller
         }
 
         return redirect('/projectscontent')->with('success', 'project info updated successfully!');
+    }
+
+    // POST /deleteproject: the database also removes its photo rows and its prototypes
+    // (foreign keys cascade), so the confirmation on the card names the prototypes.
+    // Uploaded files stay on disk, as they do when a photo is replaced.
+    public function destroy(Request $request)
+    {
+        $request->validate(['id' => 'required|exists:projects,id']);
+
+        DB::table('projects')->where('id', $request->input('id'))->delete();
+
+        return redirect('/projectscontent')->with('success', 'project deleted successfully!');
     }
 }
