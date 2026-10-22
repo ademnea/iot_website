@@ -21,7 +21,11 @@
    two sidebars with the same id).
 5. The sidebar's menu button hid at `md`, but the sidebar itself appears at `sm`, so
    between 640 and 768 px both showed.
-6. Fixed widths: 10% / 5% / 60% side margins and half-width cards squeezed the content
+6. **On phones the menu button did nothing**, so admins could not reach the sidebar.
+   It relied on Flowbite's `data-drawer-*` attributes, which the Flowbite 1.4.7 loaded by
+   the sidebar does not handle. It only worked on Current Team, which also loads
+   Flowbite 2.1.1.
+7. Fixed widths: 10% / 5% / 60% side margins and half-width cards squeezed the content
    to about 150 px on a phone. On Home content, the social links were also pushed past the
    left edge.
 
@@ -35,7 +39,9 @@
 - Admin views:
   - The viewport tag is added to the 15 pages.
   - The duplicate sidebar include is removed.
-  - The sidebar toggle hides at `sm`.
+  - The sidebar toggle hides at `sm` and is opened by a small script of our own in
+    `sidebar.blade.php`. A dimmed backdrop appears behind it, and a tap on the backdrop or
+    Escape closes it.
   - The fixed margins and widths now apply only from `sm` up (`sm:mx-[10%]`,
     `w-full sm:w-1/2`).
   - The team leader block on Home content stacks on phones.
@@ -50,5 +56,7 @@
   - Every public page and all 25 admin pages declare the viewport.
   - The Menu button is present.
   - The sidebar is included once, with the right breakpoint.
+- Headless Chrome, 360 px: the sidebar opens from its button and closes from the backdrop
+  on all seven admin list pages checked.
 - The headless-Chrome check found no sideways scrolling and no clipped content at 360 and
   768 px. Screenshots were reviewed before and after.

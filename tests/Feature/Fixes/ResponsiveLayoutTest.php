@@ -56,6 +56,9 @@ class ResponsiveLayoutTest extends FixesTestCase
             $this->assertSame(1, substr_count($html, 'id="default-sidebar"'), "$uri includes the sidebar more than once");
             // the sidebar shows from the sm breakpoint, so its toggle must hide at sm too.
             $this->assertStringContainsString('rounded-lg sm:hidden', $html);
+            // opened by our own script, not Flowbite's data-drawer attributes (which did nothing).
+            $this->assertStringContainsString('id="sidebar-toggle" aria-controls="default-sidebar" aria-expanded="false"', $html);
+            $this->assertStringNotContainsString('data-drawer-toggle', $html);
         }
     }
 }
