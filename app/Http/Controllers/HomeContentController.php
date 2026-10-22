@@ -6,12 +6,22 @@ use App\Models\partners;
 use App\Support\Upload;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 // Sidebar → Home: the single website_content row (lab details, logo, banner, contacts, social
 // links, the leader's message). $contents is added to the list page by the view composer in
 // AppServiceProvider.
 class HomeContentController extends Controller
 {
+    // The values a trash icon on the Home admin page may clear, with the name used in messages.
+    // Each falls back on the public site: the default logo, no banner photo, APP_NAME for the
+    // lab name, and the section is hidden for the texts.
+    public const CLEARABLE = [
+        'logo' => 'logo', 'banner' => 'banner photo', 'Labname' => 'lab name', 'vision' => 'vision',
+        'motto' => 'motto', 'mission' => 'mission', 'objectives' => 'objectives',
+        'team_leader_word' => "team leader's message",
+    ];
+
     // /homecontent
     public function index()
     {
@@ -223,5 +233,19 @@ class HomeContentController extends Controller
         }
 
         return redirect('/homecontent')->with('success', 'leader content updated successfully!');
+    }
+
+    // POST /clearhomefield: a trash icon on the Home admin page empties that one value.
+    // An uploaded logo or banner file stays on disk, as it does when it is replaced.
+    public function clearField(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exists:website_content,id',
+            'field' => ['required', Rule::in(array_keys(self::CLEARABLE))],
+        ]);
+
+        DB::table('website_content')->where('id', $request->input('id'))->update([$request->input('field') => null]);
+
+        return redirect('/homecontent')->with('success', self::CLEARABLE[$request->input('field')].' removed successfully!');
     }
 }

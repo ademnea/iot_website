@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Add a publication · {{ config('app.name') }}</title>
         <link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.1.4/dist/tailwind.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('styles/home.css') }}">
@@ -18,10 +19,7 @@
 <div class="p-4 sm:ml-64">
    <div class="p-4 border-2 border-gray-200 border rounded-lg light:border-gray-700">
 
-<div style="
-margin-left:10%;
-margin-right:10%;
-">
+<div class="sm:mx-[10%]">
    <div class="relative overflow-x-auto">
           <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
 
@@ -36,7 +34,7 @@ margin-right:10%;
                   Add New Technical Reports and Datasets
               </h3>
 
-              <h3 class="" style="margin-left:60%;">
+              <h3 class="sm:ml-[60%]">
               
                         <p class="text-gray-500">Add New Prototypes instead?<a href="registerprototype" class="inline-flex items-center font-medium text-blue-600 hover:underline">
                         go

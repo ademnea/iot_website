@@ -59,4 +59,10 @@ class PartnerController extends Controller
 
         return redirect('/homecontent')->with('success', 'partner info updated successfully!');
     }
+
+    // POST /deletepartner
+    public function destroy(Request $request)
+    {
+        return $this->deleteRecord($request, 'partners', '/homecontent', 'partner deleted successfully!');
+    }
 }

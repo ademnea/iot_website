@@ -14,7 +14,7 @@ class ProjectController extends Controller
     public function index()
     {
         // projects without a photo row are not listed (defect D9, awaiting a decision).
-        $projects = projects::has('photos')->with('photos')->get();
+        $projects = projects::has('photos')->with('photos')->withCount('prototypes')->get();
 
         return view('projectscontent', [
             'onprojects' => $projects->where('status', 'Ongoing')->values(),
@@ -109,5 +109,12 @@ class ProjectController extends Controller
         }
 
         return redirect('/projectscontent')->with('success', 'project info updated successfully!');
+    }
+
+    // POST /deleteproject: its photo rows and its prototypes go with it (the confirmation on
+    // the card names the prototypes).
+    public function destroy(Request $request)
+    {
+        return $this->deleteRecord($request, 'projects', '/projectscontent', 'project deleted successfully!');
     }
 }

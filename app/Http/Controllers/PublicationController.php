@@ -99,4 +99,10 @@ class PublicationController extends Controller
 
         return redirect('/publicationscontent')->with('success', 'publication updated successfully!');
     }
+
+    // POST /deletepublication: its links to team members go with it.
+    public function destroy(Request $request)
+    {
+        return $this->deleteRecord($request, 'publications', '/publicationscontent', 'publication deleted successfully!');
+    }
 }

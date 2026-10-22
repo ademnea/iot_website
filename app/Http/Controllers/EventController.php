@@ -104,6 +104,12 @@ class EventController extends Controller
         return redirect('/newscontent')->with('success', 'event updated successfully!');
     }
 
+    // POST /deletenews: its photo rows go with it.
+    public function destroy(Request $request)
+    {
+        return $this->deleteRecord($request, 'events', '/newscontent', 'event deleted successfully!');
+    }
+
     private function addPhoto(int|string $eventId, $file): void
     {
         DB::table('event_photos')->insert([

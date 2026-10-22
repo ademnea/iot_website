@@ -62,7 +62,7 @@
 
                 {{-- ALERT --}}
                 <center>
-                    <div style="width:400px; border-radius:8px; font-size:20px">
+                    <div style="width:400px; max-width:100%; border-radius:8px; font-size:20px">
                         @if ($status)
                             <div class="mb-4 font-medium text-sm text-red-600">
                                 {{ $status }}

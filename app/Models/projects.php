@@ -16,6 +16,12 @@ class projects extends Model
         return $this->hasMany(project_photos::class, 'project_id')->orderBy('id');
     }
 
+    // Prototypes built in this project (deleted with it).
+    public function prototypes()
+    {
+        return $this->hasMany(prototypes::class, 'project_id');
+    }
+
     // The first photo's file name (or null), for list cards that show one picture.
     public function getCoverAttribute(): ?string
     {
