@@ -82,10 +82,13 @@ them, which `grep -r` doesn't follow.
 ### 3.2 Back up what was there
 ```bash
 cd /var/www/iot-ra.net/public_html/iot_website          # the old site
-set -a; . ./.env; set +a; export MYSQL_PWD="$DB_PASSWORD"
-mysqldump --no-tablespaces -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/iotra_iotra_before_deploy_$(date +%F).sql
-unset MYSQL_PWD; chmod 600 ~/iotra_iotra_before_deploy_*.sql
+# in ( … ), a subshell: the old site's DB_* values must not stay in your shell (see 6.8)
+( set -a; . ./.env; set +a; export MYSQL_PWD="$DB_PASSWORD"
+  mysqldump --no-tablespaces -h"$DB_HOST" -u"$DB_USERNAME" --single-transaction "$DB_DATABASE" > ~/iotra_iotra_before_deploy_$(date +%F).sql )
+chmod 600 ~/iotra_iotra_before_deploy_*.sql
 ```
+On 21 Oct 2026 these lines ran without the subshell. The exported `DB_*` values then
+reached the database container at its first start (6.8).
 
 ### 3.3 Get the code
 ```bash
@@ -220,9 +223,10 @@ Don't run `scripts/check.sh` on the production server. It rebuilds and restarts 
 stack. Run it on a development machine before merging (see the README).
 
 ### 5.2 Update to a new version
-After a pull request is merged into `main`:
+After a pull request is merged into `main`, back up (5.5), then:
 ```bash
 cd /srv/iot-website
+env | grep -E '^(DB_|APP_)' | cut -d= -f1    # must print nothing; otherwise log in again (6.8)
 git pull
 docker compose up -d --build --wait
 docker compose ps
@@ -249,9 +253,14 @@ sudo tail -n 100 /var/log/apache2/iot-ra.net-error.log     # the front Apache
 ### 5.5 Backups
 ```bash
 mkdir -p ~/backups/iot-website
-# database
-docker compose exec -T db sh -c 'mariadb-dump -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" "$MARIADB_DATABASE"' \
+# database, with the app's credentials (the ones the site is known to work with)
+U=$(docker compose exec -T app printenv DB_USERNAME)
+P=$(docker compose exec -T app printenv DB_PASSWORD)
+D=$(docker compose exec -T app printenv DB_DATABASE)
+docker compose exec -T -e MYSQL_PWD="$P" db mariadb-dump -h db -u"$U" --single-transaction --no-tablespaces "$D" \
   > ~/backups/iot-website/db_$(date +%F).sql
+unset U P D
+tail -1 ~/backups/iot-website/db_$(date +%F).sql          # -- Dump completed …
 # uploads
 tar czf ~/backups/iot-website/data_$(date +%F).tar.gz -C /srv/iot-website data
 chmod 600 ~/backups/iot-website/*
@@ -262,7 +271,11 @@ chmod 600 ~/backups/iot-website/*
 
 **Restore the database:**
 ```bash
-docker compose exec -T db sh -c 'mariadb -u"$MARIADB_USER" -p"$MARIADB_PASSWORD" "$MARIADB_DATABASE"' < ~/backups/iot-website/db_<date>.sql
+U=$(docker compose exec -T app printenv DB_USERNAME)
+P=$(docker compose exec -T app printenv DB_PASSWORD)
+D=$(docker compose exec -T app printenv DB_DATABASE)
+docker compose exec -T -e MYSQL_PWD="$P" db mariadb -h db -u"$U" "$D" < ~/backups/iot-website/db_<date>.sql
+unset U P D
 ```
 
 **Never** run `docker compose down -v`: `-v` deletes the database volume.
@@ -317,6 +330,27 @@ the file is incomplete. Check any dump with `tail -1 file.sql`: it should end wi
 - **Size:** files up to about 11 MB are accepted; the container's PHP allows 12 MB.
 - **Permissions:** check that `/srv/iot-website/data` exists. The container sets its
   permissions on start.
+
+### 6.8 Backup: "Access denied for user …" (1045)
+- **Cause:** the db container's `MARIADB_PASSWORD` is not the database's real password,
+  while the site still works. Docker Compose fills the db container's settings from your
+  shell's environment before `.env`. So a `DB_*` variable exported in the shell wins, and
+  the value is kept when the container is created. The app container reads `.env`
+  directly, so it isn't affected.
+  - On 21 Oct 2026, step 3.2 left the old site's `DB_*` values exported.
+  - Found on 22 Oct 2026, during the first update.
+- **Check** (prints only same/DIFFERENT, never the passwords):
+  ```bash
+  env | grep -E '^(DB_|APP_|MARIADB_)' | cut -d= -f1      # must print nothing
+  [ "$(docker compose exec -T app printenv DB_PASSWORD)" = "$(grep '^DB_PASSWORD=' .env | cut -d= -f2-)" ] && echo "app = .env: same" || echo "app = .env: DIFFERENT"
+  [ "$(docker compose exec -T db printenv MARIADB_PASSWORD)" = "$(grep '^DB_PASSWORD=' .env | cut -d= -f2-)" ] && echo "db = .env: same" || echo "db = .env: DIFFERENT"
+  ```
+- **Fix:** log out and back in (or `unset` the listed variables), then run
+  `docker compose up -d --wait`. If "app = .env" says DIFFERENT, don't restart anything:
+  the restarted app would take the `.env` password and lose its database. Fix `.env`
+  first.
+- **Rule:** never `source` an `.env` file in the shell you deploy from. Use a subshell
+  `( … )`, as in 3.2.
 
 ---
 
